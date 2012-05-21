@@ -1,13 +1,13 @@
 class Package
   include Mongoid::Document
 
-  field :name, :type => String
-  field :description, :type => String
-  field :price, :type => Float
-  field :themes, :type => Integer
-  field :domains, :type => Integer
-  field :billing, :type => Integer
-  field :validity, :type => Integer
+  field :name,          :type => String
+  field :description,   :type => String
+  field :price,         :type => Float
+  field :themes,        :type => Integer
+  field :domains,       :type => Integer
+  field :billing,       :type => Integer
+  field :validity,      :type => Integer
 
   validates_presence_of [:name, :description, :price, :themes, :domains, :billing, :validity]
   validates_numericality_of :price, :greater_than => 0.00

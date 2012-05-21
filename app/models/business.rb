@@ -2,7 +2,7 @@ class Business
   include Mongoid::Document
   include ActiveModel::Validations
 
-  field :name, :type => String
+  field :name,  :type => String
   field :email, :type => String
 
   validates :email,

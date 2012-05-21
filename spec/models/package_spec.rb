@@ -16,7 +16,7 @@ describe Package do
   context "helpers" do
     before { @package = Package.create!(@valid_attributes) }
 
-    it 'should respond to vadility methods' do
+    it 'should respond to validity methods' do
       @package.should respond_to(:is_valid_for_life?)
     end
 
@@ -48,6 +48,23 @@ describe Package do
       end
     end
 
+    it 'should reject invalid validity values' do
+      [-1, 999, "invalid", :lifetime].each do |v|
+        Package.new( @valid_attributes.merge(validity: v) ).should_not be_valid
+      end
+    end
+
+    it 'should reject invalid themes values' do
+      [-1, 999, "one_theme", :one_theme].each do |v|
+        Package.new( @valid_attributes.merge(themes: v) ).should_not be_valid
+      end
+    end
+
+    it 'should reject invalid billing values' do
+      [-1, 999, :one_time_payment, "one time payment"].each do |v|
+        Package.new( @valid_attributes.merge(billing: v) ).should_not be_valid
+      end
+    end
 
   end
 end

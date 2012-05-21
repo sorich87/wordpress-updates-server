@@ -9,9 +9,6 @@ class Package
   field :billing,       :type => Integer
   field :validity,      :type => Integer
 
-  validates_presence_of [:name, :description, :price, :themes, :domains, :billing, :validity]
-  validates_numericality_of :price, :greater_than => 0.00
-
   VALIDITY = {
     :lifetime => 0,
     :one_year => 1,
@@ -27,6 +24,20 @@ class Package
     :one_theme => 0,
     :all_themes => 1
   }
+
+  validates_presence_of [:name, :description, :price, :themes, :domains, :billing, :validity]
+  
+  validates_numericality_of :price, 
+    :greater_than => 0.00
+  
+  validates_inclusion_of :validity,
+    :in => VALIDITY.values
+
+  validates_inclusion_of :billing,
+    :in => BILLING.values
+
+  validates_inclusion_of :themes,
+    :in => THEMES.values
 
   def is_valid_for_life?
     read_attribute(:validity) == VALIDITY[:lifetime]

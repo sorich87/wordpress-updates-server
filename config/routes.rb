@@ -6,5 +6,9 @@ ThemeMy::Application.routes.draw do
     resource :business do
       get '/', :to => :edit
     end
+
+    resource :packages do
+      get '/', :to => :edit
+    end
   end
 end

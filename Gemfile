@@ -22,6 +22,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "spork"
   gem "factory_girl_rails"
+  gem "capybara"
 end
 
 group :test do

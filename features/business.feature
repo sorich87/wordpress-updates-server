@@ -1,7 +1,7 @@
 Feature: Edit business
 
   So that businesses can edit their details
-  As a business owner
+  As a designer
   I want to keep my details up to date
 
   Scenario: Edit business details

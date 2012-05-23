@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Package do
   before do
+    @business = FactoryGirl.create(:business)
+    
     @valid_attributes = {
       name: "ExampleTheme 1.0",
       description: "Light weight theme with focus on readability.",
@@ -9,12 +11,13 @@ describe Package do
       validity: Package::VALIDITY[:lifetime],
       billing: Package::BILLING[:one_time_payment],
       themes: Package::THEMES[:one_theme],
-      domains: 0 # Unlimited
+      domains: 0, # Unlimited,
+      business: @business
     }
   end
 
   context "helpers" do
-    before { @package = Package.create!(@valid_attributes) }
+    before { @package = @business.packages.create!(@valid_attributes) }
 
     it 'should respond to validity methods' do
       @package.should respond_to(:is_valid_for_life?)
@@ -28,6 +31,10 @@ describe Package do
   context '#CREATE' do
     it 'should be valid given valid attributes' do
       Package.new(@valid_attributes).should be_valid
+    end
+
+    it 'should require a business' do
+      Package.new( @valid_attributes.merge(business: nil) ).should_not be_valid
     end
 
     it 'should be invalid without a name' do
@@ -65,6 +72,16 @@ describe Package do
         Package.new( @valid_attributes.merge(billing: v) ).should_not be_valid
       end
     end
+  end
 
+  it 'should belong to a business' do
+    c = Package.create!(@valid_attributes)
+    c.should respond_to(:business)
+  end
+
+  it 'should belong to many customers' do
+    c = Package.create!(@valid_attributes)
+    c.should respond_to(:customers)
+    c.should respond_to(:customer_ids)
   end
 end

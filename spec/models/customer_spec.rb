@@ -45,4 +45,14 @@ describe Customer do
       Customer.new(@valid_attributes).should_not be_valid
     end
   end
+
+  it 'should belong to a business' do
+    c = Customer.create!(@valid_attributes)
+    c.should respond_to(:business)
+  end
+  
+  it 'should have many packages' do
+    c = Customer.create!(@valid_attributes)
+    c.should respond_to(:packages)
+  end
 end

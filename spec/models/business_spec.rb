@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Business do
+  before do
+    @valid_attributes = {
+      email: "somecompany@example.com",
+      name: "Some Company"
+    }
+  end
+    
   context '#CREATE' do
-    before do
-      @valid_attributes = {
-        email: "somecompany@example.com",
-        name: "Some Company"
-      }
-    end
-
     it "should be successful given valid attributes" do
       Business.new( @valid_attributes ).should be_valid
     end
@@ -45,5 +45,16 @@ describe Business do
       Business.create!(@valid_attributes)
       Business.new( @valid_attributes.merge(email: "otheremail@example.com") ).should_not be_valid
     end
+  end
+
+  it 'should have many customers' do
+    b = Business.create!(@valid_attributes)
+    b.should respond_to(:customers)
+    #b.should respond_to(:customer_ids)
+  end
+
+  it 'should have many packages' do
+    b = Business.create!(@valid_attributes)
+    b.should respond_to(:packages)
   end
 end

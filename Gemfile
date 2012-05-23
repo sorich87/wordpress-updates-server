@@ -23,6 +23,7 @@ group :development, :test do
   gem "spork"
   gem "factory_girl_rails"
   gem "capybara"
+  gem "cucumber-rails"
 end
 
 group :test do

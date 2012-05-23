@@ -1,4 +1,6 @@
-Factory.define :business do |b|
-  b.email   "factory@example.com"
-  b.name    "FActory Company"
+FactoryGirl.define do
+  factory :business do
+    email   "factory@example.com"
+    name    "FActory Company"
+  end
 end

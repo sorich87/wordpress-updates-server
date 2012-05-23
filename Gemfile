@@ -4,6 +4,7 @@ gem 'rails',        '3.2.3'
 gem 'mongoid',      "~> 2.4.10"
 gem 'bson_ext',     "~> 1.6.2"
 gem 'jquery-rails'
+gem 'simple_form'
 
 # Gems used only for assets and not required
 # in production environments by default.

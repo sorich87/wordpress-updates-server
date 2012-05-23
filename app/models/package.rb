@@ -9,6 +9,9 @@ class Package
   field :billing,       :type => Integer
   field :validity,      :type => Integer
 
+  belongs_to :business
+  has_many :customers
+
   VALIDITY = {
     :lifetime => 0,
     :one_year => 1,
@@ -25,7 +28,7 @@ class Package
     :all_themes => 1
   }
 
-  validates_presence_of [:name, :description, :price, :themes, :domains, :billing, :validity]
+  validates_presence_of [:name, :description, :price, :themes, :domains, :billing, :validity, :business]
   
   validates_numericality_of :price, 
     :greater_than => 0.00

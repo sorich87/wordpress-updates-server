@@ -5,6 +5,9 @@ class Business
   field :name,  :type => String
   field :email, :type => String
 
+  has_many :packages
+  has_many :customers
+
   validates :email,
     :presence => true,
     :email => true,

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Package do
   before do
     @business = FactoryGirl.create(:business)
-    
+
     @valid_attributes = {
       name: "ExampleTheme 1.0",
       description: "Light weight theme with focus on readability.",
@@ -82,6 +82,5 @@ describe Package do
   it 'should belong to many customers' do
     c = Package.create!(@valid_attributes)
     c.should respond_to(:customers)
-    c.should respond_to(:customer_ids)
   end
 end

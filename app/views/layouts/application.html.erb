@@ -44,8 +44,8 @@
           <a class="brand" href="themes.html">ThemeMY! <sup>beta</sup></a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="customers.html">Customers</a></li>
-              <li><a href="settings.html">Settings</a></li>
+              <li class="active"><%= link_to 'Customers', customers_path %></li>
+              <li><%= link_to 'Settings', settings_path %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -53,6 +53,7 @@
     </div>
 
     <div class="container">
+      <%= render :partial => 'common/flashes' %>
       <%= yield %>
 
       <hr />

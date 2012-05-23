@@ -20,6 +20,7 @@ end
 group :development, :test do
   gem "rspec", "~> 2.10.0"
   gem "rspec-rails"
+  gem "spork"
 end
 
 group :test do

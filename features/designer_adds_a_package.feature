@@ -35,9 +35,9 @@ Feature: Designer adds a package
     When I fill in "Package Name" with "<name>"
     And I fill in "Package Description" with "<description>"
     And I fill in "Price" with "<price>"
-    And I choose "<validity>" as "Validity"
+    And I select "<validity>" as "Validity"
     And I choose "<billing>" as "Billing"
-    And I choose "<themes>" as "Number of Themes"
+    And I select "<themes>" as "Number of Themes"
     And I fill in "Number of Domains" with "<domains>"
     And I click "Save Package"
     Then I should be on the packages management page

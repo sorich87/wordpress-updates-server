@@ -1,16 +1,27 @@
-<h2>Sign in</h2>
+<div class="row">
+  <div class="span6 offset3 hero-unit">
 
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name),
+    <h1 class="page-header">Log In</h1>
+
+    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name),
                         :html => { :class => 'form-horizontal' }, :defaults => { :required => false }) do |f| %>
-  <div class="inputs">
-    <%= f.input :email, :label => "Email Address", :autofocus => true %>
-    <%= f.input :password, :label => "Password" %>
-    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
-  </div>
+      <%= f.error_notification %>
 
-  <div class="actions">
-    <%= f.button :submit, "Log in" %>
-  </div>
-<% end %>
+      <fieldset>
+        <legend>Please log in to your account</legend>
 
-<%= render :partial => "devise/shared/links" %>
+        <%= f.input :email, :label => "Email Address", :autofocus => true %>
+        <%= f.input :password, :label => "Password" %>
+        <%= f.input :remember_me, :as => :boolean, :label => false, :inline_label => "Remember me" %>
+
+        <div class="form-actions">
+          <%= f.button :submit, "Log in", :class => "btn btn-primary" %>
+          <%= link_to "I forgot my password", new_password_path(resource_name), :class => "btn" %>
+        </div>
+      </fieldset>
+    <% end %>
+
+    <%= render :partial => "devise/shared/links" %>
+
+  </div>
+</div>

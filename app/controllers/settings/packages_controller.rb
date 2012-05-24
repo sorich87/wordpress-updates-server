@@ -1,8 +1,7 @@
 class Settings::PackagesController < ApplicationController
   def edit
     @business = Business.first
-    @packages = @business.packages
-    @new_package = Package.new
+    @package = @business.packages.find(params[:id])
   end
 
   def create
@@ -20,6 +19,11 @@ class Settings::PackagesController < ApplicationController
     render :edit
   end
 
+  def index
+    @business = Business.first
+    @packages = @business.packages
+    @new_package = Package.new
+  end
 
   private
 

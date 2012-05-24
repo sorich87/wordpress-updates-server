@@ -7,8 +7,6 @@ ThemeMy::Application.routes.draw do
       get '/', :to => :edit
     end
 
-    resource :packages do
-      get '/', :to => :edit
-    end
+    resources :packages
   end
 end

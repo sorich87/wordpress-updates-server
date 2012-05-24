@@ -2,4 +2,20 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  packages:
+    values:
+      validity:
+        lifetime: Lifetime
+        one_month: One Month
+        one_year: One Year
+
+      themes:
+        one_theme: One Theme
+        all_themes: All Themes
+
+      billing:
+        one_time_payment: One time payment
+        subscription: Subscription with recurring billing
+
+
+

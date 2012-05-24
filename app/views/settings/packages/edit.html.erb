@@ -1,0 +1,44 @@
+<h2>Price Packages</h2>
+<hr />
+
+<div class="control-group">
+  <p>Customize the price packages available for your customers to buy.</p>
+</div>
+
+<div class="row">
+  <div class="span5 well">
+    <h3>Standard Package</h3>
+    <p>This is an awesome description of the package.
+    It contains magic words that will woo customers to buy it.</p>
+    <ul>
+      <li>$40 for one theme</li>
+      <li>Valid for one year on an unlimited number of domains</li>
+      <li>Renewal is manual</li>
+    </ul>
+  </div>
+</div>
+
+<p><a href="#" id="add_new_package"><i class="icon-plus"></i> Add a package</a></p>
+<div id="new_package_parent">
+  <%= simple_form_for [:settings, @new_package], url: settings_packages_path, html: {class: 'form-horizontal'} do |f| %>
+    <%= render :partial => 'form', locals: {f: f} %>
+  <% end %>
+</div>
+
+<% @packages.each do |package| %>
+  <%= simple_form_for [:settings, package], url: settings_packages_path, html: {class: 'form-horizontal'} do |f| %>
+    <%= render :partial => 'form', locals: {f: f} %>
+  <% end %>
+<% end %>
+
+
+<% content_for(:javascript) do %>
+  <script type="text/javascript">
+    $('a#add_new_package').one('click', function() {
+      var $parent = $('div#new_package_parent');
+      $parent.hide();
+      $parent.removeClass('hidden');
+      $parent.fadeIn('slow');
+    });
+  </script>
+<% end %>

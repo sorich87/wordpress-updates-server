@@ -9,6 +9,7 @@ Feature: Designer adds a package
     And I click "Add a package"
     And I see the add package form
 
+  @in-progress
   Scenario Outline: Successful addition of a package
     When I fill in "Package Name" with "<name>"
     And I fill in "Package Description" with "<description>"

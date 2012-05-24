@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="span9">
+    <fieldset>
+
+    <% if f.object.persisted? %>
+      <legend>Edit package</legend>
+    <% else %>
+      <legend>New Package</legend>
+    <% end %>
+    
+      <% if f.error_notification %>
+        <div class="alert alert-error fade in">
+          <a class="close" data-dismiss="alert" href="#">&times;</a>
+          <%= f.error_notification %>
+        </div>
+      <% end %>
+
+      <%= f.input :name, label: 'Package Name', input_html: {class: 'input-xlarge'} %>
+
+      <%= f.input :description, label: 'Package Description', input_html: {class: 'input-xlarge'} %>
+
+      <%= f.input :price, label: 'Price', wrapper: :prepend do %>
+        <span class="add-on">&#36;</span><%= f.input_field :price, class: 'input-mini' %>
+      <% end %>
+
+      <%= f.input :validity, collection: collection_for_package_validities %>
+
+      <%= f.input :billing, as: :radio_buttons, collection: collection_for_package_billings %>
+
+      <%= f.input :themes, collection: collection_for_package_themes, label: 'Number of Themes' %>
+      
+      <%= f.input :domains, label: 'Number of Domains', wrapper: :prepend do %>
+        <%= f.input_field :domains, class: 'input-mini' %>
+          <p class="help-inline">Number of domains the customer can install the theme on. 0 for unlimited.</p>
+      <% end %>
+
+      <div class="form-actions">
+        <%= f.button :submit, class: 'btn-primary', value: 'Save Package' %>
+        <a class="btn" href="">Cancel</a>
+      </div>
+    </fieldset>
+  </div>
+</div>

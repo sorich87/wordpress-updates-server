@@ -49,4 +49,14 @@ class Package
   def is_subscription?
     read_attribute(:billing) == BILLING[:subscription]
   end
+
+  def self.validity_strings_and_values
+    arr = []
+    VALIDITY.each do |key, val|
+      key = key.to_s.upcase.gsub('_', ' ')
+      arr.push([key, val])
+    end
+    puts arr
+    arr
+  end
 end

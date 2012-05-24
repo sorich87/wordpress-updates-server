@@ -12,13 +12,14 @@ Feature: Designer edits a package
     And I see the edit package form
     And I see the package information filled in the fields
 
+  @wip
   Scenario Outline: Successful editing of a package
     Then I fill in "Package Name" with "<name>"
     And I fill in "Package Description" with "<description>"
     And I fill in "Price" with "<price>"
-    And I choose "<validity>" as "Validity"
+    And I select "<validity>" as "Validity"
     And I choose "<billing>" as "Billing"
-    And I choose "<themes>" as "Number of Themes"
+    And I select "<themes>" as "Number of Themes"
     And I fill in "Number of Domains" with "<domains>"
     And I click "Save Package"
     Then I should be on the packages management page
@@ -32,9 +33,9 @@ Feature: Designer edits a package
 
     Scenarios: Successful edition of any package
       | name     | description | price | validity  | billing                             | themes     | domains | renewal   |
-      | Standard | Awesome     | 40    | One Year  | One time payment                    | One Theme  | 1       | manual    |
-      | Free     | The poors   | 0     | Lifetime  | One time payment                    | One Theme  | 3       | manual    |
-      | Monthly  | Recurring   | 10    | One Month | Subscription with recurring billing | All Themes | 0       | automatic |
+      | Standard | Awesome     | 40.00    | One Year  | One time payment                    | One Theme  | 1       | manual    |
+      | Free     | The poors   | 0.00     | Lifetime  | One time payment                    | One Theme  | 3       | manual    |
+      | Monthly  | Recurring   | 10.00    | One Month | Subscription with recurring billing | All Themes | 0       | automatic |
 
   Scenario Outline: Unsuccessful editing of a package
     Then I fill in "Package Name" with "<name>"
@@ -57,11 +58,11 @@ Feature: Designer edits a package
 
     Scenarios: Package name empty
       | name     | description | price | validity  | billing          | themes     | domains | renewal   |
-      |          | Awesome     | 40    | One Year  | One time payment | One Theme  | 1       | manual    |
+      |          | Awesome     | 40.00    | One Year  | One time payment | One Theme  | 1       | manual    |
 
     Scenarios: Package description empty
       | name     | description | price | validity  | billing          | themes     | domains | renewal   |
-      | Free     |             | 0     | Lifetime  | One time payment | One Theme  | 3       | manual    |
+      | Free     |             | 0.00     | Lifetime  | One time payment | One Theme  | 3       | manual    |
 
   Scenario: Cancelling editing of a package
     Then I click "Cancel"

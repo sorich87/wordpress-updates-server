@@ -34,4 +34,6 @@ group :test do
   gem 'factory_girl_rails', '~> 3.3.0'
   gem 'cucumber-rails', '~> 1.3.0', :require => false
   gem 'capybara', '~> 1.1.0'
+  gem 'email_spec'
+  gem 'action_mailer_cache_delivery', '~> 0.3'
 end

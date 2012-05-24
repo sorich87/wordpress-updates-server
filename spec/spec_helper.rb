@@ -2,6 +2,7 @@ require 'rubygems'
 require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
+require "email_spec"
 
 Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
@@ -23,6 +24,9 @@ Spork.prefork do
     # automatically. This will be the default behavior in future versions of
     # rspec-rails.
     config.infer_base_class_for_anonymous_controllers = false
+
+    config.include(EmailSpec::Helpers)
+    config.include(EmailSpec::Matchers)
   end
 end
 

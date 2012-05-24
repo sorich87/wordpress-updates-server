@@ -12,7 +12,7 @@ class Business
   validates_length_of :account_name, :minimum => 4, :maximum => 32
   validates_format_of :account_name, :with => /\A[a-z0-9_]+\z/
 
-  attr_accessible :business_name, :account_name
+  attr_accessible :business_name, :account_name, :users
 
   before_validation :strip_and_downcase_account_name
 

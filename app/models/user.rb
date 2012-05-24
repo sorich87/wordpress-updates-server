@@ -40,12 +40,15 @@ class User
 
   include Mongoid::Timestamps
 
+  belongs_to :business, :validate => true
+
+  index :email, :unique => true
+
   field :first_name, :type => String
   field :last_name,  :type => String
+
   validates_presence_of :email
   validates_uniqueness_of :email, :case_sensitive => false
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-    :first_name, :last_name
-
-  belongs_to :business
+    :first_name, :last_name, :business
 end

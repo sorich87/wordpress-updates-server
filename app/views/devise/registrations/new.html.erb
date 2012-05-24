@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="span6 offset3 hero-unit">
+
+    <h1 class="page-header">New Account</h1>
+
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+                        :html => { :class => 'form-horizontal' }, :defaults => { :required => false }) do |f| %>
+      <%= f.error_notification %>
+
+      <fieldset>
+        <legend>Business details</legend>
+        <%= f.simple_fields_for :business, resource.business do |g| %>
+          <%= g.input :business_name, :label => "Business Name", :autofocus => true %>
+          <%= g.input :account_name, :label => "Account Name" %>
+        <% end %>
+      </fieldset>
+
+      <fieldset>
+        <legend>User details</legend>
+        <%= f.input :first_name, :label => "First Name" %>
+        <%= f.input :last_name, :label => "Last Name" %>
+        <%= f.input :email, :label => "Email Address" %>
+        <%= f.input :password, :label => "Password" %>
+        <%= f.input :password_confirmation, :label => "Password Again" %>
+      </fieldset>
+
+      <div class="form-actions">
+        <%= f.button :submit, "Register", :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <%= render :partial => "devise/shared/links" %>
+
+  </div>
+</div>
+

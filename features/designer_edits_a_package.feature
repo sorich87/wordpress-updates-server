@@ -6,7 +6,7 @@ Feature: Designer edits a package
   Background:
     Given I signed in to my business account
     And there is one package
-    When I go to the package management page
+    When I go to the packages management page
     And I click "edit"
     Then I should be on the edit package page
     And I see the edit package form

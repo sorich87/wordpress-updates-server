@@ -51,4 +51,8 @@ class User
   validates_uniqueness_of :email, :case_sensitive => false
   attr_accessible :email, :password, :password_confirmation, :remember_me,
     :first_name, :last_name, :business
+
+  def full_name
+    "#{self.first_name} #{self.last_name}"
+  end
 end

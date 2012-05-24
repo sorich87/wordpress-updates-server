@@ -21,4 +21,12 @@ describe User do
   it 'should belong to a business' do
     FactoryGirl.create(:user).should respond_to(:business)
   end
+
+  describe '.full_name' do
+    before { @user = FactoryGirl.create(:user) }
+
+    it 'should return the full name' do
+      @user.full_name.should == "#{@user.first_name} #{@user.last_name}"
+    end
+  end
 end

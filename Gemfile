@@ -20,6 +20,10 @@ gem 'twitter-bootstrap-rails', '~> 2.0.0'
 gem 'simple_form', '~> 2.0.0'
 gem 'country_select', '~> 0.0.1'
 
+gem 'devise', '~> 2.0'
+
+gem 'spork', '~> 1.0rc'
+
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'
 end

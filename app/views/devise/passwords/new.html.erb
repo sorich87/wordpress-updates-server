@@ -7,7 +7,7 @@
                         :html => {  :method => :post, :class => 'form-horizontal' }) do |f| %>
       <%= f.error_notification %>
 
-      <%= f.input :email, :label => "Email Address", :required => false %>
+      <%= f.input :email, :label => "Email Address", :required => false, :input_html => { :class => "input-xlarge" } %>
 
       <div class="form-actions">
         <%= f.button :submit, "Send me reset password instructions", :class => "btn btn-primary" %>

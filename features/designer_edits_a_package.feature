@@ -7,7 +7,7 @@ Feature: Designer edits a package
     Given I signed in to my business account
     And there is one package
     When I go to the packages management page
-    And I click "edit"
+    And I click "Edit"
     Then I should be on the edit package page
     And I see the edit package form
     And I see the package information filled in the fields

@@ -28,7 +28,7 @@ Feature: Designer adds a customer
     Then I fill in "First Name" with "Tom"
     And I fill in "Last Name" with "Sawyer"
     And I fill in "Email" with "tom.sawyer@somemail.email"
-    And I choose "Standard" as "Package"
+    #And I choose "Standard" as "Package"
     And I click "Save Customer"
     Then I should be on the add customer page
     And I should see "Please review the problems below"

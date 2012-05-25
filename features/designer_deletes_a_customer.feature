@@ -11,11 +11,11 @@ Feature: Designer deletes a customer
     Then I should see an alert box to confirm deletion
 
   Scenario: Successful deletion of a customer
-    Then I click "OK"
+    Then I confirm deletion in the alert box
     And I should be on the customers management page
     And I should not see "Samantha Seeley"
 
   Scenario: Cancelled deletion of a customer
-    Then I click "Cancel"
+    Then I cancel deletion in the alert box
     And I should be on the customers management page
     And I should see "Samantha Seeley"

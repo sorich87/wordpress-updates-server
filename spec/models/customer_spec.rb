@@ -50,9 +50,4 @@ describe Customer do
     c = Customer.create!(@valid_attributes)
     c.should respond_to(:business)
   end
-  
-  it 'should have many packages' do
-    c = Customer.create!(@valid_attributes)
-    c.should respond_to(:packages)
-  end
 end

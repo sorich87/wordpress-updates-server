@@ -6,7 +6,6 @@ class Customer
   field :email,       :type => String
 
   belongs_to :business
-  has_many :packages
 
   validates_presence_of [:first_name, :last_name, :email]
   validates :email, :email => true, :uniqueness => true

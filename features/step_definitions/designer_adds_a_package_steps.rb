@@ -2,7 +2,11 @@
 Given /^I signed in to my business account$/ do
   # TODO: Implement business accounts
   # Skip it for now, but make sure we have a business account
-  FactoryGirl.create(:business) if Business.first.nil?
+  Business.first.destroy unless Business.first.nil?
+  @business = Business.create(
+    name: "Themes For You",
+    email: "ythemes@themes.thm"
+  )
 end
 
 When /^I go to the packages management page$/ do

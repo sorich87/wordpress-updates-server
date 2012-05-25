@@ -1,3 +1,4 @@
+@not-applicable
 Feature: Designer changes customer's package
   As a theme designer
   I want to change a customer's package

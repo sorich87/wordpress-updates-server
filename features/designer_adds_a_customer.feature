@@ -12,7 +12,7 @@ Feature: Designer adds a customer
     And I click "New Customer"
     Then I should be on the add customer page
 
-  Scenario: Successful addition of a package
+  Scenario: Successful addition of a customer
     Then I fill in "First Name" with "Drew"
     And I fill in "Last Name" with "Allison"
     And I fill in "Email" with "drew.allis@myemail.email"

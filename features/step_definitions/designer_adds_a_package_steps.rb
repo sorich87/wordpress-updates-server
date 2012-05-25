@@ -37,7 +37,8 @@ Then /^I should be on the packages management page$/ do
   current_path.should eq(settings_packages_path)
 end
 
-Then /^I should see "(.*?)"$/ do |arg1|
+# This seems to break syntax highlighting in at least Sublime Text 2 :)
+Then /^I should see "([^"]+)"$/ do |arg1|
   page.should have_content(arg1)
 end
 

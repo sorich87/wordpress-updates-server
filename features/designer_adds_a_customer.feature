@@ -16,13 +16,13 @@ Feature: Designer adds a customer
     Then I fill in "First Name" with "Drew"
     And I fill in "Last Name" with "Allison"
     And I fill in "Email" with "drew.allis@myemail.email"
-    And I choose "Developer" as "Package"
+    #And I choose "Developer" as "Package"
     And I click "Save Customer"
     Then I should be on the customers management page
-    And I should see "Customer added"
+    And I should see "Customer saved"
     And I should see "Drew Allison" in the column "Name"
     And I should see "drew.allis@myemail.email" in the column "Email"
-    And I should see "Developer" in the column "Package"
+    #And I should see "Developer" in the column "Package"
 
   Scenario: Customer exists
     Then I fill in "First Name" with "Tom"
@@ -35,7 +35,7 @@ Feature: Designer adds a customer
     And the "First Name" field should contain "Tom"
     And the "Last Name" field should contain "Sawyer"
     And the "Email" field should contain "tom.sawyer@somemail.email"
-    And "Standard" should be selected as "Package"
+    #And "Standard" should be selected as "Package"
 
   Scenario: Cancelled addition of a customer
     Then I click "Cancel"

@@ -1,132 +1,49 @@
-      <h1 class="page-header">Customers</h1>
+<h1 class="page-header">Customers</h1>
 
-      <p>
-        <a class="btn" href="new-customer.html">New Customer</a>
-        <a class="btn" href="">Import CSV</a>
-      </p>
+<p>
+  <%= link_to 'New Customer', new_customer_path, class: 'btn' %>
+  <a class="btn" href="">Import CSV</a>
+</p>
 
-      <div class="pagination pagination-right">
-        <ul>
-          <li><a href="">&laquo;</a></li>
-          <li class="active"><a href="">1</a></li>
-          <li><a href="">2</a></li>
-          <li><a href="">3</a></li>
-          <li class="disabled"><a href="">&hellip;</a></li>
-          <li><a href="">8</a></li>
-          <li><a href="">&raquo;</a></li>
-        </ul>
-      </div>
+<div class="pagination pagination-right">
+  <ul>
+    <li><a href="">&laquo;</a></li>
+    <li class="active"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li class="disabled"><a href="">&hellip;</a></li>
+    <li><a href="">8</a></li>
+    <li><a href="">&raquo;</a></li>
+  </ul>
+</div>
 
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Package</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>John Carmichael <a href=""><i class="icon-remove-sign"></i></a></td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>John Carmichael</td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>John Carmichael</td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>John Carmichael</td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>John Carmichael</td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>John Carmichael</td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>John Carmichael</td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>John Carmichael</td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-          <tr>
-            <td>John Carmichael</td>
-            <td>fakecarm@thememy.com</td>
-            <td>Standard</td>
-          </tr>
-          <tr>
-            <td>Thomas Bigot</td>
-            <td>bigfakethom@thememy.com</td>
-            <td>Developer</td>
-          </tr>
-        </tbody>
-      </table>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Package (not implemented)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.full_name %> <a href=""><i class="icon-remove-sign"></i></a></td>
+      <td><%= customer.email %></td>
+      <td>Not implemented.</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
-      <div class="pagination pagination-right">
-        <ul>
-          <li><a href="">&laquo;</a></li>
-          <li class="active"><a href="">1</a></li>
-          <li><a href="">2</a></li>
-          <li><a href="">3</a></li>
-          <li class="disabled"><a href="">&hellip;</a></li>
-          <li><a href="">8</a></li>
-          <li><a href="">&raquo;</a></li>
-        </ul>
-      </div>
+<div class="pagination pagination-right">
+  <ul>
+    <li><a href="">&laquo;</a></li>
+    <li class="active"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li class="disabled"><a href="">&hellip;</a></li>
+    <li><a href="">8</a></li>
+    <li><a href="">&raquo;</a></li>
+  </ul>
+</div>

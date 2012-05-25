@@ -1,3 +1,4 @@
+@done
 Feature: Designer adds a customer
   As a theme designer
   I want to add a customer

@@ -31,7 +31,7 @@ class Package
   validates_presence_of [:name, :description, :price, :themes, :domains, :billing, :validity, :business]
   
   validates_numericality_of :price, 
-    :greater_or_equal_than => 0
+    :greater_than_or_equal_to => 0
   
   validates_inclusion_of :validity,
     :in => VALIDITY.values

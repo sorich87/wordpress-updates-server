@@ -50,7 +50,7 @@ describe Package do
     end
 
     it 'should reject invalid prices' do
-      [0, -1, nil].each do |p|
+      [-919, -1, nil, '-5'].each do |p|
         Package.new( @valid_attributes.merge(price: p) ).should_not be_valid
       end
     end

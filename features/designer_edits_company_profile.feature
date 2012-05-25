@@ -1,3 +1,4 @@
+@done
 Feature: Designer edits company profile
   As a theme designer
   I want to edit my company profile

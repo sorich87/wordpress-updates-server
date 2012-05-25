@@ -12,7 +12,7 @@ class Settings::BusinessesController < ApplicationController
   def update
     @business = Business.first
     if @business.update_attributes(business_params)
-      flash.now[:success] = "Business settings updated."
+      flash.now[:notice] = "Changes saved."
     else
       flash.now[:error] = "There were errors when updating your business settings."
     end

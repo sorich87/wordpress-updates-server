@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="span9">
-    <%= simple_form_for [:settings, @business], html: {class: 'form-horizontal'} do |f| %>
+    <%= simple_form_for @business, url: settings_business_path, html: {class: 'form-horizontal'} do |f| %>
       <% if f.error_notification %>
         <div class="alert alert-error fade in">
           <a class="close" data-dismiss="alert" href="#">&times;</a>
@@ -17,12 +17,12 @@
         Your customers will use it to get in touch with you.</p>
       </div>
 
-      <%= f.input :name, input_html: {class: 'input-xlarge'}, label: 'Company name' %>
-      <%= f.input :email, input_html: {class: 'input-xlarge'}, label: 'Email address' %>
+      <%= f.input :name, input_html: {class: 'input-xlarge'}, label: 'Company Name' %>
+      <%= f.input :email, input_html: {class: 'input-xlarge'}, label: 'Email Address' %>
 
       <div class="form-actions">
-        <%= f.button :submit, class: 'btn-primary', value: 'Save changes' %>
-        <a class="btn" href="">Cancel</a>
+        <%= f.button :submit, class: 'btn-primary', value: 'Save Changes' %>
+        <%= link_to 'Cancel', settings_business_path, class: 'btn' %>
       </div>
 
     <% end %>

@@ -30,7 +30,7 @@ Feature: Designer adds a customer
     And I fill in "Email" with "tom.sawyer@somemail.email"
     #And I choose "Standard" as "Package"
     And I click "Save Customer"
-    Then I should be on the add customer page
+    Then I should be on the customers management page
     And I should see "Please review the problems below"
     And the "First Name" field should contain "Tom"
     And the "Last Name" field should contain "Sawyer"

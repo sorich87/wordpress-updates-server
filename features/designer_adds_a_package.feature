@@ -23,14 +23,14 @@ Feature: Designer adds a package
     And I should see "<name>"
     And I should see "<description>"
     And I should see "$<price> for <themes>"
-    And I should see "Valid for <validity> on <domains> domain"
+    And I should see "Valid for <valid_for> on <output_domains>"
     And I should see "Renewal is <renewal>"
 
     Scenarios: Successful addition of any package
-      | name     | description | price | validity  | billing                             | themes     | domains | renewal   |
-      | Standard | Awesome     | 40    | One Year  | One time payment                    | One Theme  | 1       | manual    |
-      | Free     | The poors   | 0     | Lifetime  | One time payment                    | One Theme  | 3       | manual    |
-      | Monthly  | Recurring   | 10    | One Month | Subscription with recurring billing | All Themes | 0       | automatic |
+      | name     | description | price    | validity  | billing                             | themes     | domains | renewal   | output_themes | valid_for | output_domains |
+      | Standard | Awesome     | 40.00    | One Year  | One time payment                    | One Theme  | 1       | manual    | one theme | one year   | 1 domain |
+      | Free     | The poors   | 0.00     | Lifetime  | One time payment                    | One Theme  | 3       | manual    | one theme | life       | 3 domains |
+      | Monthly  | Recurring   | 10.00    | One Month | Subscription with recurring billing | All Themes | 0       | automatic | all themes | one month | unlimited domains |
 
   Scenario Outline: Unsuccessful addition of a package
     When I fill in "Package Name" with "<name>"
@@ -45,12 +45,12 @@ Feature: Designer adds a package
     And I should see "Please review the problems below"
 
     Scenarios: Package name empty
-      | name     | description | price | validity  | billing          | themes     | domains | renewal   |
-      |          | Awesome     | 40    | One Year  | One time payment | One Theme  | 1       | manual    |
+      | name     | description | price    | validity  | billing          | themes     | domains | renewal   |
+      |          | Awesome     | 40.00    | One Year  | One time payment | One Theme  | 1       | manual    |
 
     Scenarios: Package description empty
-      | name     | description | price | validity  | billing          | themes     | domains | renewal   |
-      | Free     |             | 0     | Lifetime  | One time payment | One Theme  | 3       | manual    |
+      | name     | description | price    | validity  | billing          | themes     | domains | renewal   |
+      | Free     |             | 0.00     | Lifetime  | One time payment | One Theme  | 3       | manual    |
 
   Scenario: Cancelling addition of a package
     When I click "Cancel"

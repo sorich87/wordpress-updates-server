@@ -25,6 +25,7 @@ group :development, :test do
   gem "factory_girl_rails"
   gem "capybara"
   gem "cucumber-rails"
+  gem "capybara-webkit", ">= 0.12.0"
 end
 
 group :test do

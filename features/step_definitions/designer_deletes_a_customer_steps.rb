@@ -1,26 +1,15 @@
 Given /^there is one customer named "(.*?)"$/ do |arg1|
-  @customer = Customer.where(name: arg1)
-  @customer ||= FactoryGirl.create(:customer, name: arg1)
+  (first_name, last_name) = arg1.split(' ')
+  @customer = Customer.where(first_name: first_name).where(last_name: last_name)
+              .where(business_id: @business.id).find(:first)
+  @customer ||= FactoryGirl.create(:customer, first_name: first_name, last_name: last_name, business_id: @business.id)
 end
 
-When /^I click delete$/ do
-  within("#{@customer.id}") do
-    click 'delete'
+Then /^I click on delete and "(.*?)" the confirmation$/ do |arg1|
+  accept = (arg1 == "accept")
+  handle_js_confirm accept do
+    within "tr##{@customer.id}" do
+      click_on "Delete"
+    end
   end
-end
-
-Then /^I should see an alert box to confirm deletion$/ do
-  page.driver.browser.switch_to.alert.accept
-end
-
-Then /^I should not see "(.*?)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I confirm deletion in the alert box$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I cancel deletion in the alert box$/ do
-  pending # express the regexp above with the code you wish you had
 end

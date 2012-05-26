@@ -1,5 +1,7 @@
 Given /^there is one package$/ do
-  @package = Package.empty? ? FactoryGirl.create(:package) : Package.first
+  @business = Business.first || FactoryGirl.create(:business)
+  @package = Package.where(business_id: @business.id).find(:first)
+  @package ||= FactoryGirl.create(:package, business: @business)
 end
 
 Then /^I should be on the edit package page$/ do
@@ -21,7 +23,15 @@ Then /^I see the package information filled in the fields$/ do
 end
 
 Then /^I should not see the old package information$/ do
-  pending # express the regexp above with the code you wish you had
+  within "div##{@package.id}" do
+    page.should_not have_selector('input#package_name', value: @package.name)
+    page.should_not have_selector('input#package_description', value: @package.description)
+    page.should_not have_selector('input#package_price', value: @package.price)
+    page.should_not have_selector('select#package_validity', value: @package.validity)
+    page.should_not have_selector('input[name="package[billing]"]', checked: "checked", value: @package.billing)
+    page.should_not have_selector('select#package_themes', value: @package.themes)
+    page.should_not have_selector('input#package_domains', value: @package.domains)
+  end
 end
 
 # Because we show the edit form directly from the PUT UPDATE method,
@@ -35,5 +45,9 @@ Then /^the "(.*?)" field should contain "(.*?)"$/ do |arg1, arg2|
 end
 
 Then /^"(.*?)" should be chosen for the "(.*?)" field$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+  find_field(arg1)[:checked].should be_true
+end
+
+Then /^"(.*?)" should be selected for the "(.*?)" field$/ do |arg1, arg2|
+  page.should have_select(arg2, :selected => arg1)
 end

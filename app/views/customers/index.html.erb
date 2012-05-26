@@ -27,8 +27,13 @@
   </thead>
   <tbody>
     <% @customers.each do |customer| %>
-    <tr>
-      <td><%= customer.full_name %> <a href=""><i class="icon-remove-sign"></i></a></td>
+    <tr id="<%=customer.id%>">
+      <td><%= customer.full_name %> 
+          <%= link_to customer_path(customer), method: :delete, title: "Delete customer", 
+                                                            confirm: 'Are you sure?' do %>
+            <i class="icon-remove-sign"></i>
+          <% end %>
+      </td>
       <td><%= customer.email %></td>
       <td>Not implemented.</td>
     </tr>

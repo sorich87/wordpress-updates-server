@@ -24,16 +24,17 @@
 -->
 <div class="row">
 <% @packages.each do |package| %>
-  <div class="span5 well">
+  <div id="<%=package.id%>" class="span5 well">
     <h3><%= package.name %></h3>
     <p><%= package.description %></p>
     <ul>
-      <li><%= package.price %></li>
-      <li><%= package.validity %></li>
-      <li><%= package.billing %></li>
+      <li><%= package_theme_price_description(package) %></li>
+      <li><%= package_validity_description(package) %></li>
+      <li><%= package_renewal_description(package) %></li>
     </ul>
     <div style="margin-top:20px;">
-      <%= link_to 'Edit', edit_settings_package_path(package) %>
+      <%= link_to 'Edit', edit_settings_package_path(package) %> | 
+      <%= link_to 'Delete', settings_package_path(package), method: :delete, confirm: "Are you sure?", title: 'Delete package' %>
     </div>
   </div>
 <% end %>

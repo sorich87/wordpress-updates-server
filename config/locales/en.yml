@@ -17,5 +17,25 @@ en:
         one_time_payment: One time payment
         subscription: Subscription with recurring billing
 
-
-
+    descriptions:
+      themes:
+        price_for_one: "%{price} for One Theme"
+        price_for_all: "%{price} for All Themes"
+      validity:
+        limited_domains:
+          valid_for_life: 
+            one: "Valid for life on 1 domain"
+            other: "Valid for life on %{domains} domains"
+          valid_for_one_month: 
+            one: "Valid for one month on 1 domain"
+            other: "Valid for one month on %{domains} domains"
+          valid_for_one_year: 
+            one: "Valid for one year on 1 domain"
+            other: "Valid for one year on %{domains} domains"
+        unlimited_domains:
+          valid_for_life: "Valid for life on unlimited domains"
+          valid_for_one_month: "Valid for one month on unlimited domains"
+          valid_for_one_year: "Valid for one year on unlimited domains"
+      billing:
+        one_time_payment: "Renewal is manual"
+        subscription: "Renewal is automatic"

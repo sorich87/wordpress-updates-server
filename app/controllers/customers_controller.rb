@@ -1,17 +1,16 @@
 class CustomersController < ApplicationController
+  before_filter :get_business
+
   def index
-    @business = Business.first
     @customers = @business.customers
   end
 
   def new
-    @business = Business.first
     @customer = @business.customers.new
     @packages = @business.packages
   end
 
   def create
-    @business = Business.first
     @customer = Customer.new( customer_params.merge(business: @business) )
     if @customer.valid?
       @customer.save
@@ -21,9 +20,19 @@ class CustomersController < ApplicationController
     end
   end
 
+  def destroy
+    @customer = @business.customers.find(params[:id])
+    @customer.destroy
+    redirect_to customers_path
+  end
+  
   private
 
   def customer_params
     params[:customer].slice(:first_name, :last_name, :email)
+  end
+
+  def get_business
+    @business = Business.first
   end
 end

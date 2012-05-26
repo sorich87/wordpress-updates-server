@@ -1,14 +1,3 @@
-# Background:
-Given /^I signed in to my business account$/ do
-  # TODO: Implement business accounts
-  # Skip it for now, but make sure we have a business account
-  Business.first.destroy unless Business.first.nil?
-  @business = Business.create(
-    name: "Themes For You",
-    email: "ythemes@themes.thm"
-  )
-end
-
 When /^I go to the packages management page$/ do
   visit settings_packages_path
 end
@@ -37,8 +26,6 @@ Then /^I should be on the packages management page$/ do
   current_path.should eq(settings_packages_path)
 end
 
-# This seems to break syntax highlighting in at least Sublime Text 2 :)
-Then /^I should see "([^"]+)"$/ do |arg1|
-  page.should have_content(arg1)
+Then /^I should not see the add package form$/ do
+  find('form#new_package').should_not be_visible
 end
-

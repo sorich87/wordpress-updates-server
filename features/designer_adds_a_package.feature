@@ -1,3 +1,4 @@
+@done
 Feature: Designer adds a package
   As a theme designer
   I want to add a package
@@ -9,7 +10,7 @@ Feature: Designer adds a package
     And I click "Add a package"
     And I see the add package form
 
-  @in-progress
+  @done
   Scenario Outline: Successful addition of a package
     When I fill in "Package Name" with "<name>"
     And I fill in "Package Description" with "<description>"

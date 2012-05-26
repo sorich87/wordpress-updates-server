@@ -10,25 +10,14 @@
 
       <% if user_signed_in? %>
         <div class="nav-collapse">
-          <ul class="nav">
-            <li<%= active_class("#") %>><%= link_to "Themes", "#" %></li>
-            <li<%= active_class("#") %>><%= link_to "Customers", "#" %></li>
-            <li<%= active_class("#") %>><%= link_to "Reports", "#" %></li>
-            <li<%= active_class("#") %>><%= link_to "Settings", "#" %></li>
-            <li<%= active_class("#") %>><%= link_to "Feedback", "#" %></li>
-          </ul>
+          <%= render_navigation :level => 1 %>
         </div><!--/.nav-collapse -->
+      <% end %>
 
-        <ul class="nav pull-right">
-          <li<%= current_page?("#") ? " class='active'" : "" %>><%= link_to "Account", "#" %></li>
-          <li><%= link_to 'Logout', destroy_user_session_path %></li>
-        </ul>
+      <%= render_navigation :context => :user %>
+
+      <% if user_signed_in? %>
         <p class="navbar-text pull-right">Welcome <%= current_user.full_name %></p>
-
-      <% else %>
-        <ul class="nav pull-right">
-          <li<%= active_class(new_user_session_path) %>><%= link_to 'Login', new_user_session_path %></li>
-        </ul>
       <% end %>
     </div>
   </div>

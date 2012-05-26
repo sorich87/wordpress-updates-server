@@ -43,5 +43,8 @@ Spork.each_run do
     config.before(:each) do
       DatabaseCleaner.clean
     end
+
+    config.include Devise::TestHelpers, :type => :controller
+    config.extend ControllerMacros, :type => :controller
   end
 end

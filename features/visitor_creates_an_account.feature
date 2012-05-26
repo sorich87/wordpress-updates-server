@@ -18,7 +18,7 @@ Feature: Visitor creates an account
     And I fill in "Email Address" with "peter@spider.thm"
     And I fill in "Password" with "1Q!w2@"
     And I fill in "Password Again" with "1Q!w2@"
-    And I click "Register"
+    And I click "Create Account"
     Then I should see "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
     And "peter@spider.thm" should receive an email
     When I open the email
@@ -33,7 +33,7 @@ Feature: Visitor creates an account
     And I fill in "Email Address" with "<email>"
     And I fill in "Password" with "<password>"
     And I fill in "Password Again" with "<password_confirmation>"
-    And I click "Register"
+    And I click "Create Account"
     Then I should see "Please review the problems below:"
 
     Scenarios: One required field empty

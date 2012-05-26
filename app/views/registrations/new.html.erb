@@ -12,7 +12,10 @@
         <legend>Business details</legend>
         <%= f.simple_fields_for :business, resource.business do |g| %>
           <%= g.input :business_name, :label => "Business Name", :autofocus => true %>
-          <%= g.input :account_name, :label => "Account Name" %>
+          <%= g.input :account_name, :label => "Account Name", :wrapper => :append do %>
+            <%= g.input_field :account_name, :class => "input-medium" -%>
+            <%- concat content_tag :span, ".thememy.com", :class => "add-on" %>
+          <% end %>
         <% end %>
       </fieldset>
 

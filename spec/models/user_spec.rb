@@ -16,6 +16,18 @@ describe User do
         FactoryGirl.build(:user).should_not be_valid
       end
     end
+
+    describe 'of first name' do
+      it 'requires presence' do
+        FactoryGirl.build(:user, :first_name => nil).should_not be_valid
+      end
+    end
+
+    describe 'of last name' do
+      it 'requires presence' do
+        FactoryGirl.build(:user, :last_name => nil).should_not be_valid
+      end
+    end
   end
 
   it 'should belong to a business' do

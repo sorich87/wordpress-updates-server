@@ -47,7 +47,7 @@ class User
   field :first_name, :type => String
   field :last_name,  :type => String
 
-  validates_presence_of :email
+  validates_presence_of :email, :first_name, :last_name
   validates_uniqueness_of :email, :case_sensitive => false
   attr_accessible :email, :password, :password_confirmation, :remember_me,
     :first_name, :last_name, :business

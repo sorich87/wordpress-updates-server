@@ -18,4 +18,10 @@ FactoryGirl.define do
     validity        Package::VALIDITY[:one_month]
     business        get_or_create_business
   end
+
+  factory :customer do
+    first_name  "Tom"
+    last_name   "Sawyer"
+    email       "tom.sawyer@somemail.email"
+  end
 end

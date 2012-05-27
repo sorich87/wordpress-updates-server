@@ -13,10 +13,11 @@
 
     <%= stylesheet_link_tag "application", :media => "all" %>
 
-    <link href="images/favicon.ico" rel="shortcut icon">
-    <link href="images/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon" sizes="72x72">
-    <link href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon" sizes="114x114">
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/icons/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/icons/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/icons/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/icons/apple-touch-icon-57-precomposed.png">
   </head>
   <body>
 
@@ -42,6 +43,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-
+    <%= content_for(:javascript) %>
   </body>
 </html>

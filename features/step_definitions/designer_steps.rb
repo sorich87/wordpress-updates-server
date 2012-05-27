@@ -2,11 +2,12 @@ Given /^I am a confirmed user$/ do
 end
 
 When /^I sign in$/ do
-  user = FactoryGirl.create(:designer)
+  @user = FactoryGirl.create(:designer)
+  @business = @user.business
   visit new_user_session_path
-  fill_in "Email Address", with: user.email
-  fill_in "Password", with: user.password
-  click_on "Log in"
+  fill_in "Email Address", with: @user.email
+  fill_in "Password", with: @user.password
+  click_on "Log In"
 end
 
 Then /^I should be on the themes listing page$/ do

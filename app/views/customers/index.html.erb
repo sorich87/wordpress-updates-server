@@ -1,0 +1,54 @@
+<h1 class="page-header">Customers</h1>
+
+<p>
+  <%= link_to 'New Customer', new_customer_path, class: 'btn' %>
+  <a class="btn" href="">Import CSV</a>
+</p>
+
+<div class="pagination pagination-right">
+  <ul>
+    <li><a href="">&laquo;</a></li>
+    <li class="active"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li class="disabled"><a href="">&hellip;</a></li>
+    <li><a href="">8</a></li>
+    <li><a href="">&raquo;</a></li>
+  </ul>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Package (not implemented)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr id="<%=customer.id%>">
+      <td><%= customer.full_name %> 
+          <%= link_to customer_path(customer), method: :delete, title: "Delete customer", 
+                                                            confirm: 'Are you sure?' do %>
+            <i class="icon-remove-sign"></i>
+          <% end %>
+      </td>
+      <td><%= customer.email %></td>
+      <td>Not implemented.</td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="pagination pagination-right">
+  <ul>
+    <li><a href="">&laquo;</a></li>
+    <li class="active"><a href="">1</a></li>
+    <li><a href="">2</a></li>
+    <li><a href="">3</a></li>
+    <li class="disabled"><a href="">&hellip;</a></li>
+    <li><a href="">8</a></li>
+    <li><a href="">&raquo;</a></li>
+  </ul>
+</div>

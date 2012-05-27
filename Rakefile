@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Thememy::Application.load_tasks
+ThemeMy::Application.load_tasks

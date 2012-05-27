@@ -40,7 +40,7 @@ class User
 
   include Mongoid::Timestamps
 
-  belongs_to :business, :validate => true
+  belongs_to :business, :validate => true, :autosave => true
 
   index :email, :unique => true
 

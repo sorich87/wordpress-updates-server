@@ -20,7 +20,7 @@ SimpleNavigation::Configuration.run do |navigation|
   # You can override the default logic that is used to autogenerate the item ids.
   # To do this, define a Proc which takes the key of the current item as argument.
   # The example below would add a prefix to each key.
-  navigation.id_generator = Proc.new {|key| "nav-#{key}"}
+  navigation.id_generator = Proc.new {|key| "nav-item-#{key}"}
 
   # If you need to add custom html around item names, you can define a proc that will be called with the name you pass in to the navigation.
   # The example below shows how to wrap items spans.
@@ -72,16 +72,18 @@ SimpleNavigation::Configuration.run do |navigation|
     # primary.auto_highlight = false
 
     primary.item :themes, 'Themes', '#'
-    primary.item :customers, 'Customers', '#'
+    primary.item :customers, 'Customers', customers_path
     primary.item :reports, 'Reports', '#' do |sub_nav|
       sub_nav.item :graphs, 'Graphs', '#'
       sub_nav.item :sales, 'Sales', '#'
+      sub_nav.dom_class = 'nav nav-tabs'
     end
-    primary.item :settings, 'Settings', '#' do |sub_nav|
-      sub_nav.item :company, 'Company', '#'
-      sub_nav.item :packages, 'Packages', '#'
+    primary.item :settings, 'Settings', settings_business_path do |sub_nav|
+      sub_nav.item :company, 'Company', settings_business_path
+      sub_nav.item :packages, 'Packages', settings_packages_path
       sub_nav.item :payment, 'Payment', '#'
       sub_nav.item :other, 'Other', '#'
+      sub_nav.dom_class = 'nav nav-tabs'
     end
 
   end

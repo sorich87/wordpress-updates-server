@@ -1,10 +1,10 @@
 development:
   host: localhost
-  database: thememy_development
+  database: theme_my_development
 
 test:
   host: localhost
-  database: thememy_test
+  database: theme_my_test
 
 # set these environment variables on your prod server
 production:

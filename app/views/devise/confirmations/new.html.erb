@@ -10,7 +10,8 @@
       <%= f.input :email, :label => "Email Address", :required => false, :input_html => { :class => "input-xlarge" } %>
 
       <div class="form-actions">
-        <%= f.button :submit, "Resend confirmation instructions", :class => "btn btn-primary" %>
+        <%= f.button :submit, "Resend Instructions", :class => "btn btn-primary" %>
+        <%= link_to "Return to Login Page", new_user_session_path, :class => "btn" %>
       </div>
     <% end %>
 

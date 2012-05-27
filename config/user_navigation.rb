@@ -71,8 +71,8 @@ SimpleNavigation::Configuration.run do |navigation|
     # You can turn off auto highlighting for a specific level
     # primary.auto_highlight = false
 
-    primary.item :account, 'Account', '#', :if => Proc.new { user_signed_in? }
-    primary.item :logout, 'Logout', destroy_user_session_path, :if => Proc.new { user_signed_in? }
+    primary.item :account, 'Account', edit_user_registration_path, :if => Proc.new { user_signed_in? }
+    primary.item :logout, 'Logout', destroy_user_session_path, :method => :delete, :if => Proc.new { user_signed_in? }
     primary.item :login, 'Login', new_user_session_path, :unless => Proc.new { user_signed_in? }
 
   end

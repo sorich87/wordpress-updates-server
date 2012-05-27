@@ -1,7 +1,9 @@
 <div class="row">
   <div class="span6 offset3 hero-unit">
 
-    <h1 class="page-header">Forgot your password?</h1>
+    <h1 class="page-header">Forgot Your Password?</h1>
+
+    <p>No worries, enter your email address below and we'll send you login instructions right away.</p>
 
     <%= simple_form_for(resource, :as => resource_name, :url => password_path(resource_name),
                         :html => {  :method => :post, :class => 'form-horizontal' }) do |f| %>
@@ -10,7 +12,8 @@
       <%= f.input :email, :label => "Email Address", :required => false, :input_html => { :class => "input-xlarge" } %>
 
       <div class="form-actions">
-        <%= f.button :submit, "Send me reset password instructions", :class => "btn btn-primary" %>
+        <%= f.button :submit, "Send Me Instructions", :class => "btn btn-primary" %>
+        <%= link_to "Return to Login Page", new_user_session_path, :class => "btn" %>
       </div>
     <% end %>
 

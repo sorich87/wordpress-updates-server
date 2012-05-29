@@ -5,7 +5,11 @@ gem 'mongoid',      "~> 2.4.10"
 gem 'bson_ext',     "~> 1.6.2"
 gem 'jquery-rails'
 gem 'sanitize'
-
+gem 'twitter-bootstrap-rails', '~> 2.0.0'
+gem 'simple_form', '~> 2.0.0'
+gem 'country_select', '~> 0.0.1'
+gem 'simple-navigation', '~> 3.0'
+gem 'devise', '~> 2.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -15,16 +19,6 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'
-gem 'twitter-bootstrap-rails', '~> 2.0.0'
-
-gem 'simple_form', '~> 2.0.0'
-gem 'country_select', '~> 0.0.1'
-
-gem 'simple-navigation', '~> 3.0'
-
-gem 'devise', '~> 2.0'
 
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'

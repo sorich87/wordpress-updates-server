@@ -1,5 +1,6 @@
 <%- flash.each do |name, msg| -%>
-  <%- name = "info" if name == "notice" -%>
+  <%- name = :info if name == :notice -%>
+  <%- name = :error if name == :alert -%>
   <%- class_name = "alert alert-#{name}" -%>
   <%= content_tag :div, msg, :class => class_name if msg.is_a?(String) %>
 <%- end -%>

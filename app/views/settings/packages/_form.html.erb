@@ -8,12 +8,7 @@
         <legend>New Package</legend>
       <% end %>
 
-      <% if f.error_notification %>
-        <div class="alert alert-error fade in">
-          <a class="close" data-dismiss="alert" href="#">&times;</a>
-          <%= f.error_notification %>
-        </div>
-      <% end %>
+      <%= f.error_notification %>
 
       <%= f.input :name, label: 'Package Name', input_html: {class: 'input-xlarge'} %>
 

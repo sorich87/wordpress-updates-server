@@ -3,13 +3,8 @@
 <h2>New Customer</h2>
 
 <%= simple_form_for @customer, html: {class: 'form-horizontal'} do |f| %>
-  <% if f.error_notification %>
-    <div class="alert alert-error fade in">
-      <a class="close" data-dismiss="alert" href="#">&times;</a>
-      <%= f.error_notification %>
-    </div>
-  <% end %>
-  
+  <%= f.error_notification %>
+
   <fieldset>
     <legend>Customer Details</legend>
     <%= f.input :first_name, label: 'First Name', input_html: {class: 'input-xlarge'} %>

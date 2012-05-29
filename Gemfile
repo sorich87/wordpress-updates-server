@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails',        '3.2.3'
 gem 'mongoid',      "~> 2.4.10"
 gem 'bson_ext',     "~> 1.6.2"
-gem 'jquery-rails'
 gem 'sanitize'
 gem 'twitter-bootstrap-rails', '~> 2.0.0'
 gem 'simple_form', '~> 2.0.0'

@@ -1,7 +1,15 @@
 FactoryGirl.define do
   factory :business do
-    name 'Spider Themes'
-    email   "contact@spider.thm"
+    name      'Spider Themes'
+    email     'contact@spider.thm'
+    country   'United States'
+    street1   '20 Ingram St.'
+    street2   'Forest Hills, Queens'
+    city      'New York City'
+    state     'NY'
+    zip       '12345'
+    phone     '123-456-7890'
+    time_zone 'Eastern Time (US & Canada)'
   end
 
   factory :user do

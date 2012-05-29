@@ -5,15 +5,15 @@ class Settings::BusinessesController < ApplicationController
 
   def update
     if @business.update_attributes(business_params)
-      flash.now[:notice] = "Changes saved."
+      flash[:notice] = "Changes saved."
+      redirect_to settings_business_path
     else
-      flash.now[:error] = "There were errors when updating your business settings."
+      render :edit
     end
-    render :edit
   end
 
   private
   def business_params
-    params[:business].slice(:name, :email)
+    params[:business].slice(:name, :email, :country, :time_zone, :street1, :street2, :city, :state, :zip, :phone)
   end
 end

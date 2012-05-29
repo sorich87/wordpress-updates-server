@@ -24,7 +24,7 @@ When /^I fill in and submit the registration form$/ do
 end
 
 Then /^I should see a registration success message$/ do
-  page.should have_content "A message with a confirmation link has been sent to your email address. Please open the link to activate your account."
+  page.should have_content "Welcome! You have signed up successfully."
 end
 
 When /^I confirm my account$/ do

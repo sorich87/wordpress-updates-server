@@ -18,9 +18,11 @@ class ApplicationController < ActionController::Base
   private
 
   def set_time_zone
-    if user_signed_in? & !@business.time_zone.nil?
-      timezone = ActiveSupport::TimeZone.new(@business.time_zone)
-      Time.zone = @business.time_zone unless timezone.nil?
+    if user_signed_in?
+      unless @business.time_zone.nil?
+        timezone = ActiveSupport::TimeZone.new(@business.time_zone)
+        Time.zone = @business.time_zone unless timezone.nil?
+      end
     end
   end
 end

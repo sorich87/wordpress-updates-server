@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :business do
-    business_name 'Spider Themes'
-    account_name  'spider'
+    name 'Spider Themes'
     email   "contact@spider.thm"
   end
 

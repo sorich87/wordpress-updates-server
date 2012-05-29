@@ -6,57 +6,35 @@ describe Business do
       FactoryGirl.build(:business).should be_valid
     end
 
-    describe 'of business_name' do
+    describe 'of name' do
       it 'requires presence' do
-        FactoryGirl.build(:business, :business_name => nil).should_not be_valid
+        FactoryGirl.build(:business, :name => nil).should_not be_valid
+      end
+
+      it 'requires minimum length' do
+        FactoryGirl.build(:business, :name => 'a').should_not be_valid
+      end
+
+      it 'requires maximum length' do
+        FactoryGirl.build(:business, :name => 'a' * 70).should_not be_valid
       end
     end
 
     describe 'of email' do
+      it 'requires presence' do
+        FactoryGirl.build(:business, :email => nil).should_not be_valid
+      end
+
+      it 'requires uniqueness' do
+        FactoryGirl.create(:business)
+        FactoryGirl.build(:business, :name => 'Other Name').should_not be_valid
+      end
+
       it "requires valid email" do
         invalid_emails = ["notatallcorrect", "without@tld", "without@.domain"]
         invalid_emails.each do |e|
           FactoryGirl.build(:business, :email => e).should_not be_valid
         end
-      end
-    end
-
-    describe 'of account_name' do
-      it 'requires presence' do
-        FactoryGirl.build(:business, :account_name => nil).should_not be_valid
-      end
-
-      it 'requires uniqueness' do
-        FactoryGirl.create(:business)
-        FactoryGirl.build(:business, :business_name => 'Venom Themes').should_not be_valid
-      end
-
-      it 'requires letters, numbers and underscore only' do
-        FactoryGirl.build(:business, :account_name => 'spideR').should be_valid
-        FactoryGirl.build(:business, :account_name => 'spider1').should be_valid
-        FactoryGirl.build(:business, :account_name => 'spide_r').should be_valid
-        FactoryGirl.build(:business, :account_name => 'spider@').should_not be_valid
-        FactoryGirl.build(:business, :account_name => 'spide r').should_not be_valid
-      end
-
-      it 'requires minimum length' do
-        FactoryGirl.build(:business, :account_name => 'a').should_not be_valid
-      end
-
-      it 'requires maximum length' do
-        FactoryGirl.build(:business, :account_name => 'a' * 70).should_not be_valid
-      end
-
-      it 'downcases' do
-        business = FactoryGirl.build(:business, :account_name => 'SpIdEr')
-        business.valid?
-        business.account_name.should == 'spider'
-      end
-
-      it 'strips whitespaces' do
-        business = FactoryGirl.build(:business, :account_name => '   spider ')
-        business.valid?
-        business.account_name.should == 'spider'
       end
     end
   end

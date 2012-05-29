@@ -8,18 +8,15 @@
                         :defaults => { :required => false, :input_html => { :class => "input-xlarge" } }) do |f| %>
       <%= f.error_notification %>
 
-      <fieldset>
+      <fieldset id="business-details">
         <legend>Business details</legend>
         <%= f.simple_fields_for :business, resource.business do |g| %>
-          <%= g.input :business_name, :label => "Business Name", :autofocus => true %>
-          <%= g.input :account_name, :label => "Account Name", :wrapper => :append do %>
-            <%= g.input_field :account_name, :class => "input-medium" -%>
-            <%- concat content_tag :span, ".thememy.com", :class => "add-on" %>
-          <% end %>
+          <%= g.input :name, :label => "Business Name", :autofocus => true %>
+          <%= g.input :email, :label => "Business Email" %>
         <% end %>
       </fieldset>
 
-      <fieldset>
+      <fieldset id="user-details">
         <legend>User details</legend>
         <%= f.input :first_name, :label => "First Name" %>
         <%= f.input :last_name, :label => "Last Name" %>

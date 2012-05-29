@@ -14,6 +14,6 @@ class Settings::BusinessesController < ApplicationController
 
   private
   def business_params
-    params[:business].slice(:business_name, :email)
+    params[:business].slice(:name, :email)
   end
 end

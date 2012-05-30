@@ -11,8 +11,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new( customer_params.merge(business: @business) )
-    if @customer.valid?
-      @customer.save
+    if @customer.save
       redirect_to customers_path, notice: "Customer saved."
     else
       render :new
@@ -24,10 +23,10 @@ class CustomersController < ApplicationController
     @customer.destroy
     redirect_to customers_path
   end
-  
+
   private
 
   def customer_params
-    params[:customer].slice(:first_name, :last_name, :email)
+    params[:customer].slice(:email)
   end
 end

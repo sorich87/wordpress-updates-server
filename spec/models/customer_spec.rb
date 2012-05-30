@@ -22,14 +22,6 @@ describe Customer do
       Customer.new(@valid_attributes).should be_valid
     end
 
-    it "should reject empty first names" do
-      Customer.new( @valid_attributes.merge(first_name: nil) ).should_not be_valid
-    end
-
-    it "should reject empty last names" do
-      Customer.new( @valid_attributes.merge(last_name: nil) ).should_not be_valid
-    end
-
     it "should reject empty emails" do
       Customer.new( @valid_attributes.merge(email: nil) ).should_not be_valid
     end

@@ -2,8 +2,12 @@ module ControllerMacros
   def sign_in_user
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
-      @user = FactoryGirl.create(:designer)
-      @business = @user.business
+
+      @user_attributes = FactoryGirl.attributes_for(:user)
+      @business_attributes = FactoryGirl.attributes_for(:business)
+
+      @business = Business.create(@business_attributes)
+      @user = User.create(@user_attributes.merge(business: @business))
       sign_in @user
     end
   end

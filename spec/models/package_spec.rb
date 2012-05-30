@@ -12,7 +12,7 @@ describe Package do
       billing: Package::BILLING[:one_time_payment],
       themes: Package::THEMES[:one_theme],
       domains: 0, # Unlimited,
-      business_id: @business.id
+      business: @business
     }
   end
 

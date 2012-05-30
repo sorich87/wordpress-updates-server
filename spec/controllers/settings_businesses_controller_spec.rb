@@ -66,19 +66,14 @@ describe Settings::BusinessesController do
 
   describe "DELETE destroy" do
     context "valid password" do
-      before :each do
-        user_attributes = FactoryGirl.attributes_for(:user)
-        @password = user_attributes[:password]
-      end
-
       it "deletes the business" do
         expect{
-          delete :destroy, password: @password
+          delete :destroy, password: @user_attributes[:password]
         }.to change(Business,:count).by(-1)
       end
 
       it "redirects to home#sorry" do
-        delete :destroy, password: @password
+        delete :destroy, password: @user_attributes[:password]
         response.should redirect_to sorry_home_path
       end
     end

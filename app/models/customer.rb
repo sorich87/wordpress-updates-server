@@ -7,8 +7,12 @@ class Customer
 
   belongs_to :business
 
-  validates_presence_of [:first_name, :last_name, :email]
-  validates :email, :email => true, :uniqueness => true
+  validates :email,
+    :presence => true,
+    :email => true,
+    :uniqueness => { :case_sensitive => false }
+
+  attr_accessible :first_name, :last_name, :email, :business
 
   def full_name
     "#{first_name} #{last_name}"

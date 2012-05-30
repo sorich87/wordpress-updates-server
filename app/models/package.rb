@@ -28,6 +28,8 @@ class Package
     :all_themes => 1
   }
 
+  attr_accessible :name, :description, :price, :themes, :domains, :billing, :validity, :business, :customers
+
   validates_presence_of [:name, :description, :price, :themes, :domains, :billing, :validity, :business]
 
   validates_numericality_of :price,

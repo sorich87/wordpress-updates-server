@@ -20,41 +20,29 @@ When /^the company profile form fields contain my company details$/ do
 end
 
 When /^I fill in new company details$/ do
-  @new_business = Business.new({
-    name: 'Paris Themes',
-    email: 'contact@paris.thm',
-    country: 'France',
-    street1: '1 Rue Imaginaire',
-    street2: '',
-    city: 'Paris',
-    state: '',
-    zip: '90000',
-    phone: '01 44 18 90 64',
-    time_zone: 'Paris'
-  })
-  fill_in "Company Name", with: @new_business.name
-  fill_in "Email Address", with: @new_business.email
-  select @new_business.country, from: "Country"
-  fill_in "Street 1", with: @new_business.street1
-  fill_in "Street 2", with: @new_business.street2
-  fill_in "City", with: @new_business.city
-  fill_in "State/Province/Region", with: @new_business.state
-  fill_in "Zip/Postal Code", with: @new_business.zip
-  fill_in "Phone", with: @new_business.phone
-  select @new_business.time_zone, from: "Time Zone"
+  fill_in "Company Name", with: 'Paris Themes'
+  fill_in "Email Address", with: 'contact@paris.thm'
+  select 'France', from: "Country"
+  fill_in "Street 1", with: '1 Rue Imaginaire'
+  fill_in "Street 2", with: 'Appartement 3'
+  fill_in "City", with: 'Paris'
+  fill_in "State/Province/Region", with: 'Paris'
+  fill_in "Zip/Postal Code", with: '90000'
+  fill_in "Phone", with: '01 44 18 90 64'
+  select 'Paris', from: "Time Zone"
 end
 
 Then /^the company profile form fields should contain my new company details$/ do
-  find_field("Company Name").value.should == @new_business.name
-  find_field("Email Address").value.should == @new_business.email
-  find_field("Country").value.should == @new_business.country
-  find_field("Street 1").value.should == @new_business.street1
-  find_field("Street 2").value.should == @new_business.street2
-  find_field("City").value.should == @new_business.city
-  find_field("State/Province/Region").value.should == @new_business.state
-  find_field("Zip/Postal Code").value.should == @new_business.zip
-  find_field("Phone").value.should == @new_business.phone
-  find_field("Time Zone").value.should == @new_business.time_zone
+  find_field("Company Name").value.should == 'Paris Themes'
+  find_field("Email Address").value.should == 'contact@paris.thm'
+  find_field("Country").value.should == 'France'
+  find_field("Street 1").value.should == '1 Rue Imaginaire'
+  find_field("Street 2").value.should == 'Appartement 3'
+  find_field("City").value.should == 'Paris'
+  find_field("State/Province/Region").value.should == 'Paris'
+  find_field("Zip/Postal Code").value.should == '90000'
+  find_field("Phone").value.should == '01 44 18 90 64'
+  find_field("Time Zone").value.should == 'Paris'
 end
 
 Then /^the company profile form fields should contain my company details$/ do

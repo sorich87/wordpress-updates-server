@@ -12,8 +12,9 @@ describe User do
       end
 
       it 'requires uniqueness' do
-        FactoryGirl.create(:user)
-        FactoryGirl.build(:user).should_not be_valid
+        user = FactoryGirl.attributes_for(:user)
+        User.create(user)
+        User.create(user).should_not be_valid
       end
     end
 

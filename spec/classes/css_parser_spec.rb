@@ -53,14 +53,13 @@ describe CSSParser do
   # Test a couple of style.css:s that were downloaded from
   # http://wordpress.org/extend/themes/
   # Basically we just don't want an exception to occur
-  describe 'downloaded styles' do
+  describe 'downloaded style' do
     css_files = File.join(Rails.root, 'spec/fixtures/themes/headers/downloaded/*.css')
 
     Dir.glob(css_files).each do |file|
 
-      specify 'should all be valid' do
+      specify "#{file} should be valid" do
         tp = CSSParser.new(file)
-        puts file unless tp.valid?
         tp.should be_valid
       end
 

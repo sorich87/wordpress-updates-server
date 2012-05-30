@@ -1,3 +1,7 @@
+When /^I go to the customers management page$/ do
+  visit customers_path
+end
+
 Given /^there is one customer named "(.*?)"$/ do |arg1|
   (first_name, last_name) = arg1.split(' ')
   @customer = Customer.where(first_name: first_name).where(last_name: last_name)

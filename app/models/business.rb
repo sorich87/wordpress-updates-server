@@ -2,8 +2,8 @@ class Business
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  has_many :users
-  has_many :packages
+  has_many :users, dependent: :delete
+  has_many :packages, dependent: :delete
   has_many :customers
   has_many :themes
 

@@ -10,8 +10,9 @@ ThemeMy::Application.routes.draw do
   namespace :settings do
     root :to => 'businesses#edit'
 
-    resource :business, :only => [:edit, :update] do
+    resource :business, :only => [:edit, :update, :destroy] do
       get '/', :to => :edit
+      get '/admin', :to => :admin
     end
 
     resources :packages
@@ -27,6 +28,11 @@ ThemeMy::Application.routes.draw do
       as: :user_registration do
         get :cancel
       end
+  end
+
+  resource :home, only: [:index] do
+    match 'sorry' => 'home#sorry'
+    get '/sorry', :to => :sorry
   end
 
   root :to => 'home#index'

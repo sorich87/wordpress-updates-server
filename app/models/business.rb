@@ -5,6 +5,7 @@ class Business
   has_many :users
   has_many :packages
   has_many :customers
+  has_many :themes
 
   field :name,      :type => String
   field :email,     :type => String

@@ -1,6 +1,11 @@
 ThemeMy::Application.routes.draw do
 
   resources :customers
+  resources :themes do
+    collection do
+      post 'validate_zip', as: :validate_zip
+    end
+  end
 
   namespace :settings do
     root :to => 'businesses#edit'

@@ -1,0 +1,23 @@
+<h1 class="page-header">Themes</h1>
+
+<ul class="thumbnails">
+  <li class="span3">
+    <div class="thumbnail">
+      <img src="http://placehold.it/300x225" alt="" />
+      <div class="caption">
+        <h4>Pure Awesomeness 2.0</h4>
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a class="btn btn-mini btn-primary" href="">new version</a>
+            <a class="btn btn-mini btn-danger" href="">delete theme</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <li class="span3">
+    <%= link_to new_theme_path do %>
+      <img src="http://placehold.it/300x313&text=new+theme" alt="" />
+    <% end %>
+  </li>
+</ul>

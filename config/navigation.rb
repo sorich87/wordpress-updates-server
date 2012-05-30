@@ -71,7 +71,7 @@ SimpleNavigation::Configuration.run do |navigation|
     # You can turn off auto highlighting for a specific level
     # primary.auto_highlight = false
 
-    primary.item :themes, 'Themes', '#'
+    primary.item :themes, 'Themes', themes_path
     primary.item :customers, 'Customers', customers_path
     primary.item :reports, 'Reports', '#' do |sub_nav|
       sub_nav.item :graphs, 'Graphs', '#'

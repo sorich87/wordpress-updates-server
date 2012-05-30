@@ -9,7 +9,7 @@ gem 'simple_form', '~> 2.0.0'
 gem 'country_select', '~> 0.0.1'
 gem 'simple-navigation', '~> 3.0'
 gem 'devise', '~> 2.0'
-gem 'paperclip', '~> 3.0.4'
+gem 'mongoid-paperclip', :require => "mongoid_paperclip"
 gem 'jquery-rails'
 
 group :assets do

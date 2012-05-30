@@ -1,0 +1,43 @@
+<%= render :partial => 'settings/layout' %>
+
+<div class="row">
+  <div class="span5 well alert-error">
+    <h3>Delete Account</h3>
+    <p>Do you want to delete your account and all of your data, and lose everything?<br />
+    If you have a problem, please <a href="mailto:contact@thememy.com">contact us</a>
+    instead and we will help you solve it.</p>
+    <p>
+      <a class="btn btn-danger" href="#delete-account" data-toggle="modal">I want to delete my account</a>
+      <a class="btn" href="mailto:contact@thememy.com">Contact us</a>
+    </p>
+  </div>
+</div>
+
+<div class="modal hide alert-error" id="delete-account">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">×</a>
+		<h3>Make sure you want to do this!</h3>
+  </div>
+  <div class="modal-body">
+		<p>Deleting your account will delete all the data in your account including all the themes you uploaded.<br />
+		If you want to use ThemeMy! again in the future, you will need to start over from zero! Are you sure you want to delete your account?</p>
+
+    <%= simple_form_for @business, url: settings_business_path, method: :delete, html: {id: 'delete-form'} do |f| %>
+			<label for="delete-password">Please enter your password below to confirm:</label>
+			<input class="input-xlarge" type="password" name="password" id="delete-password" />
+    <% end %>
+  </div>
+  <div class="modal-footer">
+    <a class="btn" data-dismiss="modal">Cancel</a>
+		<a href="#" class="btn btn-danger" id="delete-confirm">Delete this account and all my themes</a>
+  </div>
+</div>
+
+<%- content_for :javascript do -%>
+  <script type="text/javascript">
+    $("#delete-confirm").click(function (e) {
+      e.preventDefault();
+      $("#delete-form").submit();
+    });
+  </script>
+<%- end -%>

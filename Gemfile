@@ -24,6 +24,7 @@ end
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'
   gem 'spork', '~> 1.0rc'
+  gem 'forgery', '0.5.0'
 end
 
 group :test do

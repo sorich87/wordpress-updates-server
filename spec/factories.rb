@@ -1,24 +1,23 @@
 FactoryGirl.define do
   factory :business do
-    name      'Spider Themes'
-    email     'contact@spider.thm'
-    country   'United States'
-    street1   '20 Ingram St.'
-    street2   'Forest Hills, Queens'
-    city      'New York City'
-    state     'NY'
-    zip       '12345'
-    phone     '123-456-7890'
-    time_zone 'Eastern Time (US & Canada)'
+    name      { Forgery(:name).company_name }
+    email     { Forgery(:email).address }
+    country   { Forgery(:address).country }
+    street1   { Forgery(:address).street_address }
+    street2   ''
+    city      { Forgery(:address).city }
+    state     { Forgery(:address).state }
+    zip       { Forgery(:address).zip }
+    phone     { Forgery(:address).phone }
+    time_zone { Forgery(:time).zone }
   end
 
   factory :user do
-    first_name            'Peter'
-    last_name             'Parker'
-    email                 'peter@spider.thm'
-    password              '1Q!w2@'
-    password_confirmation '1Q!w2@'
-    confirmed_at          Time.now
+    first_name   { Forgery(:name).first_name }
+    last_name    { Forgery(:name).last_name }
+    email        { Forgery(:email).address }
+    password     { Forgery(:basic).password }
+    confirmed_at { Forgery(:date).date(past: true) }
 
     factory :designer do
       business
@@ -26,18 +25,18 @@ FactoryGirl.define do
   end
 
   factory :package do
-    name            "Standard"
-    description     "Awesome"
-    price           40.00
-    themes          Package::THEMES[:one_theme]
-    domains         0
-    billing         Package::BILLING[:subscription]
-    validity        Package::VALIDITY[:one_month]
+    name        { Forgery(:lorem_ipsum).title }
+    description { Forgery(:lorem_ipsum).sentence }
+    price       { Forgery(:monetary).money }
+    themes      Package::THEMES[:one_theme]
+    domains     { Forgery(:basic).number(at_least: 0) }
+    billing     Package::BILLING[:subscription]
+    validity    Package::VALIDITY[:one_month]
   end
 
   factory :customer do
-    first_name  "Tom"
-    last_name   "Sawyer"
-    email       "tom.sawyer@somemail.email"
+    first_name { Forgery(:name).first_name }
+    last_name  { Forgery(:name).last_name }
+    email      { Forgery(:email).address }
   end
 end

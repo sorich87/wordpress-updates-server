@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'spork'
 require 'factory_girl'
+require 'forgery'
 require 'capybara/rspec'
 require "email_spec"
 #uncomment the following line to use spork with the debugger

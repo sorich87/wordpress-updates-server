@@ -81,8 +81,7 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :settings, 'Settings', settings_business_path do |sub_nav|
       sub_nav.item :company, 'Company', settings_business_path
       sub_nav.item :packages, 'Packages', settings_packages_path
-      sub_nav.item :payment, 'Payment', '#'
-      sub_nav.item :other, 'Other', '#'
+      sub_nav.item :admin, 'Admin', admin_settings_business_path
       sub_nav.dom_class = 'nav nav-tabs'
     end
 

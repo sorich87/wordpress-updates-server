@@ -26,8 +26,9 @@ describe Business do
       end
 
       it 'requires uniqueness' do
-        FactoryGirl.create(:business)
-        FactoryGirl.build(:business, :name => 'Other Name').should_not be_valid
+        business = FactoryGirl.attributes_for(:business)
+        Business.create(business)
+        Business.create(business).should_not be_valid
       end
 
       it "requires valid email" do

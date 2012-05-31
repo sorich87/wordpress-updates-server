@@ -1,16 +1,33 @@
 require 'zip/zip'
 
 class ThemeParser
-  REQUIRED_FILES = ['style\.css', 'screenshot\.(png|jpg|jpeg)']
+  REQUIRED_FILES = [:style, :screenshot]
 
   def initialize(filename)
     @filename = filename
-    @zip = Zip::ZipFile.open(@filename)
+    @@errors = {}
+    @@required_files = [
+      {
+        identifier: :style,
+        regex: /\A[\w-]{0,}\/{0,1}style.css$/
+      },
+      {
+        identifier: :screenshot,
+        regex: /screenshot\.(png|jpg|jpeg|gif)/
+      }
+    ]
+
+    if File.exists?(filename)
+      @zip = Zip::ZipFile.open(@filename)
+    else
+      @@errors[:base] = "File \"#{filename}\" does not exist or is not a file."
+    end
     valid?
   end
 
 
   def valid?
+    return false if @zip.nil?
     return false unless validate_required_files
     return false unless validate_css_file
 
@@ -21,34 +38,45 @@ class ThemeParser
     @css_parser
   end
 
+  def errors
+    @@errors
+  end
+
   private
   
   def validate_required_files
-    found = 0
+    find_files
+    all_files_present = true
+    @@required_files.each do |required_file|
+      unless required_file[:found]
+        identifier = required_file[:identifier]
+        @@errors[identifier] ||= []
+        unless @@errors[identifier].include? "could not be found."
+          @@errors[identifier] << "could not be found."
+        end
+        all_files_present = false
+      end
+    end
+
+    return all_files_present
+  end
+
+  def find_files
     zip_files = []
     Zip::ZipFile.foreach @filename do |file|
       zip_files << file
     end
 
-    REQUIRED_FILES.each do |required_file|
-      regex = Regexp.new(required_file)
+    @@required_files.each_with_index do |required_file, index|
+      regex = required_file[:regex]
 
       zip_files.each do |zip_file|
         if regex.match(zip_file.to_s)
-          if zip_file =~ /screenshot\.(png|jpg|jpeg)/
-            @screenshot = zip_file
-          end
-
-          found += 1
+          @@required_files[index][:found] = true
+          @@required_files[index][:location] = zip_files.to_s
           break
         end
       end
-    end
-
-    if found == REQUIRED_FILES.count
-      return true
-    else
-      return false
     end
   end
 

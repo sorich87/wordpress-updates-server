@@ -20,6 +20,26 @@ describe ThemeParser do
         tp.should_not be_valid
       end
     end
+
+    describe 'error messages' do
+      it 'should add an error when screenshot is missing' do
+        zip_file = File.join(Rails.root, 'spec/fixtures/themes/zips/invalid/screenshot_missing.zip')
+        tp = ThemeParser.new(zip_file)
+        tp.errors.should have_key(:screenshot)
+      end
+
+      it 'should add an error when style.css is missing' do
+        zip_file = File.join(Rails.root, 'spec/fixtures/themes/zips/invalid/style_missing.zip')
+        tp = ThemeParser.new(zip_file)
+        tp.errors.should have_key(:style)
+      end
+    end
+
+    it 'should an error when the .zip is not a file' do
+      zip_file = File.join(Rails.root, 'spec/fixtures/this_file_is_mising.zip')
+      tp = ThemeParser.new(zip_file)
+      tp.errors.should have_key(:base)
+    end
   end
 
   it 'should get the attributes out of it' do

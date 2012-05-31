@@ -12,7 +12,7 @@ describe CSSParser do
 
   describe 'attributes' do
     before do
-      @tp = CSSParser.new( @fixture_file )
+      @cp = CSSParser.new( @fixture_file )
     end
 
     attributes = [:theme_name, :theme_uri, :description, :version, :license,
@@ -20,32 +20,33 @@ describe CSSParser do
 
     attributes.each do |attr|
       it "should respond to #{attr}" do
-        @tp.should respond_to(attr)
+        @cp.should respond_to(attr)
       end
     end
 
-    specify { @tp.theme_name.should_not be_nil }
-    specify { @tp.theme_uri.should_not be_nil }
-    specify { @tp.description.should_not be_nil }
-    specify { @tp.version.should_not be_nil }
-    specify { @tp.license.should_not be_nil }
-    specify { @tp.license_uri.should_not be_nil }
-    specify { @tp.tags.should_not be_nil }
-    specify { @tp.author.should_not be_nil }
+    specify { @cp.theme_name.should_not be_nil }
+    specify { @cp.theme_uri.should_not be_nil }
+    specify { @cp.description.should_not be_nil }
+    specify { @cp.version.should_not be_nil }
+    specify { @cp.license.should_not be_nil }
+    specify { @cp.license_uri.should_not be_nil }
+    specify { @cp.tags.should_not be_nil }
+    specify { @cp.author.should_not be_nil }
 
     it 'should create an array of tags' do
-      @tp.tags.is_a?(Array).should be_true
+      @cp.tags.is_a?(Array).should be_true
     end
   end
 
   describe 'missing attibutes' do
     before do
       @header_path = File.join( Rails.root, 'spec/fixtures/themes/headers/')
+      @cp = CSSParser.new( File.join(@header_path, 'missing_name.css' ))
     end
 
     it 'should mark file as invalid when no name is present' do
-      @tp = CSSParser.new( File.join(@header_path, 'missing_name.css' ))
-      @tp.should_not be_valid
+      @cp.should_not be_valid
+    end
     end
   end
 
@@ -59,8 +60,8 @@ describe CSSParser do
     Dir.glob(css_files).each do |file|
 
       specify "#{file} should be valid" do
-        tp = CSSParser.new(file)
-        tp.should be_valid
+        cp = CSSParser.new(file)
+        cp.should be_valid
       end
 
     end

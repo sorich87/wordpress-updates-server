@@ -22,7 +22,7 @@ Then /^I should see the customer in the list$/ do
 end
 
 When /^I there is a customer in my account$/ do
-  @customer = FactoryGirl.create(:customer, business: @business)
+  @customer = FactoryGirl.create(:customer, businesses: [@business])
 end
 
 When /^I add that customer again$/ do

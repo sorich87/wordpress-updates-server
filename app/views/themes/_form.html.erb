@@ -4,8 +4,6 @@
 
       <% if f.object.persisted? %>
         <legend>Edit theme</legend>
-      <% else %>
-        <legend>New theme</legend>
       <% end %>
 
       <% if f.error_notification %>
@@ -32,49 +30,12 @@
         <%= f.input :license, input_html: {class: 'input-xlarge'} %>
         <%= f.input :license_uri, input_html: {class: 'input-xlarge'} %>
         <%= f.input :tags, input_html: {class: 'input-xlarge'} %>
-      </div>
-      
-      <div class="form-actions">
-        <%= f.button :submit, class: 'btn-primary', value: 'Save Theme' %>
-        <%= link_to 'Cancel', themes_path %>
+
+        <div class="form-actions">
+          <%= f.button :submit, class: 'btn-primary', value: 'Save Theme' %>
+          <%= link_to 'Cancel', themes_path %>
+        </div>
       </div>
     </fieldset>
   </div>
 </div>
-
-<% content_for(:head) do %>
-  <%= stylesheet_link_tag 'jquery.plupload.queue' %>
-<% end %>
-<% content_for(:javascript) do %>
-<%= javascript_include_tag "plupload.full", "jquery.plupload.queue" %>
-<%= javascript_include_tag "theme_uploader" %>
-<script type="text/javascript">
-  <% session_key_name = Rails.application.config.session_options[:key] %>
-  var global_response = null;
-  jQuery(document).ready(function() {
-    $("#upload_theme").pluploadQueue({
-      runtimes: 'html5,flash,silverlight',
-      url: '<%= validate_zip_themes_path %>',
-      max_file_size: '10mb',
-      multiple_queues: true,
-      flash_swf_url: "/javascripts/plupload/plupload.flash.swf",  
-      silverlight_xap_url: "/javascripts/plupload/plupload.silverlight.xap",
-      multipart: true,
-      multipart_params: {
-        '_http_accept': 'application/javascript',
-        'authenticity_token' : '<%= form_authenticity_token %>',
-        '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
-      },
-      filters: [
-        {title: "Compressed theme file", extensions: "zip"}
-      ],
-      init: {
-        FileUploaded: function(up, file, info) {
-          global_response = $.parseJSON(info.response);
-          handleUpload(info);
-        }
-      }
-    });
-  });
-</script>
-<% end %>

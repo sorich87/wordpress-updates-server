@@ -38,6 +38,10 @@ class ThemeParser
     @css_parser
   end
 
+  def attributes
+    css.attributes if css
+  end
+
   def errors
     @@errors
   end

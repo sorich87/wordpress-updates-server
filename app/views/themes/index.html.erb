@@ -1,6 +1,23 @@
 <h1 class="page-header">Themes</h1>
 
 <ul class="thumbnails">
+  <% @themes.each do |theme| %>
+  <li class="span3">
+    <div class="thumbnail">
+      <img src="http://placehold.it/300x225" alt="<%= theme.name %>" />
+      <div class="caption">
+        <h4><%= theme.name %> <%= theme.version %></h4>
+        <div class="btn-toolbar">
+          <div class="btn-group">
+            <a class="btn btn-mini btn-primary" href="">new version</a>
+            <a class="btn btn-mini btn-danger" href="">delete theme</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+  <% end %>
+
   <li class="span3">
     <div class="thumbnail">
       <img src="http://placehold.it/300x225" alt="" />
@@ -16,8 +33,59 @@
     </div>
   </li>
   <li class="span3">
-    <%= link_to new_theme_path do %>
+    <%= link_to '#', id: 'upload_new_theme_file' do %>
       <img src="http://placehold.it/300x313&text=new+theme" alt="" />
     <% end %>
   </li>
 </ul>
+
+<% content_for(:head) do %>
+  <%= stylesheet_link_tag 'jquery.plupload.queue' %>
+<% end %>
+<% content_for(:javascript) do %>
+<%= javascript_include_tag "plupload.full", "jquery.plupload.queue" %>
+<%= javascript_include_tag "theme_uploader" %>
+<script type="text/javascript">
+  var uploader = null;
+
+  <% session_key_name = Rails.application.config.session_options[:key] %>
+  var global_response = null;
+  jQuery(document).ready(function() {
+    uploader = new plupload.Uploader({
+      runtimes: 'html5, flash, silverlight',
+      url: '<%= themes_path %>',
+      max_file_size: '10mb',
+      container: 'upload_theme',
+      multiple_queues: false,
+      browse_button: 'upload_new_theme_file',
+      multipart: true,
+      multipart_params: {
+        '_http_accept': 'application/javascript',
+        'authenticity_token' : '<%= form_authenticity_token %>',
+        '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
+      },
+      filters: [
+        {title: "Compressed theme file", extensions: "zip"}
+      ],
+    });
+
+    uploader.init();
+
+    uploader.bind('FileUploaded', function(up, file, info) {
+      //global_response = $.parseJSON(info.response);
+      console.log(info);
+      handleUpload(info);
+    });
+
+    uploader.bind('FilesAdded', function(up, files) {
+      uploader.start();
+    });
+
+
+  });
+</script>
+<% end %>
+
+<div id="upload_theme">
+  <a id="start_uploading_theme"></a>
+</div>

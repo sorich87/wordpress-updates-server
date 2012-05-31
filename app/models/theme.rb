@@ -16,4 +16,7 @@ class Theme
   has_many :packages
 
   has_mongoid_attached_file :compressed_file
+
+  alias_attribute :theme_name, :name
+  alias_attribute :theme_uri, :uri
 end

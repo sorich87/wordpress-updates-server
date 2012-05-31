@@ -24,7 +24,9 @@ var insertFormDetails = function(details) {
 
 
 var handleUpload = function(info) {
-  if (info.status == 200) {
+  response = $.parseJSON(info.response);
+
+  if (response.code == 200) {
     insertFormDetails( $.parseJSON(info.response) );
   } else {
     handleFormErrors( $.parseJSON(info.response) );

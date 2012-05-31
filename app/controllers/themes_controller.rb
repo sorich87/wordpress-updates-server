@@ -1,42 +1,35 @@
 class ThemesController < ApplicationController
   def index
-    #@themes = @business.themes
-  end
-
-  def new
-    @theme = Theme.new
+    @themes = @business.themes
   end
 
   def edit
   end
 
   def create
-    @theme = @business.themes.new(compressed_file: params[:file])
+    @tp = ThemeParser.new(params[:file].tempfile)
+
     respond_to do |format|
-      if @theme.save 
-        format.html { redirect_to edit_theme_path(@theme), notice: "Theme saved." }
-      else
-        render :edit
+      if @tp.valid?
+        @theme = @business.themes.new(@tp.attributes)
+
+        format.json do
+          if @theme.valid?
+            @theme.save
+            render status: 200, json: { code: 200, status: "OK", theme: @theme }
+          else
+            render status: 200, json: { code: 403, status: "FAILED", theme: @theme, errors: @theme.errors }
+          end
+        end
+      else        
+        format.json do
+          # #%"#€1i310"#!"" plupload
+          render status: 200, json: { code: 400, status: "FAILED", theme: @tp.attributes, errors: @tp.errors }
+        end
       end
     end
   end
 
   def destroy
-  end
-
-  def validate_zip
-    file = params[:file]
-    tp = ThemeParser.new(file.tempfile)
-    respond_to do |format|
-      if tp.valid?
-        format.json { 
-          render status: 200, json: { status: "OK", theme: tp.css.attributes } 
-        }
-      else
-        format.json { 
-          render status: 403, json: { status: "FAILED", message: "File contained errors." } 
-        } 
-      end
-    end
   end
 end

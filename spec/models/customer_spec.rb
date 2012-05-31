@@ -38,8 +38,8 @@ describe Customer do
     end
   end
 
-  it 'should belong to a business' do
+  it 'should belong to many businesses' do
     c = Customer.create!(@valid_attributes)
-    c.should respond_to(:business)
+    c.should respond_to(:businesses)
   end
 end

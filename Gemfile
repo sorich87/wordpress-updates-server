@@ -11,6 +11,7 @@ gem 'simple-navigation', '~> 3.0'
 gem 'devise', '~> 2.0'
 gem 'mongoid-paperclip', :require => "mongoid_paperclip"
 gem 'jquery-rails'
+gem 'kaminari', '~> 0.13'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

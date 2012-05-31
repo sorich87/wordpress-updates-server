@@ -10,17 +10,25 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = Customer.new( customer_params.merge(business: @business) )
-    if @customer.save
-      redirect_to customers_path, notice: "Customer saved."
-    else
+    @customer = Customer.find_or_initialize_by(email: customer_params[:email])
+
+    if @customer.business_ids.include?(@business.id)
+      @customer.errors.add(:email, "is already taken")
+      @customer._id = nil
       render :new
+    else
+      @customer.businesses << @business
+      if @customer.save
+        redirect_to customers_path, notice: "Customer saved."
+      else
+        render :new
+      end
     end
   end
 
   def destroy
-    @customer = @business.customers.find(params[:id])
-    @customer.destroy
+    @customer = Customer.find(params[:id])
+    @business.customers -= [@customer]
     redirect_to customers_path
   end
 

@@ -47,6 +47,9 @@ describe CSSParser do
     it 'should mark file as invalid when no name is present' do
       @cp.should_not be_valid
     end
+
+    it 'should add error message to :theme_name when the theme name is missing' do
+      @cp.errors.should have_key(:theme_name)
     end
   end
 

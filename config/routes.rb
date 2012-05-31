@@ -1,6 +1,9 @@
 ThemeMy::Application.routes.draw do
 
-  resources :customers
+  resources :customers do
+    get 'page/:page', :action => :index, :on => :collection
+  end
+
   resources :themes do
     collection do
       post 'validate_zip', as: :validate_zip

@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
 
   def index
-    @customers = @business.customers
+    @customers = @business.customers.asc(:email).page(params[:page]).per(20)
   end
 
   def new

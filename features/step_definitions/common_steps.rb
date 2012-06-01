@@ -9,3 +9,7 @@ end
 Given /^I follow "(.*?)"$/ do |arg1|
   click_on arg1
 end
+
+Then /^I should see a success message "(.*?)"$/ do |arg1|
+  page.find('div.alert-info').should have_content(arg1)
+end

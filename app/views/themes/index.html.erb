@@ -1,16 +1,20 @@
 <h1 class="page-header">Themes</h1>
 
-<ul class="thumbnails">
+<ul class="thumbnails" id="theme_list">
   <% @themes.each do |theme| %>
-  <li class="span3">
+  <li class="span3 theme" id="theme-<%=theme.id%>" data-theme-id="<%=theme.id%>">
     <div class="thumbnail">
       <img src="http://placehold.it/300x225" alt="<%= theme.name %>" />
       <div class="caption">
-        <h4><%= theme.name %> <%= theme.version %></h4>
+        <h4>
+          <span class="name"><%= theme.name %></span> <span class="version"><%= theme.version %></span>
+        </h4>
         <div class="btn-toolbar">
           <div class="btn-group">
-            <a class="btn btn-mini btn-primary" href="">new version</a>
-            <a class="btn btn-mini btn-danger" href="">delete theme</a>
+            <a class="btn btn-mini btn-primary update-theme-button" id="update-<%=theme.id%>" href="#">new version</a>
+
+            <%= link_to 'delete theme', theme_path(theme), method: :delete,
+                confirm: 'Are you sure?', class: 'btn btn-mini btn-danger' %>
           </div>
         </div>
       </div>
@@ -19,22 +23,8 @@
   <% end %>
 
   <li class="span3">
-    <div class="thumbnail">
-      <img src="http://placehold.it/300x225" alt="" />
-      <div class="caption">
-        <h4>Pure Awesomeness 2.0</h4>
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <a class="btn btn-mini btn-primary" href="">new version</a>
-            <a class="btn btn-mini btn-danger" href="">delete theme</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </li>
-  <li class="span3">
     <%= link_to '#', id: 'upload_new_theme_file' do %>
-      <img src="http://placehold.it/300x313&text=new+theme" alt="" />
+      <img src="http://placehold.it/300x313&amp;text=new+theme" alt="New theme" />
     <% end %>
   </li>
 </ul>
@@ -49,7 +39,11 @@
   var uploader = null;
 
   <% session_key_name = Rails.application.config.session_options[:key] %>
-  var global_response = null;
+  var uploaderSettings = {
+        '_http_accept': 'application/javascript',
+        'authenticity_token' : '<%= form_authenticity_token %>',
+        '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
+  };
   jQuery(document).ready(function() {
     uploader = new plupload.Uploader({
       runtimes: 'html5, flash, silverlight',
@@ -59,11 +53,7 @@
       multiple_queues: false,
       browse_button: 'upload_new_theme_file',
       multipart: true,
-      multipart_params: {
-        '_http_accept': 'application/javascript',
-        'authenticity_token' : '<%= form_authenticity_token %>',
-        '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
-      },
+      multipart_params: uploaderSettings,
       filters: [
         {title: "Compressed theme file", extensions: "zip"}
       ],
@@ -72,9 +62,7 @@
     uploader.init();
 
     uploader.bind('FileUploaded', function(up, file, info) {
-      //global_response = $.parseJSON(info.response);
-      console.log(info);
-      handleUpload(info);
+      handleCreate(info);
     });
 
     uploader.bind('FilesAdded', function(up, files) {

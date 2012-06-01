@@ -4,7 +4,12 @@ ThemeMy::Application.routes.draw do
     get 'page/:page', :action => :index, :on => :collection
   end
 
-  resources :themes, :only => [:index, :create]
+  resources :themes, only: [:index, :update, :create, :destroy] do
+    # Because plupload does not support PUT requests (POST is hardcoded into it)
+    member do
+      post :update
+    end
+  end
 
   namespace :settings do
     root :to => 'businesses#edit'

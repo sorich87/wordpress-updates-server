@@ -1,3 +1,7 @@
+# TODO: Grab screenshot from .zipfile
+# TODO: Handle revisions
+# TODO: More validations
+
 class Theme
   include Mongoid::Document
   include Mongoid::Paperclip
@@ -11,6 +15,7 @@ class Theme
   field :tags,          type: Array
 
   validates_presence_of [:name]
+  validates_uniqueness_of [:name]
 
   belongs_to :business
   has_many :packages

@@ -39,4 +39,13 @@ FactoryGirl.define do
     last_name  { Forgery(:name).last_name }
     email      { Forgery(:email).address }
   end
+
+  factory :theme do
+    name            "Awesome Theme"
+    uri             "http://awesome.example.com"
+    description     "My awesome theme"
+    license         "MIT License"
+    license_uri     "http://license.example.com"
+    tags            ['awesome', 'nice', 'pretty']
+  end
 end

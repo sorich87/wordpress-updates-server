@@ -36,5 +36,5 @@ group :test do
   gem 'capybara', '~> 1.1.0'
   gem "capybara-webkit", ">= 0.12.0"
   gem 'email_spec'
-  gem 'action_mailer_cache_delivery', '~> 0.3'
+  gem 'shoulda-matchers'
 end

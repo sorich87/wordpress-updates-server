@@ -19,6 +19,7 @@ class Customer
   field :email,       :type => String
 
   has_and_belongs_to_many :businesses
+  has_many :sites, dependent: :delete
 
   validates :email,
     :presence => true,

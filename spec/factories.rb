@@ -48,4 +48,20 @@ FactoryGirl.define do
     license_uri     "http://license.example.com"
     tags            ['awesome', 'nice', 'pretty']
   end
+
+  factory :site do
+    domain_name { Forgery(:internet).domain_name }
+    customer
+
+    factory :unconfirmed_site do
+      unconfirmed_secret_key { Forgery(:basic).password }
+      confirmation_token { Forgery(:basic).password }
+      confirmation_sent_at Time.now.utc
+    end
+
+    factory :confirmed_site do
+      secret_key { Forgery(:basic).password }
+      confirmed_at { Forgery(:date).date(past: true) }
+    end
+  end
 end

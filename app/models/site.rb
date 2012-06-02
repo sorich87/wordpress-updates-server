@@ -11,7 +11,7 @@ class Site
   field :confirmed_at,           :type => Time
   field :confirmation_sent_at,   :type => Time
 
-  index :domain_name
+  index :domain_name, :confirmation_token
 
   validates_presence_of :domain_name
   validates_uniqueness_of :domain_name

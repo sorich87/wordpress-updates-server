@@ -1,5 +1,9 @@
 ThemeMy::Application.routes.draw do
 
+  resources :confirm, controller: "sites", only: [] do
+    get '/', :to => :confirm
+  end
+
   resources :customers do
     get 'page/:page', :action => :index, :on => :collection
   end

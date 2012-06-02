@@ -6,6 +6,6 @@ describe SiteMailer do
     let(:site) { FactoryGirl.create(:unconfirmed_site) }
     it { should have_sent_email.with_subject(/Please Confirm Your Website$/) }
     it { should have_sent_email.to(site.customer.email) }
-    #it { should have_sent_email.with_body(/#{site_confirmation_url}/) }
+    it { should have_sent_email.with_body(/Confirm my website/) }
   end
 end

@@ -2,5 +2,4 @@ Hello <%= @site.customer.email %>!
 
 You can confirm your website through the link below:
 
-<%= link_to 'Confirm my website', "" %>
-<%# link_to 'Confirm my website', site_confirmation_url(@site, :confirmation_token => @site.confirmation_token) %>
+<%= link_to 'Confirm my website', confirm_url(@site.confirmation_token) %>

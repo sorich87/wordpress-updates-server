@@ -56,5 +56,5 @@ When /^I incorrectly fill in the registration form$/ do
 end
 
 Then /^I should see an error message$/ do
-  page.should have_content "Please review the problems below:"
+  page.has_selector?('#alert-error')
 end

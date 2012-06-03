@@ -1,18 +1,16 @@
 class SitesController < ApplicationController
-  skip_before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!, only: [:confirm]
 
   def confirm
-    if params[:confirm_id].nil?
-      redirect_to root_path
-      return
+    unless params[:confirm_id].nil?
+      @site = Site.where(confirmation_token: params[:confirm_id]).first
+      unless @site.nil?
+        @site.confirm!
+      end
     end
 
-    @site = Site.where(confirmation_token: params[:confirm_id]).first
     if @site.nil?
-      redirect_to root_path
-      return
+      @site = Site.new
     end
-
-    @site.confirm!
   end
 end

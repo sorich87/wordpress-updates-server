@@ -19,10 +19,12 @@ describe SitesController do
     end
 
     context "with invalid attributes" do
-      it "redirects to the root path" do
-        get :confirm, confirm_id: nil
-        should redirect_to(root_path)
+      before do
+        get :confirm, confirm_id: "1234"
       end
+
+      it { should respond_with(:success)  }
+      it { should render_template(:confirm)  }
     end
   end
 end

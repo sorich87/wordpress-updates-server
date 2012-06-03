@@ -1,7 +1,11 @@
 <div class="row">
   <div class="span6 offset3 hero-unit">
-
-    <h1 class="page-header">Your website has been confirmed</h1>
-    <p>You will now get the automatic updates directly in your website dashboard.</p>
+    <%- if @site.confirmed? -%>
+      <h1 class="page-header">Your website has been confirmed</h1>
+      <p>You will now get the automatic updates directly in your website dashboard.</p>
+    <%- else -%>
+      <h1 class="page-header">Bad Request</h1>
+      <p>It looks like the link you clicked on is not valid anymore.</p>
+    <%- end -%>
   </div>
 </div>

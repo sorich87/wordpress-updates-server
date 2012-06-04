@@ -9,7 +9,7 @@ String.prototype.capitalize = ->
 
 # Our 'namespace'
 @themeMy = {
-  utils: {}
+  ui: {}
 }
 
 themeMy.ui.createFlashMessage = (message, type='info') ->

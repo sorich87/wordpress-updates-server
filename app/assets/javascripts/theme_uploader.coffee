@@ -79,7 +79,6 @@
 
 
 @themeMy.themeForm.initTheme = ($element) ->
-  console.log($element)
   themeId = $element.attr('data-theme-id')
   $updateButton = $element.find('a#update-'+themeId)
 

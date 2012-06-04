@@ -11,8 +11,6 @@ String.prototype.capitalize = ->
 @themeMy = {}
 
 themeMy.createFlashMessage = (message, type='info') ->
-  console.log(message)
-
   $flashHTML = $('
     <div class="alert alert-'+type+'">    
     </div>'
@@ -20,9 +18,7 @@ themeMy.createFlashMessage = (message, type='info') ->
 
   if typeof message == "string"
     $(flashHTML).text(message)
-    console.log("Was a string")
   else
-    console.log("Was an object")
     $(message).appendTo($flashHTML)
   
   # Yes, prepend it

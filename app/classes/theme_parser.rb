@@ -46,6 +46,16 @@ class ThemeParser
     @@errors
   end
 
+  def screenshot_file
+    @@required_files.each do |required_file|
+      if required_file[:identifier] == :screenshot && required_file[:found]
+        return required_file[:location]
+      end
+    end
+
+    nil
+  end
+
   private
   
   def validate_required_files

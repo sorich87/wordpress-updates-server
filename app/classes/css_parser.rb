@@ -4,7 +4,8 @@ require 'sanitize'
 class CSSParser
   FIELDS = [
     :theme_name, :theme_uri, :description, :version,
-    :license, :license_uri, :tags, :author, :author_uri
+    :license, :license_uri, :tags, :author, :author_uri,
+    :template, :status
   ]
 
   def initialize(filename)

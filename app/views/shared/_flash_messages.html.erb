@@ -2,5 +2,10 @@
   <%- name = :info if name == :notice -%>
   <%- name = :error if name == :alert -%>
   <%- class_name = "alert alert-#{name}" -%>
-  <%= content_tag :div, msg, :class => class_name if msg.is_a?(String) %>
+  <% if msg.is_a?(String) %>
+    <%= content_tag :div, :class => class_name  do %>
+      <%= msg %>
+      <a class="close" data-dismiss="alert" href="#">&times;</a>
+    <% end %>
+  <% end %>
 <%- end -%>

@@ -38,8 +38,6 @@ describe Customer do
     end
   end
 
-  it 'should belong to many businesses' do
-    c = Customer.create!(@valid_attributes)
-    c.should respond_to(:businesses)
-  end
+  it { should have_and_belong_to_many(:businesses) }
+  it { should have_many(:sites) }
 end

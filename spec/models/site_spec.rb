@@ -17,6 +17,11 @@ describe Site do
   it { should_not allow_mass_assignment_of(:confirmed_at) }
   it { should_not allow_mass_assignment_of(:confirmation_sent_at) }
 
+  it 'is valid given valid attributes' do
+    FactoryGirl.build(:site).should be_valid
+  end
+
+
   it "validates uniqueness of domain name" do
     FactoryGirl.create(:site)
     should validate_uniqueness_of(:domain_name)

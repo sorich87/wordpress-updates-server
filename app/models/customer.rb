@@ -18,6 +18,9 @@ class Customer
   field :last_name,   :type => String
   field :email,       :type => String
 
+  index :email, :unique => true
+  index :authentication_token
+
   has_and_belongs_to_many :businesses
   has_many :sites, dependent: :delete
 

@@ -35,4 +35,7 @@ describe Theme do
       second_theme.should be_valid
     end
   end
+
+  it { should belong_to(:business) }
+  it { should have_many(:packages) }
 end

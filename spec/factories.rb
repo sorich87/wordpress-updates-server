@@ -41,9 +41,10 @@ FactoryGirl.define do
   end
 
   factory :theme do
-    name            "Awesome Theme"
+    name            { Forgery(:lorem_ipsum).title }
     uri             "http://awesome.example.com"
-    description     "My awesome theme"
+    description     { Forgery(:lorem_ipsum).sentence }
+    version         "0.1.0"
     license         "MIT License"
     license_uri     "http://license.example.com"
     tags            ['awesome', 'nice', 'pretty']

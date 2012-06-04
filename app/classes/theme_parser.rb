@@ -76,7 +76,7 @@ class ThemeParser
       zip_files.each do |zip_file|
         if regex.match(zip_file.to_s)
           @@required_files[index][:found] = true
-          @@required_files[index][:location] = zip_files.to_s
+          @@required_files[index][:location] = zip_file.to_s
           break
         end
       end

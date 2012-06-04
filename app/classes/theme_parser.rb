@@ -9,7 +9,7 @@ class ThemeParser
     @@required_files = [
       {
         identifier: :style,
-        regex: /\A[\w-]{0,}\/{0,1}style.css$/
+        regex: /\A[\.\w-]{0,}\/{0,1}style.css$/
       },
       {
         identifier: :screenshot,
@@ -73,7 +73,6 @@ class ThemeParser
 
     @@required_files.each_with_index do |required_file, index|
       regex = required_file[:regex]
-
       zip_files.each do |zip_file|
         if regex.match(zip_file.to_s)
           @@required_files[index][:found] = true
@@ -90,8 +89,8 @@ class ThemeParser
       # The style.css is in the root folder, but that's often
       # one directory deep eg. annotum-base.zip extracts to
       # annotum-base/*files*
-      # http://rubular.com/r/7QSg4bY7fx
-      if file.to_s =~ /\A[\w-]{0,}\/{0,1}style.css$/
+      # http://rubular.com/r/XvC094vi0m
+      if file.to_s =~ /\A[\.\w-]{0,}\/{0,1}style.css$/
         css_file_path = file
         break
       end

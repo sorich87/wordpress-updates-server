@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe User do
+  it { should allow_mass_assignment_of(:email) }
+  it { should allow_mass_assignment_of(:password) }
+  it { should allow_mass_assignment_of(:password_confirmation) }
+  it { should allow_mass_assignment_of(:remember_me) }
+  it { should allow_mass_assignment_of(:first_name) }
+  it { should allow_mass_assignment_of(:last_name) }
+  it { should allow_mass_assignment_of(:business) }
+
   describe 'validation' do
     it 'passes with valid attributes' do
       FactoryGirl.build(:user).should be_valid

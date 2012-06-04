@@ -79,7 +79,7 @@ describe Package do
     c.should respond_to(:business)
   end
 
-  it 'should belong to many customers' do
+  it 'should have many customers' do
     c = Package.create!(@valid_attributes)
     c.should respond_to(:customers)
   end

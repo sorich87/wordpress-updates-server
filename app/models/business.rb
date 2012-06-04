@@ -18,6 +18,8 @@ class Business
   field :zip,       :type => String
   field :phone,     :type => String
 
+  index :email, :unique => true
+
   validates :email,
     :presence => true,
     :email => true,

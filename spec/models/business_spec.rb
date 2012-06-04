@@ -40,15 +40,8 @@ describe Business do
     end
   end
 
-  it 'should have many users' do
-    FactoryGirl.create(:business).should respond_to(:users)
-  end
-
-  it 'should have many customers' do
-    FactoryGirl.create(:business).should respond_to(:customers)
-  end
-
-  it 'should have many packages' do
-    FactoryGirl.create(:business).should respond_to(:packages)
-  end
+  it { should have_and_belong_to_many(:customers) }
+  it { should have_many(:users) }
+  it { should have_many(:packages) }
+  it { should have_many(:themes) }
 end

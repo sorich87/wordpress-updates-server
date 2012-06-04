@@ -62,7 +62,7 @@
     uploader.init();
 
     uploader.bind('FileUploaded', function(up, file, info) {
-      handleCreate(info);
+      themeMy.themeForm.handleCreate(info);
     });
 
     uploader.bind('FilesAdded', function(up, files) {

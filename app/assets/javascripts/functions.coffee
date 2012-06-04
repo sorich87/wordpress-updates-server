@@ -19,7 +19,7 @@ themeMy.ui.createFlashMessage = (message, type='info') ->
   )
 
   if typeof message == "string"
-    $(flashHTML).text(message)
+    $($flashHTML).text(message)
   else
     $(message).appendTo($flashHTML)
   

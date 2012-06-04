@@ -59,7 +59,7 @@ describe ThemeParser do
       license:      'GNU General Public License v2.0',
       license_uri:  'http://www.gnu.org/licenses/gpl-2.0.html'
     }
-    tp = ThemeParser.new(File.join(Rails.root, 'spec/fixtures/themes/zips/hatch.0.1.8.zip'))
+    tp = ThemeParser.new(File.join(Rails.root, 'spec/fixtures/themes/zips/hatch.zip'))
     tp.css.attributes.should eq(@attributes)
   end
 end

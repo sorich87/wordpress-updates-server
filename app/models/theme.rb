@@ -6,13 +6,18 @@ class Theme
   include Mongoid::Document
   include Mongoid::Paperclip
 
-  field :name,          type: String
-  field :uri,           type: String
-  field :description,   type: String
-  field :version,       type: String
-  field :license,       type: String
-  field :license_uri,   type: String
-  field :tags,          type: Array
+  field :name,                type: String
+  field :uri,                 type: String
+  field :author,              type: String
+  field :author_uri,          type: String
+  field :description,         type: String
+  field :version,             type: String
+  field :license,             type: String
+  field :license_uri,         type: String
+  field :tags,                type: Array
+  field :status,              type: String
+  field :template,            type: String
+  
 
   validates_presence_of [:name]
   validates_uniqueness_of [:name]

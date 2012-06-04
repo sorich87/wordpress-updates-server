@@ -19,8 +19,8 @@ class Theme
   field :template,            type: String
   
 
-  validates_presence_of [:name]
-  validates_uniqueness_of [:name]
+  validates_presence_of [:name, :version, :business_id]
+  validates_uniqueness_of :name, :scope => :business_id
 
   belongs_to :business
   has_many :packages

@@ -51,8 +51,9 @@ class ThemesController < ApplicationController
           end
         end
       else
-        format.json
-        render status: 200, json: { code: 400, status: "FAILED", theme: @tp, errors: @tp.errors }
+        format.json do
+          render status: 200, json: { code: 400, status: "FAILED", theme: @tp, errors: @tp.errors }
+        end
       end
     end
 

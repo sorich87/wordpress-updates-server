@@ -28,25 +28,11 @@ var insertNewTheme = function(theme) {
   $newButton = $('a#upload_new_theme_file');
   $(html).insertBefore($newButton.parent());
 
-  var $flashHTML = $(
-    '<div class="alert alert-info">'+
-      'Theme saved.'+
-    '</div>'
-  );
-
-  $flashHTML.prependTo('div#main_content');
+  themeMy.createFlashMessage('Theme saved.');
 };
 
 var handleUploadErrors = function(theme) {
-  var $flashHTML = $(
-    '<div class="alert alert-error">'+
-      'There were errors in the theme archive. Please review the problems below:'+
-      '<ul class="errors">'+
-      '</ul>'+
-    '</div>'
-  );
-
-  var $ul = $flashHTML.find('ul.errors').first();
+  var $ul = $('<ul class="errors"></ul>');
 
   $.each(theme.errors, function(attribute, attribute_errors) {
     $.each(attribute_errors, function(index, error) {
@@ -58,8 +44,7 @@ var handleUploadErrors = function(theme) {
     });
   });
 
-
-  $flashHTML.prependTo('div#main_content');
+  themeMy.createFlashMessage($ul, 'error');
 }
 
 var handleUpdate = function(info) {
@@ -80,14 +65,8 @@ var updateTheme = function(theme) {
 
   $name.text(theme.name);
   $version.text(theme.version);
-
-  var $flashHTML = $(
-    '<div class="alert alert-info">'+
-      'Theme updated.'+
-    '</div>'
-  );
-  $flashHTML.prependTo('div#main_content');
-
+  
+  themeMy.createFlashMessage('Theme updated.');
   $container.attr('data-updated', 'true');
 }
 

@@ -10,6 +10,11 @@
   <div id="<%=package.id%>" class="span5 well">
     <h3><%= package.name %></h3>
     <p><%= package.description %></p>
+    <p>Themes:
+      <%- for theme in package.themes do -%>
+        <%= theme.name %> |
+      <%- end -%>
+    </p>
     <ul>
       <li><%= package_theme_price_description(package) %></li>
       <li><%= package_validity_description(package) %></li>

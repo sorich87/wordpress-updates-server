@@ -37,5 +37,5 @@ describe Theme do
   end
 
   it { should belong_to(:business) }
-  it { should have_many(:packages) }
+  it { should have_and_belong_to_many(:packages) }
 end

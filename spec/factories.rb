@@ -25,13 +25,28 @@ FactoryGirl.define do
   end
 
   factory :package do
-    name        { Forgery(:lorem_ipsum).title }
-    description { Forgery(:lorem_ipsum).sentence }
-    price       { Forgery(:monetary).money }
-    themes      Package::THEMES[:one_theme]
-    domains     { Forgery(:basic).number(at_least: 0) }
-    billing     Package::BILLING[:subscription]
-    validity    Package::VALIDITY[:one_month]
+    name              { Forgery(:lorem_ipsum).title }
+    description       { Forgery(:lorem_ipsum).sentence }
+    price             { Forgery(:monetary).money }
+    number_of_themes  { Forgery(:basic).number(at_least: 0) }
+    number_of_domains { Forgery(:basic).number(at_least: 0) }
+    billing           Package::BILLING[:subscription]
+    validity          Package::VALIDITY[:one_month]
+    business
+
+    factory :package_with_themes do
+      ignore do
+        themes_count 3
+      end
+
+      after(:build) do |package, evaluator|
+        FactoryGirl.create_list(:theme_in_business, evaluator.themes_count, packages: [package])
+      end
+    end
+
+    factory :invalid_package do
+      name nil
+    end
   end
 
   factory :customer do
@@ -48,6 +63,10 @@ FactoryGirl.define do
     license         "MIT License"
     license_uri     "http://license.example.com"
     tags            ['awesome', 'nice', 'pretty']
+
+    factory :theme_in_business do
+      business
+    end
   end
 
   factory :site do

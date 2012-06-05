@@ -1,86 +1,48 @@
 require 'spec_helper'
 
 describe Package do
-  before do
-    @business = FactoryGirl.create(:business)
-
-    @valid_attributes = {
-      name: "ExampleTheme 1.0",
-      description: "Light weight theme with focus on readability.",
-      price: 19.99,
-      validity: Package::VALIDITY[:lifetime],
-      billing: Package::BILLING[:one_time_payment],
-      themes: Package::THEMES[:one_theme],
-      domains: 0, # Unlimited,
-      business: @business
-    }
-  end
+  let(:package) { build(:package) }
 
   context "helpers" do
-    before { @package = @business.packages.create!(@valid_attributes) }
-
     it 'should respond to validity methods' do
-      @package.should respond_to(:is_valid_for_life?)
+      package.should respond_to(:is_valid_for_life?)
     end
 
     it 'should respond to payment methods' do
-      @package.should respond_to(:is_subscription?)
+      package.should respond_to(:is_subscription?)
     end
   end
 
   context '#CREATE' do
     it 'should be valid given valid attributes' do
-      Package.new(@valid_attributes).should be_valid
+      package.should be_valid
     end
 
-    it 'should require a business' do
-      Package.new( @valid_attributes.merge(business: nil) ).should_not be_valid
-    end
+    it { should validate_presence_of(:business) }
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:description) }
+    it { should validate_presence_of(:price) }
+    it { should validate_presence_of(:number_of_themes) }
+    it { should validate_presence_of(:number_of_domains) }
+    it { should validate_presence_of(:billing) }
+    it { should validate_presence_of(:validity) }
 
-    it 'should be invalid without a name' do
-      Package.new( @valid_attributes.merge(name: nil) ).should_not be_valid
-    end
-
-    it 'should be invalid without a description' do
-      Package.new( @valid_attributes.merge(description: nil) ).should_not be_valid
-    end
-
-    it 'should be invalid without a price' do
-      Package.new( @valid_attributes.merge(price: nil) ).should_not be_valid
-    end
-
-    it 'should reject invalid prices' do
-      [-919, -1, nil, '-5'].each do |p|
-        Package.new( @valid_attributes.merge(price: p) ).should_not be_valid
-      end
-    end
+    it { should validate_numericality_of(:price) }
 
     it 'should reject invalid validity values' do
       [-1, 999, "invalid", :lifetime].each do |v|
-        Package.new( @valid_attributes.merge(validity: v) ).should_not be_valid
-      end
-    end
-
-    it 'should reject invalid themes values' do
-      [-1, 999, "one_theme", :one_theme].each do |v|
-        Package.new( @valid_attributes.merge(themes: v) ).should_not be_valid
+        build(:package, validity: v).should_not be_valid
       end
     end
 
     it 'should reject invalid billing values' do
       [-1, 999, :one_time_payment, "one time payment"].each do |v|
-        Package.new( @valid_attributes.merge(billing: v) ).should_not be_valid
+        build(:package, billing: v).should_not be_valid
       end
     end
   end
 
-  it 'should belong to a business' do
-    c = Package.create!(@valid_attributes)
-    c.should respond_to(:business)
-  end
-
-  it 'should have many customers' do
-    c = Package.create!(@valid_attributes)
-    c.should respond_to(:customers)
-  end
+  it { should belong_to(:business) }
+  it { should have_many(:customers) }
+  it { should have_and_belong_to_many(:themes) }
 end

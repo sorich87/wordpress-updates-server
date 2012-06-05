@@ -9,18 +9,16 @@ en:
         one_month: One Month
         one_year: One Year
 
-      themes:
-        one_theme: One Theme
-        all_themes: All Themes
-
       billing:
         one_time_payment: One time payment
         subscription: Subscription with recurring billing
 
     descriptions:
       themes:
-        price_for_one: "%{price} for One Theme"
-        price_for_all: "%{price} for All Themes"
+        price_for_number:
+          one: "%{price} for 1 theme"
+          other: "%{price} for %{themes} themes"
+        price_for_all: "%{price} for all themes"
       validity:
         limited_domains:
           valid_for_life: 

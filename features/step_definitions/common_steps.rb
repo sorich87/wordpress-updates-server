@@ -13,3 +13,11 @@ end
 Then /^I should see a success message "(.*?)"$/ do |arg1|
   page.find('div.alert-info').should have_content(arg1)
 end
+
+When /^I select "(.*?)" as "(.*?)"$/ do |arg1, arg2|
+  select arg1, from: arg2
+end
+
+When /^I choose "(.*?)" as "(.*?)"$/ do |arg1, arg2|
+  choose arg1
+end

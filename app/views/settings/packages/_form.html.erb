@@ -22,11 +22,16 @@
 
       <%= f.input :billing, as: :radio_buttons, collection: collection_for_package_billings %>
 
-      <%= f.input :themes, collection: collection_for_package_themes, label: 'Number of Themes' %>
+      <%= f.association :themes, as: :check_boxes, collection: Theme.all %>
 
-      <%= f.input :domains, label: 'Number of Domains', wrapper: :prepend do %>
-        <%= f.input_field :domains, class: 'input-mini' %>
-        <p class="help-inline">Number of domains the customer can install the theme on. 0 for unlimited.</p>
+      <%= f.input :number_of_themes, label: 'Number of Themes', wrapper: :prepend do %>
+        <%= f.input_field :number_of_themes, class: 'input-mini' %>
+        <p class="help-inline">Number of themes the customer gets at once after buying this package. 0 for all themes.</p>
+      <% end %>
+
+      <%= f.input :number_of_domains, label: 'Number of Domains', wrapper: :prepend do %>
+        <%= f.input_field :number_of_domains, class: 'input-mini' %>
+        <p class="help-inline">Number of domains the customer can install the themes on. 0 for unlimited.</p>
       <% end %>
 
       <div class="form-actions">

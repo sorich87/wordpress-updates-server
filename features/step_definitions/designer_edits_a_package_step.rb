@@ -1,5 +1,5 @@
 Given /^there is one package$/ do
-  @package = FactoryGirl.create(:package_with_themes, business: @business)
+  @package = FactoryGirl.create(:package, business: @business)
 end
 
 When /^I go to the edit package page$/ do

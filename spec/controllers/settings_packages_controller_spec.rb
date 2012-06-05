@@ -16,14 +16,16 @@ describe Settings::PackagesController do
 
   describe 'POST #create' do
     context 'with valid attributes' do
+      let(:theme) { create(:theme, business: @user.business) }
+
       it 'saves the new package in the database' do
         expect{
-          post :create, package: attributes_for(:package)
+          post :create, package: attributes_for(:package, theme_ids: [theme.id])
         }.to change(Package,:count).by(1)
       end
 
       it 'redirects to the packages settings page' do
-        post :create, package: attributes_for(:package)
+        post :create, package: attributes_for(:package, theme_ids: [theme.id])
         response.should redirect_to settings_packages_path
       end
     end

@@ -31,13 +31,13 @@ describe Package do
 
     it 'should reject invalid validity values' do
       [-1, 999, "invalid", :lifetime].each do |v|
-        build(:package, validity: v).should_not be_valid
+        should_not allow_value(v).for(:validity)
       end
     end
 
     it 'should reject invalid billing values' do
       [-1, 999, :one_time_payment, "one time payment"].each do |v|
-        build(:package, billing: v).should_not be_valid
+        should_not allow_value(v).for(:billing)
       end
     end
   end

@@ -34,14 +34,12 @@ FactoryGirl.define do
     validity          Package::VALIDITY[:one_month]
     business
 
-    factory :package_with_themes do
-      ignore do
-        themes_count 3
-      end
+    ignore do
+      themes_count 3
+    end
 
-      after(:build) do |package, evaluator|
-        FactoryGirl.create_list(:theme_in_business, evaluator.themes_count, packages: [package])
-      end
+    after(:build) do |package, evaluator|
+      FactoryGirl.create_list(:theme_in_business, evaluator.themes_count, packages: [package])
     end
 
     factory :invalid_package do

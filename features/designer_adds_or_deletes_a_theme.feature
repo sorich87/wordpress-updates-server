@@ -12,12 +12,12 @@ Feature: Designer adds or deletes a theme
     When I upload a new theme
     Then I should see the new theme screenshot, name and version number
     And I should see a success message "Theme saved."
-  
+
   @javascript
   Scenario: Unsuccessful addition of a theme
     When I upload a non-valid theme archive
     Then I should see an error message
-  
+
   @javascript
   Scenario: Addition of a new version of a theme
     When I have one theme

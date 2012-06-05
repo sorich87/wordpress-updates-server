@@ -39,7 +39,7 @@ class Settings::PackagesController < ApplicationController
   private
 
   def package_params
-    params[:package].slice(:name, :description, :price, :validity, :billing, :themes, :domains)
+    params[:package].slice(:name, :description, :price, :validity, :billing, :number_of_themes, :number_of_domains, :theme_ids)
   end
 
 end

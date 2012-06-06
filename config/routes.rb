@@ -15,6 +15,8 @@ ThemeMy::Application.routes.draw do
     end
   end
 
+  resources :packages
+
   namespace :settings do
     root :to => 'businesses#edit'
 
@@ -22,8 +24,6 @@ ThemeMy::Application.routes.draw do
       get '/', :to => :edit
       get '/admin', :to => :admin
     end
-
-    resources :packages
   end
 
   devise_for :customers

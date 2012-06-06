@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Settings::PackagesController do
+describe PackagesController do
   sign_in_user
 
   describe 'GET #edit' do
@@ -24,9 +24,9 @@ describe Settings::PackagesController do
         }.to change(Package,:count).by(1)
       end
 
-      it 'redirects to the packages settings page' do
+      it 'redirects to the packages page' do
         post :create, package: attributes_for(:package, theme_ids: [theme.id])
-        response.should redirect_to settings_packages_path
+        response.should redirect_to packages_path
       end
     end
 
@@ -69,9 +69,9 @@ describe Settings::PackagesController do
         package.name.should == 'A Package'
       end
 
-      it 'redirects to the packages settings page' do
+      it 'redirects to the packages page' do
         put :update, id: package.id, package: attributes_for(:package)
-        response.should redirect_to settings_packages_path
+        response.should redirect_to packages_path
       end
     end
 
@@ -99,9 +99,9 @@ describe Settings::PackagesController do
       }.to change(Package,:count).by(-1)
     end
 
-    it 'redirects to the packages settings page' do
+    it 'redirects to the packages page' do
       delete :destroy, id: package.id
-      response.should redirect_to settings_packages_path
+      response.should redirect_to packages_path
     end
   end
 end

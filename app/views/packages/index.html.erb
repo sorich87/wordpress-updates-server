@@ -1,7 +1,4 @@
-<%= render :partial => 'settings/layout' %>
-
-
-<h2>Price Packages</h2>
+<h1 class="page-header">Price Packages</h1>
 
 <p>Add the price packages you offer to your customers here.</p>
 
@@ -22,8 +19,8 @@
       <li><%= package_renewal_description(package) %></li>
     </ul>
     <div style="margin-top:20px;">
-      <%= link_to 'Edit', edit_settings_package_path(package) %> | 
-      <%= link_to 'Delete', settings_package_path(package), method: :delete, confirm: "Are you sure?", title: 'Delete package' %>
+      <%= link_to 'Edit', edit_package_path(package) %> | 
+      <%= link_to 'Delete', package_path(package), method: :delete, confirm: "Are you sure?", title: 'Delete package' %>
     </div>
   </div>
 <% end %>
@@ -31,7 +28,7 @@
 
 <p><a href="#" id="add_new_package"><i class="icon-plus"></i> Add a package</a></p>
 <div id="new_package_parent" class="hidden">
-  <%= simple_form_for [:settings, @new_package], url: settings_packages_path, html: {class: 'form-horizontal'}, defaults: {required: false} do |f| %>
+  <%= simple_form_for @new_package, url: packages_path, html: {class: 'form-horizontal'}, defaults: {required: false} do |f| %>
     <%= render :partial => 'form', locals: {f: f} %>
   <% end %>
 </div>

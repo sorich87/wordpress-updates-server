@@ -4,7 +4,7 @@ Given /^there is one package$/ do
 end
 
 When /^I go to the edit package page$/ do
-  visit edit_settings_package_path(@package)
+  visit edit_package_path(@package)
 end
 
 Then /^I see the package details filled in the fields$/ do

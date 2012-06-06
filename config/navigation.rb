@@ -72,6 +72,7 @@ SimpleNavigation::Configuration.run do |navigation|
     # primary.auto_highlight = false
 
     primary.item :themes, 'Themes', themes_path
+    primary.item :packages, 'Packages', packages_path
     primary.item :customers, 'Customers', customers_path
     primary.item :reports, 'Reports', '#' do |sub_nav|
       sub_nav.item :graphs, 'Graphs', '#'
@@ -80,7 +81,6 @@ SimpleNavigation::Configuration.run do |navigation|
     end
     primary.item :settings, 'Settings', settings_business_path do |sub_nav|
       sub_nav.item :company, 'Company', settings_business_path
-      sub_nav.item :packages, 'Packages', settings_packages_path
       sub_nav.item :admin, 'Admin', admin_settings_business_path
       sub_nav.dom_class = 'nav nav-tabs'
     end

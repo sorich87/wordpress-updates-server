@@ -1,5 +1,5 @@
 When /^I go to the packages management page$/ do
-  visit settings_packages_path
+  visit packages_path
 end
 
 When /^I add a package$/ do
@@ -17,7 +17,7 @@ When /^I add a package$/ do
 end
 
 Then /^I should be on the packages management page$/ do
-  current_path.should == settings_packages_path
+  current_path.should == packages_path
 end
 
 Then /^I should see the package details$/ do

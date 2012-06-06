@@ -1,4 +1,4 @@
-class Settings::PackagesController < ApplicationController
+class PackagesController < ApplicationController
 
   def edit
     @package = @business.packages.find(params[:id])
@@ -8,7 +8,7 @@ class Settings::PackagesController < ApplicationController
     @package = @business.packages.build(package_params)
     if @package.save
       flash[:notice] = "Package has been saved."
-      redirect_to settings_packages_path
+      redirect_to packages_path
     else
       flash[:error] = "Error saving your package."
       render :edit
@@ -23,7 +23,7 @@ class Settings::PackagesController < ApplicationController
   def update
     @package = @business.packages.find(params[:id])
     if @package.update_attributes(package_params)
-      redirect_to settings_packages_path, notice: "Package saved."
+      redirect_to packages_path, notice: "Package saved."
     else
       render :edit
     end
@@ -32,7 +32,7 @@ class Settings::PackagesController < ApplicationController
   def destroy
     @package = @business.packages.find(params[:id])
     @package.destroy
-    redirect_to settings_packages_path, notice: "Package removed."
+    redirect_to packages_path, notice: "Package removed."
   end
 
 

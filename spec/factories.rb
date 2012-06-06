@@ -31,7 +31,7 @@ FactoryGirl.define do
     number_of_themes  { Forgery(:basic).number(at_least: 0) }
     number_of_domains { Forgery(:basic).number(at_least: 0) }
     billing           Package::BILLING[:subscription]
-    validity          Package::VALIDITY[:one_month]
+    validity          { Forgery(:basic).number(at_least: 0) }
     business
 
     ignore do

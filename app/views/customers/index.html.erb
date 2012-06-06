@@ -1,8 +1,8 @@
 <h1 class="page-header">Customers</h1>
 
 <p>
-  <%= link_to 'New Customer', new_customer_path, class: 'btn' %>
-  <a class="btn" href="">Import CSV</a>
+<%= link_to 'New Customer', new_customer_path, class: 'btn' %>
+<a class="btn" href="">Import CSV</a>
 </p>
 
 <%= paginate @customers %>
@@ -10,35 +10,31 @@
 <table class="table table-striped" id="customers-table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Package (not implemented)</th>
+      <th class="span3">Email</th>
+      <th>Packages</th>
+      <th>Themes</th>
     </tr>
   </thead>
   <tbody>
     <% @customers.each do |customer| %>
-    <tr id="<%=customer.id%>">
-      <td><%= customer.full_name %> 
-          <%= link_to customer_path(customer), method: :delete, title: "Delete customer", 
-                                                            confirm: 'Are you sure?' do %>
-            <i class="icon-remove-sign"></i>
+      <tr id="<%=customer.id%>" class="customer">
+        <td>
+          <%= customer.email %>
+          <span class="actions">
+          <%= link_to edit_customer_path(customer), title: "Edit Customer" do %>
+            <i class="icon-pencil"></i> edit
           <% end %>
-      </td>
-      <td><%= customer.email %></td>
-      <td>Not implemented.</td>
-    </tr>
+          |
+          <%= link_to customer_path(customer), title: "Delete Customer", method: :delete, confirm: 'Are you sure?' do %>
+            <i class="icon-remove"></i> delete
+          <% end %>
+          </span>
+        </td>
+        <td></td>
+        <td></td>
+      </tr>
     <% end %>
   </tbody>
 </table>
 
-<div class="pagination pagination-right">
-  <ul>
-    <li><a href="">&laquo;</a></li>
-    <li class="active"><a href="">1</a></li>
-    <li><a href="">2</a></li>
-    <li><a href="">3</a></li>
-    <li class="disabled"><a href="">&hellip;</a></li>
-    <li><a href="">8</a></li>
-    <li><a href="">&raquo;</a></li>
-  </ul>
-</div>
+<%= paginate @customers %>

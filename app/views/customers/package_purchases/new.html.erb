@@ -1,0 +1,20 @@
+
+
+  <fieldset>
+    <legend>Package</legend>
+
+    <div class="control-group">
+      <p>Add one package the customer bought from you. You can add additional packages later.</p>
+    </div>
+
+    <%= f.simple_fields_for :package_purchases do |g| %>
+      <%= g.input :packages, as: :radio_buttons, label: "Package",
+        collection: @business.packages.all, value_method: :id, label_method: :name %>
+
+      <%= g.input :themes, as: :check_boxes, label: "Themes", name: "test",
+        collection: @business.themes.all, value_method: :id, label_method: :name %>
+
+      <%= g.input :purchase_date, label: "Purchase Date", input_html: { class: 'input-small' },
+        as: :date, start_year: 2008, end_year: Date.today.year, order: [:day, :month, :year] %>
+    <% end %>
+  </fieldset>

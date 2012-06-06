@@ -1,14 +1,6 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
   packages:
     values:
-      validity:
-        lifetime: Lifetime
-        one_month: One Month
-        one_year: One Year
-
       billing:
         one_time_payment: One time payment
         subscription: Subscription with recurring billing
@@ -20,20 +12,15 @@ en:
           other: "%{price} for %{themes} themes"
         price_for_all: "%{price} for all themes"
       validity:
+        valid_for_months:
+          one: "Valid for 1 month"
+          other: "Valid for %{months} months"
+        valid_for_life: "Valid for life"
+      domains:
         limited_domains:
-          valid_for_life: 
-            one: "Valid for life on 1 domain"
-            other: "Valid for life on %{domains} domains"
-          valid_for_one_month: 
-            one: "Valid for one month on 1 domain"
-            other: "Valid for one month on %{domains} domains"
-          valid_for_one_year: 
-            one: "Valid for one year on 1 domain"
-            other: "Valid for one year on %{domains} domains"
-        unlimited_domains:
-          valid_for_life: "Valid for life on unlimited domains"
-          valid_for_one_month: "Valid for one month on unlimited domains"
-          valid_for_one_year: "Valid for one year on unlimited domains"
+          one: "Limited to 1 domain"
+          other: "Limited to %{domains} domains"
+        unlimited_domains: "Unlimited domains"
       billing:
         one_time_payment: "Renewal is manual"
         subscription: "Renewal is automatic"

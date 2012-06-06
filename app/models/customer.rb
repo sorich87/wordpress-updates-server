@@ -21,8 +21,9 @@ class Customer
   index :email, :unique => true
   index :authentication_token
 
-  has_and_belongs_to_many :businesses
+  has_many :package_purchases
   has_many :sites, dependent: :delete
+  has_and_belongs_to_many :businesses
 
   validates :email,
     :presence => true,

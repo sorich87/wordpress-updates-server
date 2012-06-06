@@ -10,14 +10,8 @@ class Package
   field :validity,          :type => Integer
 
   belongs_to :business
-  has_many :customers
+  has_many :package_purchases
   has_and_belongs_to_many :themes
-
-  VALIDITY = {
-    :lifetime => 0,
-    :one_year => 1,
-    :one_month => 2
-  }
 
   BILLING = {
     :one_time_payment => 0,
@@ -28,17 +22,16 @@ class Package
 
   validates_presence_of [:name, :description, :price, :number_of_themes, :number_of_domains, :billing, :validity, :business, :theme_ids]
 
-  validates_numericality_of :price,
-    :greater_than_or_equal_to => 0
-
-  validates_inclusion_of :validity,
-    :in => VALIDITY.values
+  validates_numericality_of :number_of_domains, greater_than_or_equal_to: 0, only_integers: true
+  validates_numericality_of :number_of_themes, greater_than_or_equal_to: 0, only_integers: true
+  validates_numericality_of :price, greater_than_or_equal_to: 0
+  validates_numericality_of :validity, greater_than_or_equal_to: 0, only_integers: true
 
   validates_inclusion_of :billing,
     :in => BILLING.values
 
   def is_valid_for_life?
-    read_attribute(:validity) == VALIDITY[:lifetime]
+    read_attribute(:validity) == 0
   end
 
   def is_subscription?
@@ -51,15 +44,5 @@ class Package
 
   def price
     "%.2f" % read_attribute(:price) unless read_attribute(:price).nil?
-  end
-
-  def self.validity_strings_and_values
-    arr = []
-    VALIDITY.each do |key, val|
-      key = key.to_s.upcase.gsub('_', ' ')
-      arr.push([key, val])
-    end
-    puts arr
-    arr
   end
 end

@@ -39,5 +39,6 @@ describe Customer do
   end
 
   it { should have_and_belong_to_many(:businesses) }
+  it { should have_many(:package_purchases) }
   it { should have_many(:sites) }
 end

@@ -1,0 +1,11 @@
+<%= simple_form_for @customer, html: { class: 'form-horizontal' }, defaults: { required: false, input_html: { class: 'input-xlarge' } } do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :email, label: 'Email Address', autofocus: true,
+    hint: "The email address is used to securely identify the customer and manage their permissions." %>
+
+  <div class="form-actions">
+    <%= f.submit 'Save Customer', class: 'btn btn-primary' %>
+    <%= link_to 'Cancel', customers_path, class: 'btn' %>
+  </div>
+<% end %>

@@ -18,18 +18,21 @@
         <span class="add-on">&#36;</span><%= f.input_field :price, class: 'input-mini' %>
       <% end %>
 
-      <%= f.input :validity, collection: collection_for_package_validities %>
-
       <%= f.input :billing, as: :radio_buttons, collection: collection_for_package_billings %>
+
+      <%= f.input :validity, label: 'Validity' do %>
+        <%= f.input_field :validity, class: 'input-mini' %>
+        <p class="help-inline">Number of months the customer gets updates for. 0 unlimited.</p>
+      <% end %>
 
       <%= f.association :themes, as: :check_boxes, collection: @business.themes.all %>
 
-      <%= f.input :number_of_themes, label: 'Number of Themes', wrapper: :prepend do %>
+      <%= f.input :number_of_themes, label: 'Number of Themes' do %>
         <%= f.input_field :number_of_themes, class: 'input-mini' %>
         <p class="help-inline">Number of themes the customer gets at once after buying this package. 0 for all themes.</p>
       <% end %>
 
-      <%= f.input :number_of_domains, label: 'Number of Domains', wrapper: :prepend do %>
+      <%= f.input :number_of_domains, label: 'Number of Domains' do %>
         <%= f.input_field :number_of_domains, class: 'input-mini' %>
         <p class="help-inline">Number of domains the customer can install the themes on. 0 for unlimited.</p>
       <% end %>

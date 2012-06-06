@@ -1,11 +1,4 @@
 module PackageHelper
-  def collection_for_package_validities
-    Package::VALIDITY.map do |key, val|
-      label = I18n.t key, :scope => [:packages, :values, :validity]
-      [label, val]
-    end
-  end
-
   def collection_for_package_billings
     Package::BILLING.map do |key, val|
       label = I18n.t key, :scope => [:packages, :values, :billing]
@@ -24,19 +17,20 @@ module PackageHelper
   end
 
   def package_validity_description(package)
-    if package.unlimited?
-      scope = [:packages, :descriptions, :validity, :unlimited_domains]
-    else
-      scope = [:packages, :descriptions, :validity, :limited_domains]
-    end
-
     case package.validity
-    when Package::VALIDITY[:lifetime]
-      I18n.t :valid_for_life, scope: scope, domains: package.number_of_domains, count: package.number_of_domains
-    when Package::VALIDITY[:one_month]
-      I18n.t :valid_for_one_month, scope: scope, domains: package.number_of_domains, count: package.number_of_domains
-    when Package::VALIDITY[:one_year]
-      I18n.t :valid_for_one_year, scope: scope, domains: package.number_of_domains, count: package.number_of_domains
+    when 0
+      I18n.t :valid_for_life, scope: [:packages, :descriptions, :validity]
+    else
+      I18n.t :valid_for_months, scope: [:packages, :descriptions, :validity], months: package.validity, count: package.validity
+    end
+  end
+
+  def package_domains_description(package)
+    case package.number_of_domains
+    when 0
+      I18n.t :unlimited_domains, scope: [:packages, :descriptions, :domains]
+    else
+      I18n.t :limited_domains, scope: [:packages, :descriptions, :domains], domains: package.number_of_domains, count: package.number_of_domains
     end
   end
 

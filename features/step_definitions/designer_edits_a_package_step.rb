@@ -1,5 +1,6 @@
 Given /^there is one package$/ do
-  @package = FactoryGirl.create(:package, business: @business)
+  @theme = FactoryGirl.create(:theme, name: "A Theme", business: @user.business)
+  @package = FactoryGirl.create(:package, business: @business, themes: [@theme])
 end
 
 When /^I go to the edit package page$/ do
@@ -7,19 +8,21 @@ When /^I go to the edit package page$/ do
 end
 
 Then /^I see the package details filled in the fields$/ do
-  page.should have_selector('input#package_name', value: @package.name)
-  page.should have_selector('input#package_description', value: @package.description)
-  page.should have_selector('input#package_price', value: @package.price)
-  page.should have_selector('select#package_validity', value: @package.validity)
-  page.should have_selector('input[name="package[billing]"]', checked: "checked", value: @package.billing)
-  page.should have_selector('input#package_number_of_themes', value: @package.number_of_themes)
-  page.should have_selector('input#package_number_of_domains', value: @package.number_of_domains)
+  find_field('Package Name').value.should == @package.name
+  find_field('Package Description').value.should == @package.description
+  find_field('Price').value.should == @package.price
+  find_field('Validity').value.should == "#{@package.validity}"
+  find_field('Subscription with recurring billing').should be_checked
+  find_field('A Theme').should be_checked
+  find_field('Number of Themes').value.should == "#{@package.number_of_themes}"
+  find_field('Number of Domains').value.should == "#{@package.number_of_domains}"
 end
 
 When /^I edit the package$/ do
   fill_in "Package Name", with: "New Name"
   fill_in "Package Description", with: "New Description"
   click_on "Save Package"
+  save_and_open_page
 end
 
 Then /^I should see the new package details$/ do

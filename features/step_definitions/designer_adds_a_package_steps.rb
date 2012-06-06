@@ -8,7 +8,7 @@ When /^I add a package$/ do
   fill_in "Package Name", with: @package[:name]
   fill_in "Package Description", with: @package[:description]
   fill_in "Price", with: @package[:price]
-  select "Lifetime", from: "Validity"
+  fill_in "Validity", with: @package[:validity]
   choose "One time payment"
   fill_in "Number of Themes", with: @package[:number_of_themes]
   fill_in "Number of Domains", with: @package[:number_of_domains]

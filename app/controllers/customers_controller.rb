@@ -9,6 +9,10 @@ class CustomersController < ApplicationController
     @packages = @business.packages
   end
 
+  def edit
+    @customer = Customer.find(params[:id])
+  end
+
   def create
     @customer = Customer.find_or_initialize_by(email: customer_params[:email])
 

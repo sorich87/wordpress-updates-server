@@ -22,7 +22,7 @@
 
       <%= f.input :billing, as: :radio_buttons, collection: collection_for_package_billings %>
 
-      <%= f.association :themes, as: :check_boxes, collection: Theme.all %>
+      <%= f.association :themes, as: :check_boxes, collection: @business.themes.all %>
 
       <%= f.input :number_of_themes, label: 'Number of Themes', wrapper: :prepend do %>
         <%= f.input_field :number_of_themes, class: 'input-mini' %>

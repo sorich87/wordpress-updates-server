@@ -3,7 +3,6 @@
 class Theme
   include Mongoid::Document
   include Mongoid::Paperclip
-  include Mongoid::Versioning
 
   field :name,                type: String
   field :uri,                 type: String

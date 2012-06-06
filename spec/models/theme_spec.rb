@@ -38,18 +38,4 @@ describe Theme do
 
   it { should belong_to(:business) }
   it { should have_and_belong_to_many(:packages) }
-
-  describe 'versioning' do
-    before do
-      @theme = FactoryGirl.create(:theme, business: @business)
-    end
-
-    it 'should add another version when being updated' do
-      lambda {
-        @theme.update_attributes(version: '2.0')
-      }.should change(@theme, :version).by(1)
-    end
-
-
-  end
 end

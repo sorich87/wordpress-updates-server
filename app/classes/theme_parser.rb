@@ -39,7 +39,7 @@ class ThemeParser
   end
 
   def attributes
-    css.attributes if css
+    css.attributes.merge(:screenshot_path_in_zip => screenshot_file) if css
   end
 
   def errors

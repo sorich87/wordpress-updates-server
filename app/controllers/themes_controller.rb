@@ -11,7 +11,7 @@ class ThemesController < ApplicationController
 
     respond_to do |format|
       if @tp.valid?
-        @theme = @business.themes.new(@tp.attributes)
+        @theme = @business.themes.new(@tp.attributes.merge(archive: params[:file]))
 
         format.json do
           if @theme.valid?

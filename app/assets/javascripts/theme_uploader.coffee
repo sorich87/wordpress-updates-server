@@ -17,9 +17,9 @@
   deletePath = this.constants.deletePath.replace(':id', theme._id)
 
   html = 
-    '<li class="span3 theme" id="theme-'+theme._id+'" data-theme-id="'+theme._id+'">
+    '<li class="span3 theme new_theme" id="theme-'+theme._id+'" data-theme-id="'+theme._id+'">
       <div class="thumbnail">
-        <img src="http://placehold.it/300x225" alt="'+theme.name+'" />
+        <img src="'+theme.screenshot+'" alt="'+theme.name+'" />
         <div class="caption">
           <h4>'+theme.name+' '+theme.version+'</h4>
           <div class="btn-toolbar">
@@ -34,6 +34,8 @@
         </div>
       </div>
     </li>'
+
+
 
   $newButton = $('a#upload_new_theme_file')
   html = $(html).insertBefore($newButton.parent())

@@ -10,7 +10,7 @@ class Theme
   field :author,              type: String
   field :author_uri,          type: String
   field :description,         type: String
-  field :version,             type: String
+  field :theme_version,       type: String
   field :license,             type: String
   field :license_uri,         type: String
   field :tags,                type: Array
@@ -18,7 +18,7 @@ class Theme
   field :template,            type: String
   
 
-  validates_presence_of [:name, :version, :business_id]
+  validates_presence_of [:name, :theme_version, :business_id]
   validates_uniqueness_of :name, :scope => :business_id
 
   belongs_to :business
@@ -44,7 +44,7 @@ class Theme
       _id:            self.id,
       name:           self.name,
       uri:            self.uri,
-      version:        self.version,
+      theme_version:  self.theme_version,
       author:         self.author,
       author_uri:     self.author_uri,
       description:    self.description,

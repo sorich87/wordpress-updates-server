@@ -15,8 +15,8 @@ describe CSSParser do
       @cp = CSSParser.new( @fixture_file )
     end
 
-    attributes = [:theme_name, :theme_uri, :description, :version, :license,
-      :license_uri, :tags, :author]
+    attributes = [:theme_name, :theme_uri, :description, :theme_version, 
+      :license, :license_uri, :tags, :author]
 
     attributes.each do |attr|
       it "should respond to #{attr}" do
@@ -27,7 +27,7 @@ describe CSSParser do
     specify { @cp.theme_name.should_not be_nil }
     specify { @cp.theme_uri.should_not be_nil }
     specify { @cp.description.should_not be_nil }
-    specify { @cp.version.should_not be_nil }
+    specify { @cp.theme_version.should_not be_nil }
     specify { @cp.license.should_not be_nil }
     specify { @cp.license_uri.should_not be_nil }
     specify { @cp.tags.should_not be_nil }

@@ -3,7 +3,7 @@ require 'sanitize'
 
 class CSSParser
   FIELDS = [
-    :theme_name, :theme_uri, :description, :version,
+    :theme_name, :theme_uri, :description, :theme_version,
     :license, :license_uri, :tags, :author, :author_uri,
     :template, :status
   ]
@@ -53,6 +53,9 @@ class CSSParser
 
     type = type.downcase.gsub(' ', '_').to_sym
     value = strip(value)
+
+
+    type = :theme_version if type == :version
 
     if type == :tags
       @@theme[:tags] ||= []

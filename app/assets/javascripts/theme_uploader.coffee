@@ -74,7 +74,7 @@
   $version = $container.find('span.version').first()
 
   $name.text(theme.name)
-  $version.text(theme.version)
+  $version.text(theme.theme_version)
 
   themeMy.ui.createFlashMessage('Theme updated.')
   $container.attr('data-updated', 'true')

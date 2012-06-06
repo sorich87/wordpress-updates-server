@@ -21,7 +21,7 @@
       <div class="thumbnail">
         <img src="'+theme.screenshot+'" alt="'+theme.name+'" />
         <div class="caption">
-          <h4>'+theme.name+' '+theme.version+'</h4>
+          <h4>'+theme.name+' '+theme.theme_version+'</h4>
           <div class="btn-toolbar">
             <div class="btn-group">
               <a class="btn btn-mini btn-primary" id="update-'+theme._id+'" href="#">new version</a>

@@ -12,7 +12,7 @@ describe Theme do
       end
 
       specify 'version' do
-        FactoryGirl.build(:theme, business: @business, version: nil).should_not be_valid
+        FactoryGirl.build(:theme, business: @business, theme_version: nil).should_not be_valid
       end
 
       specify 'business' do

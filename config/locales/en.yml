@@ -1,4 +1,19 @@
 en:
+  activerecord:
+    attributes:
+      theme:
+        name: Name
+        uri: URI
+        author: Author
+        author_uri: Author URI
+        description: Description
+        theme_version: Theme Version
+        license: License
+        license_uri: License URI
+        tags: Tags
+        status: Status
+        template: Template
+
   packages:
     values:
       billing:

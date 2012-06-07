@@ -1,4 +1,9 @@
 class ThemesController < ApplicationController
+  def show
+    @theme = @business.themes.find(params[:id])
+    @versions = @theme.versions
+  end
+
   def index
     @themes = @business.themes
   end

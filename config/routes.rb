@@ -10,7 +10,7 @@ ThemeMy::Application.routes.draw do
     resources :purchases
   end
 
-  resources :themes, only: [:index, :update, :create, :destroy] do
+  resources :themes, only: [:index, :update, :create, :destroy, :show] do
     # Because plupload does not support PUT requests (POST is hardcoded into it)
     member do
       post :update

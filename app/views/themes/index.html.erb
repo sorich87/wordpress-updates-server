@@ -4,8 +4,10 @@
   <% @themes.each do |theme| %>
   <li class="span3 theme" id="theme-<%=theme.id%>" data-theme-id="<%=theme.id%>">
     <div class="thumbnail">
-      <%= image_tag theme.screenshot.url %>
-      <!--<img src="http://placehold.it/300x225" alt="<%= theme.name %>" />-->
+      <%= link_to theme do %>
+        <%= image_tag theme.screenshot.url %>
+        <!--<img src="http://placehold.it/300x225" alt="<%= theme.name %>" />-->
+      <% end %>
       <div class="caption">
         <h4>
           <span class="name"><%= theme.name %></span> <span class="version"><%= theme.theme_version %></span>

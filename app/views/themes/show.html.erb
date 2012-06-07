@@ -1,0 +1,31 @@
+<h2 class="page-header"><%= @theme.name %> <%= @theme.theme_version %></h2>
+
+<% attributes = [:theme_version, :uri, :author, :author_uri, :description,
+                 :license, :license_uri, :status, :template] %>
+
+<div class="row">
+  <ul class="span6 ">
+    <% attributes.each do |attr| %>
+      <% unless @theme.read_attribute(attr).nil? %>
+
+      <li><%= I18n.t attr, :scope => 'activerecord.attributes.theme' %>: <%= @theme.read_attribute(attr) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <div style="float:right;">
+    <%= image_tag @theme.screenshot %>
+  </div>
+</div>
+
+<hr />
+
+<% unless @versions.empty? %>
+<h3>Past versions</h3>
+<ul>
+  <% @versions.each do |version| %>
+    <li><%= version.name %> <%= version.theme_version %></li>
+  <% end %>
+</ul>
+<% end %>
+

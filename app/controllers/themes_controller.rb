@@ -18,7 +18,7 @@ class ThemesController < ApplicationController
             @theme.save
             render status: 200, json: { code: 200, status: "OK", theme: @theme }
           else
-            render status: 200, json: { code: 403, status: "FAILED", theme: @theme, errors: @theme.errors }
+            render status: 200, json: { code: 400, status: "FAILED", theme: @theme, errors: @theme.errors }
           end
         end
       else        

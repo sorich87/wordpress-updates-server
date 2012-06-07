@@ -26,7 +26,10 @@ class Theme
   has_and_belongs_to_many :purchases
   has_and_belongs_to_many :packages
 
+  # TODO: Make private.
   has_mongoid_attached_file :archive,
+                            :url => '/system/themes/:id/:version/archive_:id.:extension',
+                            :path => ':rails_root/public/system/themes/:id/:path_version/:id.:extension'
   has_mongoid_attached_file :screenshot,
                             :url => '/system/themes/:id/:version/screenshot_:id.:extension',
                             :path => ':rails_root/public/system/themes/:id/:path_version/:id.:extension'

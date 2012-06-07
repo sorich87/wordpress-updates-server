@@ -1,4 +1,11 @@
 <%= simple_form_for @customer, html: { class: 'form-horizontal' }, defaults: { required: false, input_html: { class: 'input-xlarge' } } do |f| %>
+
+  <% if f.object.persisted? %>
+    <legend>Edit Customer</legend>
+  <% else %>
+    <legend>New Customer</legend>
+  <% end %>
+
   <%= f.error_notification %>
 
   <%= f.input :email, label: 'Email Address', autofocus: true,

@@ -72,8 +72,13 @@ SimpleNavigation::Configuration.run do |navigation|
     # primary.auto_highlight = false
 
     primary.item :themes, 'Themes', themes_path
-    primary.item :packages, 'Packages', packages_path
-    primary.item :customers, 'Customers', customers_path
+    primary.item :packages, 'Packages', packages_path do |sub_nav|
+      sub_nav.item :edit_package, "Edit Package", edit_package_path(@package) unless @package.nil? || ! @package.persisted?
+    end
+    primary.item :customers, 'Customers', customers_path do |sub_nav|
+      sub_nav.item :new_customer, 'New Customer', new_customer_path
+      sub_nav.item :edit_customer, 'Edit Customer', edit_customer_path(@customer) unless @customer.nil? || ! @customer.persisted?
+    end
     primary.item :reports, 'Reports', '#' do |sub_nav|
       sub_nav.item :graphs, 'Graphs', '#'
       sub_nav.item :sales, 'Sales', '#'

@@ -1,3 +1,7 @@
+<h1 class="page-header">Price Packages</h1>
+
+<%= render_navigation :renderer => Breadcrumbs, :static_leaf => true %>
+
 <%= simple_form_for @package, html: { class: 'form-horizontal' }, defaults: { required: false } do |f| %>
   <%= render :partial => 'form', locals: {f: f} %>
 <% end %>

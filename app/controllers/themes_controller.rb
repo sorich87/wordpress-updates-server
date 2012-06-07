@@ -49,7 +49,7 @@ class ThemesController < ApplicationController
     respond_to do |format|
       if @tp.valid?
         format.json do
-          if @theme.update_attributes(@tp.attributes)
+          if @theme.update_attributes(@tp.attributes.merge(archive: params[:file]))
             render status: 200, json: { code: 200, status: "OK", theme: @theme }
           else
             render status: 200, json: { code: 400, status: "FAILED", theme: @theme, errors: @theme.errors }

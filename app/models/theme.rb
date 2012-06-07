@@ -1,4 +1,4 @@
-# TODO: More validations
+# TODO: Make archives (.zip) private
 
 class Theme
   include Mongoid::Document
@@ -26,13 +26,30 @@ class Theme
   has_and_belongs_to_many :purchases
   has_and_belongs_to_many :packages
 
-  has_mongoid_attached_file :archive
-  has_mongoid_attached_file :screenshot
+  has_mongoid_attached_file :archive,
+  has_mongoid_attached_file :screenshot,
+                            :url => '/system/themes/:id/:version/screenshot_:id.:extension',
+                            :path => ':rails_root/public/system/themes/:id/:path_version/:id.:extension'
 
   alias_attribute :theme_name, :name
   alias_attribute :theme_uri, :uri
 
   attr_accessor :screenshot_path_in_zip
+
+  # So :url and :path are evaluated at different times, thus
+  # the solution is to use two different interpolations.
+  # How hacky! And so simple...
+  Paperclip.interpolates :path_version  do |attachment, style| 
+    if attachment.instance.new_record?
+      1
+    else
+      attachment.instance.versions.count+2
+    end
+  end
+  
+  Paperclip.interpolates :version do |attachment, style|
+    attachment.instance.version
+  end
 
   # Interrupt the assignment of the attachment and grab the tempfile
   # so we can extract the screenshot from it.

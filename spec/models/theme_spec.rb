@@ -47,8 +47,20 @@ describe Theme do
 
     it 'should add another version when being updated' do
       lambda {
-        @theme.update_attributes(version: '2.0')
+        @theme.update_attributes(theme_version: '2.0')
       }.should change(@theme, :version).by(1)
+    end
+
+    describe 'changing the theme name' do
+      it 'should not be allowed' do
+        @theme.update_attributes(name: 'Some other name').should be_false
+      end
+
+      it  'should generate an error message' do
+        @theme.name = "Some other theme name"
+        @theme.should_not be_valid
+        @theme.should have(1).error_on(:name)
+      end
     end
   end
 end

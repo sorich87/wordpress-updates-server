@@ -24,3 +24,11 @@ en:
       billing:
         one_time_payment: "Renewal is manual"
         subscription: "Renewal is automatic"
+
+  mongoid:
+    errors:
+      models:
+        theme:
+          attributes:
+            name:
+              immutable_attribute: cannot be changed after creation

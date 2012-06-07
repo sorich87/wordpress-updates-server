@@ -20,6 +20,7 @@ class Theme
 
   validates_presence_of [:name, :theme_version, :business_id]
   validates_uniqueness_of :name, :scope => :business_id
+  validates :name, :on => :update, :immutable => true
 
   belongs_to :business
   has_and_belongs_to_many :package_purchases

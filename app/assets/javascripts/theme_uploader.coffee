@@ -21,7 +21,9 @@
       <div class="thumbnail">
         <img src="'+theme.screenshot+'" alt="'+theme.name+'" />
         <div class="caption">
-          <h4>'+theme.name+' '+theme.theme_version+'</h4>
+          <h4>
+            <span class="name">'+theme.name+'</span> <span class="version">'+theme.theme_version+'</span>
+          </h4>
           <div class="btn-toolbar">
             <div class="btn-group">
               <a class="btn btn-mini btn-primary" id="update-'+theme._id+'" href="#">new version</a>
@@ -72,11 +74,14 @@
   $container = $('#theme-'+theme._id)
   $name = $container.find('span.name').first()
   $version = $container.find('span.version').first()
+  $screenshot = $container.find('img').first()
 
   $name.text(theme.name)
   $version.text(theme.theme_version)
+  $screenshot.attr('src', theme.screenshot)
 
   themeMy.ui.createFlashMessage('Theme updated.')
+  $container.removeClass('new_theme').addClass('new_theme')
   $container.attr('data-updated', 'true')
 
 

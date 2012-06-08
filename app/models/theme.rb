@@ -16,6 +16,7 @@ class Theme
   field :tags,                type: Array
   field :status,              type: String
   field :template,            type: String
+  field :access_token,        type: String
   
 
   validates_presence_of [:name, :theme_version, :business_id]
@@ -27,12 +28,20 @@ class Theme
   has_and_belongs_to_many :packages
 
   # TODO: Make private.
+  # TODO: Files should not be preserved when theme is deleted.
+  #       This serves to preserve them when a new version is added.
   has_mongoid_attached_file :archive,
-                            :url => '/system/themes/:id/:version/archive_:id.:extension',
-                            :path => ':rails_root/public/system/themes/:id/:path_version/archive_:id.:extension'
+        :url => '/system/themes/:access_token/:version/archive.:extension',
+        :path => ':rails_root/public/system/themes/:access_token/:version/archive.:extension',
+        :preserve_files => true
   has_mongoid_attached_file :screenshot,
-                            :url => '/system/themes/:id/:version/screenshot_:id.:extension',
-                            :path => ':rails_root/public/system/themes/:id/:path_version/screenshot_:id.:extension'
+        :url => '/system/themes/:access_token/:version/screenshot.:extension',
+        :path => ':rails_root/public/system/themes/:access_token/:version/screenshot.:extension',
+        :preserve_files => true
+
+  # We need the access token to be generated immediately when a
+  # new record is created, but only when it's a new record.
+  before_create :generate_access_token
 
   alias_attribute :theme_name, :name
   alias_attribute :theme_uri, :uri
@@ -46,7 +55,7 @@ class Theme
     if attachment.instance.new_record?
       1
     else
-      attachment.instance.versions.count+2
+      attachment.instance.version+1
     end
   end
   
@@ -94,10 +103,24 @@ class Theme
     zip_entry.extract(tempname)
 
     tempfile = File.new(tempname)
-
     screenshot.assign( tempfile )
-    screenshot.save
-
     File.delete(tempname)
+  end
+
+  def random_salt(len = 20)
+    chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+    salt = ""
+    1.upto(len) { |i| salt << chars[rand(chars.size-1)] }
+    return salt
+  end
+
+  # SHA1 from random salt and time
+  def generate_access_token
+    self.access_token = Digest::SHA1.hexdigest("#{random_salt}#{business_id}#{Time.now.to_i}")
+  end
+
+  # interpolate in paperclip
+  Paperclip.interpolates :access_token  do |attachment, style|
+    attachment.instance.access_token
   end
 end

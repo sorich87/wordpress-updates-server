@@ -3,6 +3,7 @@
     updatePath: '/themes/:id',
     createPath: '/themes',
     deletePath: '/themes/:id',
+    showPath:   '/themes/:id'
   }
 }
 @themeMy.themeForm.handleCreate = (info) ->
@@ -15,11 +16,14 @@
 
 @themeMy.themeForm.insertNewTheme = (theme) ->
   deletePath = this.constants.deletePath.replace(':id', theme._id)
+  showPath = this.constants.showPath.replace(':id', theme._id)
 
   html = 
     '<li class="span3 theme new_theme" id="theme-'+theme._id+'" data-theme-id="'+theme._id+'">
       <div class="thumbnail">
-        <img src="'+theme.screenshot+'" alt="'+theme.name+'" />
+        <a href="'+showPath+'">
+          <img src="'+theme.screenshot+'" alt="'+theme.name+'" />
+        </a>
         <div class="caption">
           <h4>
             <span class="name">'+theme.name+'</span> <span class="version">'+theme.theme_version+'</span>

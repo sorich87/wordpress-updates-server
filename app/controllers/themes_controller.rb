@@ -1,14 +1,29 @@
 class ThemesController < ApplicationController
   def show
-    @theme = @business.themes.find(params[:id])
-    @versions = @theme.versions
+    @parent_theme = @business.themes.find(params[:id])
+    requested_version = params[:version].to_i
+
+    if params[:version] && requested_version != @parent_theme.version
+      requested_version = params[:version].to_i      
+      if requested_version > @parent_theme.version
+        raise ActionController::RoutingError.new('Not Found') 
+      end
+
+      @theme = @parent_theme.versions.to_a.find { |theme_version| 
+        theme_version.version == requested_version
+      }
+    else
+      @theme = @parent_theme
+    end
+
+    @packages = @parent_theme.packages.includes(:purchases)
+
+    @newer_versions = @parent_theme.get_newer_versions_than (@theme)
+    @older_versions = @parent_theme.get_older_versions_than (@theme)
   end
 
   def index
     @themes = @business.themes
-  end
-
-  def edit
   end
 
   def create

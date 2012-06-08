@@ -4,6 +4,7 @@ class Theme
   include Mongoid::Document
   include Mongoid::Paperclip
   include Mongoid::Versioning
+  include Mongoid::Timestamps::Created
 
   field :name,                type: String
   field :uri,                 type: String
@@ -87,6 +88,38 @@ class Theme
       screenshot:     self.screenshot.url
     }
   end
+
+  # Get older versions than <Theme>
+  # Has to be called on the parent Theme, as older versions
+  # have no access to their parents.
+  def get_older_versions_than(instance)
+
+    if instance.version > self.version
+
+      []
+    elsif instance.version <= self.version
+      
+      older_versions = versions.to_a.select {|v| 
+        v.version < instance.version 
+      }.sort! { |a, b| 
+        a.version <=> b.version 
+      }.reverse!
+    end
+  end
+
+  # Get newer versions than <Theme>
+  # Has to be called on the parent Theme, as older versions
+  # have no access to their parents.
+  def get_newer_versions_than(instance)
+    if instance.version >= self.version
+      []
+    elsif instance.version < self.version
+      newer_versions = versions.to_a.select {|v| v.version > instance.version }
+      newer_versions << self
+      newer_versions.sort! { |a, b| a.version <=> b.version }.reverse!
+    end
+  end
+
 
   private
   def grab_screenshot_from_zip(zip_file)

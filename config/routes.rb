@@ -11,9 +11,10 @@ ThemeMy::Application.routes.draw do
   end
 
   resources :themes, only: [:index, :update, :create, :destroy, :show] do
-    # Because plupload does not support PUT requests (POST is hardcoded into it)
     member do
+      # Because plupload does not support PUT requests (POST is hardcoded into it)
       post :update
+      get ':version', :action => :show, :as => 'version', :constraints => {:version => /\d+/}
     end
   end
 

@@ -19,13 +19,43 @@
   </div>
 </div>
 
-<% unless @versions.empty? %>
+<% unless @packages.empty? %>
+<hr />
+<h3>Packages</h3>
+<ul>
+  <% @packages.each do |package| %>
+    <li><%= link_to package.name, edit_package_path(package) %> 
+      (<%=pluralize(package.purchases.count, 'purchase')%>)
+    </li>
+  <% end %>
+</ul>
+<% end %>
+
+<% unless @newer_versions.empty? %>
+<hr />
+<h3>Newer versions</h3>
+<ul>
+  <% @newer_versions.each do |version| %>
+    <li>
+      <%= link_to version_theme_path(@parent_theme, version.version) do %>
+        <%= version.name %> <%= version.theme_version %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+<% end %>
+
+<% unless @older_versions.empty? %>
 <hr />
 
-<h3>Past versions</h3>
+<h3>Older versions</h3>
 <ul>
-  <% @versions.each do |version| %>
-    <li><%= version.name %> <%= version.theme_version %></li>
+  <% @older_versions.each do |version| %>
+    <li>
+      <%= link_to version_theme_path(@parent_theme.id, version.version) do %>
+        <%= version.name %> <%= version.theme_version %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 <% end %>

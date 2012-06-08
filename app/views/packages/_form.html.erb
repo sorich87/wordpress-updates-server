@@ -1,46 +1,47 @@
-<div class="row">
-  <div class="span9">
-    <fieldset>
+<fieldset>
 
-      <% if f.object.persisted? %>
-        <legend>Edit Package</legend>
-      <% else %>
-        <legend>New Package</legend>
-      <% end %>
+  <% if f.object.persisted? %>
+    <legend>Edit Package</legend>
+  <% else %>
+    <legend>New Package</legend>
+  <% end %>
 
-      <%= f.error_notification %>
+  <%= f.error_notification %>
 
-      <%= f.input :name, label: 'Package Name', input_html: {class: 'input-xlarge'} %>
+  <%= f.input :name, label: 'Package Name', input_html: {class: 'input-xlarge'} %>
 
-      <%= f.input :description, label: 'Package Description', input_html: {class: 'input-xlarge'} %>
+  <%= f.input :description, label: 'Package Description', input_html: {class: 'input-xlarge'} %>
 
-      <%= f.input :price, label: 'Price', wrapper: :prepend do %>
-        <span class="add-on">&#36;</span><%= f.input_field :price, class: 'input-mini' %>
-      <% end %>
+  <%= f.input :price, label: 'Price', wrapper: :prepend do %>
+    <span class="add-on">&#36;</span><%= f.input_field :price, class: 'input-mini' %>
+  <% end %>
 
-      <%= f.input :billing, as: :radio_buttons, collection: collection_for_package_billings %>
+  <%= f.input :billing, as: :radio_buttons, collection: collection_for_package_billings %>
 
-      <%= f.input :validity, label: 'Validity' do %>
-        <%= f.input_field :validity, class: 'input-mini' %>
-        <p class="help-inline">Number of months the customer gets updates for. 0 unlimited.</p>
-      <% end %>
+  <%= f.input :validity, label: 'Validity' do %>
+    <%= f.input_field :validity, class: 'input-mini' %>
+    <p class="help-inline">Number of months the customer gets updates for. 0 unlimited.</p>
+  <% end %>
 
-      <%= f.association :themes, as: :check_boxes, collection: @business.themes.all %>
+  <%= f.association :themes, as: :check_boxes, collection: @business.themes.all %>
 
-      <%= f.input :number_of_themes, label: 'Number of Themes' do %>
-        <%= f.input_field :number_of_themes, class: 'input-mini' %>
-        <p class="help-inline">Number of themes the customer gets at once after buying this package. 0 for all themes.</p>
-      <% end %>
+  <%= f.input :number_of_themes, label: 'Number of Themes' do %>
+    <%= f.input_field :number_of_themes, class: 'input-mini' %>
+    <p class="help-inline">Number of themes the customer gets at once after buying this package. 0 for all themes.</p>
+  <% end %>
 
-      <%= f.input :number_of_domains, label: 'Number of Domains' do %>
-        <%= f.input_field :number_of_domains, class: 'input-mini' %>
-        <p class="help-inline">Number of domains the customer can install the themes on. 0 for unlimited.</p>
-      <% end %>
+  <%= f.input :number_of_domains, label: 'Number of Domains' do %>
+    <%= f.input_field :number_of_domains, class: 'input-mini' %>
+    <p class="help-inline">Number of domains the customer can install the themes on. 0 for unlimited.</p>
+  <% end %>
 
-      <div class="form-actions">
-        <%= f.button :submit, class: 'btn-primary', value: 'Save Package' %>
-        <%= link_to 'Cancel', packages_path %>
-      </div>
-    </fieldset>
+  <div class="form-actions">
+    <%= f.button :submit, class: 'btn-primary', value: 'Save Package' %>
+
+    <%- if f.object.persisted? -%>
+      <%= link_to 'Cancel', packages_path %>
+    <%- else -%>
+      <%= link_to 'Cancel', "#new_package", class: 'hide-target' %>
+    <%- end -%>
   </div>
-</div>
+</fieldset>

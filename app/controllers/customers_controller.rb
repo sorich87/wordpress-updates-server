@@ -9,10 +9,6 @@ class CustomersController < ApplicationController
     @packages = @business.packages
   end
 
-  def edit
-    @customer = Customer.find(params[:id])
-  end
-
   def create
     @customer = Customer.find_or_initialize_by(email: customer_params[:email])
 
@@ -23,7 +19,7 @@ class CustomersController < ApplicationController
     else
       @customer.businesses << @business
       if @customer.save
-        redirect_to customers_path, notice: "Customer saved."
+        redirect_to customer_purchases_path(@customer), notice: "Customer saved."
       else
         render :new
       end
@@ -33,6 +29,7 @@ class CustomersController < ApplicationController
   def destroy
     @customer = Customer.find(params[:id])
     @business.customers -= [@customer]
+    flash[:notice] = "Customer deleted."
     redirect_to customers_path
   end
 

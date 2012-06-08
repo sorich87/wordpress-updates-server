@@ -72,18 +72,42 @@ SimpleNavigation::Configuration.run do |navigation|
     # primary.auto_highlight = false
 
     primary.item :themes, 'Themes', themes_path
+
     primary.item :packages, 'Packages', packages_path do |sub_nav|
-      sub_nav.item :edit_package, "Edit Package", edit_package_path(@package) unless @package.nil? || ! @package.persisted?
+      unless @package.nil? || ! @package.persisted?
+        sub_nav.item :edit_package, "Edit Package", edit_package_path(@package)
+      end
     end
-    primary.item :customers, 'Customers', customers_path do |sub_nav|
-      sub_nav.item :new_customer, 'New Customer', new_customer_path
-      sub_nav.item :edit_customer, 'Edit Customer', edit_customer_path(@customer) unless @customer.nil? || ! @customer.persisted?
+
+    primary.item :customers, 'Customers', customers_path, highlights_on: :subpath do |sub_nav|
+
+      sub_nav.item :new_customer, 'New Customer', new_customer_path,
+        highlights_on: create_action_matcher("customers")
+
+      unless @customer.nil? || ! @customer.persisted?
+        sub_nav.item :edit_customer, "Edit Customer", edit_customer_path(@customer),
+          highlights_on: update_action_matcher("customers")
+
+        sub_nav.item :purchases, "Customer's Purchases", customer_purchases_path(@customer),
+          highlights_on: :subpath do |sub_sub_nav|
+
+          sub_sub_nav.item :new_purchase, "New Purchase", new_customer_purchase_path,
+            highlights_on: create_action_matcher("purchases")
+
+          unless @purchase.nil? || ! @purchase.persisted?
+            sub_sub_nav.item :edit_purchase, "Edit Purchase", edit_customer_purchase_path(@customer, @purchase),
+              highlights_on: update_action_matcher("purchases")
+          end
+        end
+      end
     end
+
     primary.item :reports, 'Reports', '#' do |sub_nav|
       sub_nav.item :graphs, 'Graphs', '#'
       sub_nav.item :sales, 'Sales', '#'
       sub_nav.dom_class = 'nav nav-tabs'
     end
+
     primary.item :settings, 'Settings', settings_business_path do |sub_nav|
       sub_nav.item :company, 'Company', settings_business_path
       sub_nav.item :admin, 'Admin', admin_settings_business_path

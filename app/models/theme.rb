@@ -23,7 +23,7 @@ class Theme
   validates :name, :on => :update, :immutable => true
 
   belongs_to :business
-  has_and_belongs_to_many :package_purchases
+  has_and_belongs_to_many :purchases
   has_and_belongs_to_many :packages
 
   has_mongoid_attached_file :archive

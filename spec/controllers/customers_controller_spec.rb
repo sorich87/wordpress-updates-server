@@ -15,16 +15,6 @@ describe CustomersController do
     it { should render_template(:index) }
   end
 
-  describe "GET edit" do
-    before do
-      customer
-      get :edit, id: customer.id
-    end
-
-    it { should assign_to(:customer).with(customer) }
-    it { should render_template(:edit) }
-  end
-
   describe "POST create" do
     context "with valid attributes" do
       it "creates a new customer" do
@@ -40,9 +30,9 @@ describe CustomersController do
         Business.find(@business.id).customer_ids.should include @customer.id
       end
 
-      it "redirects to the customers list" do
+      it "redirects to the customer purchases list" do
         post :create, customer: attributes_for(:customer)
-        response.should redirect_to customers_path
+        response.should redirect_to customer_purchases_path(@customer)
       end
     end
 

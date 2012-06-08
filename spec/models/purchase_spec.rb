@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PackagePurchase do
+describe Purchase do
   it { should belong_to(:customer) }
   it { should belong_to(:package) }
   it { should have_and_belong_to_many(:themes) }

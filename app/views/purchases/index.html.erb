@@ -1,0 +1,13 @@
+<h1 class="page-header">Customers</h1>
+
+<%= render_navigation :renderer => Breadcrumbs %>
+
+<h2 class="page-header">Purchases by <%= @customer.email %></h2>
+
+<div class="row">
+  <%= render partial: "purchase", collection: @purchases %>
+</div>
+
+<p class="toggle-next"><%= link_to '<i class="icon-plus"></i> Add Purchase'.html_safe, "#new_purchase" %></p>
+
+<%= render partial: "form" %>

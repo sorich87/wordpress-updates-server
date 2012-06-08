@@ -21,7 +21,15 @@ class Customer
   index :email, :unique => true
   index :authentication_token
 
-  has_many :package_purchases
+  has_many :purchases, dependent: :delete do
+    def current
+      @target.select { |p| ! p.expired? }
+    end
+
+    def expired
+      @target.select { |p| p.expired? }
+    end
+  end
   has_many :sites, dependent: :delete
   has_and_belongs_to_many :businesses
 
@@ -34,5 +42,14 @@ class Customer
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def package_names
+    purchases.current.collect { |p| p.package.name }.uniq
+  end
+
+  def theme_names
+    themes = purchases.current.collect { |p| p.themes }
+    themes.flatten.collect { |t| t.name }.uniq
   end
 end

@@ -37,7 +37,7 @@ describe Theme do
   end
 
   it { should belong_to(:business) }
-  it { should have_and_belong_to_many(:package_purchases) }
+  it { should have_and_belong_to_many(:purchases) }
   it { should have_and_belong_to_many(:packages) }
 
   describe 'versioning' do

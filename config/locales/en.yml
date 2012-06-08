@@ -25,6 +25,18 @@ en:
         one_time_payment: "Renewal is manual"
         subscription: "Renewal is automatic"
 
+  purchases:
+    descriptions:
+      all_themes: "All themes"
+      themes:
+        one: "Theme: %{themes}"
+        other: "Themes: %{themes}"
+      purchase_date: "Purchased on %{date}"
+      expiration:
+        no_expiration: "No expiration"
+        expire_on: "Expire on %{date}"
+        expired_on: "Expired on %{date}"
+
   mongoid:
     errors:
       models:

@@ -20,18 +20,23 @@
       <tr id="<%=customer.id%>" class="customer">
         <td>
           <%= customer.email %>
-          <span class="actions">
-          <%= link_to edit_customer_path(customer), title: "Edit Customer" do %>
-            <i class="icon-pencil"></i> edit
-          <% end %>
-          |
-          <%= link_to customer_path(customer), title: "Delete Customer", method: :delete, confirm: 'Are you sure?' do %>
-            <i class="icon-remove"></i> delete
-          <% end %>
+          <span class="row-actions hide-if-js">
+            <%= link_to customer_path(customer), title: "Delete Customer", method: :delete, confirm: 'Are you sure?' do %>
+              <i class="icon-remove"></i> delete
+            <% end %>
           </span>
         </td>
-        <td></td>
-        <td></td>
+        <td>
+          <%= customer.package_names.join(", ") %>
+          <span class="row-actions hide-if-js">
+            <%= link_to customer_purchases_path(customer), title: "Edit Customer's Purchases" do %>
+              <i class="icon-pencil"></i> edit
+            <% end %>
+          </span>
+        </td>
+        <td>
+          <%= customer.theme_names.join(", ") %>
+        </td>
       </tr>
     <% end %>
   </tbody>

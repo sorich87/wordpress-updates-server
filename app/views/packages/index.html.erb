@@ -4,7 +4,7 @@
 
 <div class="row">
 <% @packages.each do |package| %>
-  <div id="<%=package.id%>" class="span5 well">
+  <div id="<%=package.id%>" class="span3 well">
     <h3><%= package.name %></h3>
     <p><%= package.description %></p>
     <p>Themes:
@@ -26,21 +26,7 @@
 <% end %>
 </div>
 
-<p><a href="#" id="add_new_package"><i class="icon-plus"></i> Add a package</a></p>
-<div id="new_package_parent" class="hidden">
-  <%= simple_form_for @new_package, url: packages_path, html: {class: 'form-horizontal'}, defaults: {required: false} do |f| %>
-    <%= render :partial => 'form', locals: {f: f} %>
-  <% end %>
-</div>
-
-
-<% content_for(:javascript) do %>
-  <script type="text/javascript">
-    $('a#add_new_package').one('click', function() {
-      var $parent = $('div#new_package_parent');
-      $parent.hide();
-      $parent.removeClass('hidden');
-      $parent.fadeIn('slow');
-    });
-  </script>
+<p class="toggle-next"><a href="#new_package"><i class="icon-plus"></i> Add a package</a></p>
+<%= simple_form_for @new_package, url: packages_path, html: {class: 'form-horizontal hide-if-js'}, defaults: {required: false} do |f| %>
+  <%= render :partial => 'form', locals: {f: f} %>
 <% end %>

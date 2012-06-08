@@ -6,6 +6,8 @@ ThemeMy::Application.routes.draw do
 
   resources :customers do
     get 'page/:page', :action => :index, :on => :collection
+
+    resources :purchases
   end
 
   resources :themes, only: [:index, :update, :create, :destroy] do

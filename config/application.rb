@@ -61,5 +61,8 @@ module ThemeMy
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Seems to fix all the problems Emil had with i18n and mongoid.
+    config.i18n.fallbacks = true
   end
 end

@@ -7,8 +7,9 @@
   <ul class="span6 ">
     <% attributes.each do |attr| %>
       <% unless @theme.read_attribute(attr).nil? %>
-
-      <li><%= I18n.t attr, :scope => 'activerecord.attributes.theme' %>: <%= @theme.read_attribute(attr) %></li>
+      <li>
+        <%= Theme.human_attribute_name(attr) %>: <%= @theme.read_attribute(attr) %>
+      </li>
       <% end %>
     <% end %>
   </ul>
@@ -18,9 +19,9 @@
   </div>
 </div>
 
+<% unless @versions.empty? %>
 <hr />
 
-<% unless @versions.empty? %>
 <h3>Past versions</h3>
 <ul>
   <% @versions.each do |version| %>

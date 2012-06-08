@@ -29,10 +29,10 @@ class Theme
   # TODO: Make private.
   has_mongoid_attached_file :archive,
                             :url => '/system/themes/:id/:version/archive_:id.:extension',
-                            :path => ':rails_root/public/system/themes/:id/:path_version/:id.:extension'
+                            :path => ':rails_root/public/system/themes/:id/:path_version/archive_:id.:extension'
   has_mongoid_attached_file :screenshot,
                             :url => '/system/themes/:id/:version/screenshot_:id.:extension',
-                            :path => ':rails_root/public/system/themes/:id/:path_version/:id.:extension'
+                            :path => ':rails_root/public/system/themes/:id/:path_version/screenshot_:id.:extension'
 
   alias_attribute :theme_name, :name
   alias_attribute :theme_uri, :uri

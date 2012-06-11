@@ -1,25 +1,8 @@
 class ThemesController < ApplicationController
   def show
-    @parent_theme = @business.themes.find(params[:id])
-    requested_version = params[:version].to_i
-
-    if params[:version] && requested_version != @parent_theme.version
-      requested_version = params[:version].to_i      
-      if requested_version > @parent_theme.version
-        raise ActionController::RoutingError.new('Not Found') 
-      end
-
-      @theme = @parent_theme.versions.to_a.find { |theme_version| 
-        theme_version.version == requested_version
-      }
-    else
-      @theme = @parent_theme
-    end
-
-    @packages = @parent_theme.packages.includes(:purchases)
-
-    @newer_versions = @parent_theme.get_newer_versions_than (@theme)
-    @older_versions = @parent_theme.get_older_versions_than (@theme)
+    @theme = @business.themes.find(params[:id])
+    @packages = @theme.packages.includes(:purchases)
+    @older_versions = @theme.get_older_versions_than (@theme)
   end
 
   def index
@@ -55,6 +38,19 @@ class ThemesController < ApplicationController
     @theme.destroy
 
     redirect_to themes_path, notice: 'Theme deleted.'
+  end
+
+  # We just inactive it in reality, but destroy 'makes sense'
+  def destroy_version
+    @theme = @business.themes.find(params[:id])
+
+    requested_version = params[:version].to_i
+    if @theme.deactivate_version!(requested_version)
+      flash[:notice] = "Version deleted."
+      redirect_to @theme
+    else
+      flash[:notice] = "Theme version could not be found."
+    end
   end
 
   def update

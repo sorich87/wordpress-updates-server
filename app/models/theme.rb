@@ -18,6 +18,7 @@ class Theme
   field :status,              type: String
   field :template,            type: String
   field :access_token,        type: String
+  field :active,              type: Boolean,   default: true
   
 
   validates_presence_of [:name, :theme_version, :business_id]
@@ -49,19 +50,12 @@ class Theme
 
   attr_accessor :screenshot_path_in_zip
 
-  # So :url and :path are evaluated at different times, thus
-  # the solution is to use two different interpolations.
-  # How hacky! And so simple...
-  Paperclip.interpolates :path_version  do |attachment, style| 
-    if attachment.instance.new_record?
-      1
-    else
-      attachment.instance.version+1
-    end
-  end
-  
   Paperclip.interpolates :version do |attachment, style|
     attachment.instance.version
+  end
+
+  Paperclip.interpolates :access_token do |attachment, style|
+    attachment.instance.access_token
   end
 
   # Interrupt the assignment of the attachment and grab the tempfile
@@ -90,36 +84,70 @@ class Theme
   end
 
   # Get older versions than <Theme>
-  # Has to be called on the parent Theme, as older versions
-  # have no access to their parents.
-  def get_older_versions_than(instance)
-
-    if instance.version > self.version
-
-      []
-    elsif instance.version <= self.version
-      
+  # Has to be called on the parent Theme, 
+  # as older versions have no access to their parents.
+  # <Theme> can either be an instance or a fixnum (version number)
+  # Set include_deleted to true to also include versions marked as destroyed.
+  # Returns an array with newer versions
+  def get_older_versions_than(requested_version, include_deleted = false)
+    requested_version = requested_version.is_a?(Theme) ? requested_version.version 
+                                                       : requested_version
+    if requested_version <= self.version.to_i
       older_versions = versions.to_a.select {|v| 
-        v.version < instance.version 
+        v.active? && v.version < requested_version
       }.sort! { |a, b| 
         a.version <=> b.version 
       }.reverse!
+    else
+      []
     end
   end
 
   # Get newer versions than <Theme>
-  # Has to be called on the parent Theme, as older versions
-  # have no access to their parents.
-  def get_newer_versions_than(instance)
-    if instance.version >= self.version
-      []
-    elsif instance.version < self.version
-      newer_versions = versions.to_a.select {|v| v.version > instance.version }
-      newer_versions << self
+  # Same param/return as get_older_versions_than
+  def get_newer_versions_than(version, include_deleted = false)
+    version = version.is_a?(Theme) ? version.version : version
+    if version < self.version
+      newer_versions = versions.to_a.select {|v| v.active? && v.version > version }
+      newer_versions << self if self.active?
       newer_versions.sort! { |a, b| a.version <=> b.version }.reverse!
+    else
+      []
     end
   end
 
+  # Get requested_version <requested_version>
+  # <requested_version> can either be a Fixnum or a Theme
+  # Set include_deleted to true to include versions marked as deleted
+  # Returns an instance of Theme or nil
+  def get_version(requested_version, include_deleted = false)
+    requested_version = requested_version.theme_version if requested_version.is_a? Theme
+    if requested_version == self.version.to_i && self.active?
+      return self
+    elsif requested_version < self.version
+      return versions.to_a.find { |instance| 
+        instance.version == requested_version && instance.active?
+      }
+    end
+    nil
+  end
+
+  # <requested_version> can either be a Fixnum or a Theme
+  # Returns true when version has been deleted, or false if version was not found.
+  def deactivate_version!(requested_version)
+    instance = requested_version.is_a?(Theme) ? requested_version : get_version(requested_version)
+    return false unless instance
+    instance.deactivate!
+  end
+
+  def deactivate!
+    self.active = false
+    self.save
+  end
+
+  def active?
+    self.active
+  end
 
   private
   def grab_screenshot_from_zip(zip_file)
@@ -150,10 +178,5 @@ class Theme
   # SHA1 from random salt and time
   def generate_access_token
     self.access_token = Digest::SHA1.hexdigest("#{random_salt}#{business_id}#{Time.now.to_i}")
-  end
-
-  # interpolate in paperclip
-  Paperclip.interpolates :access_token  do |attachment, style|
-    attachment.instance.access_token
   end
 end

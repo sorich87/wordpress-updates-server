@@ -13,7 +13,7 @@
       <% end %>
     <% end %>
   </ul>
-  
+
   <div style="float:right;">
     <%= image_tag @theme.screenshot %>
   </div>
@@ -38,9 +38,13 @@
 <ul>
   <% @older_versions.each do |version| %>
     <li>
-      <%= "#{version.name} #{version.theme_version}" %> 
-      (<%= link_to 'download', version.archive.url %> | 
-        <%= link_to 'delete', version_theme_path(@theme, version.version), method: :delete, confirm: "Are you sure?" %>)
+      <%= "#{version.name} #{version.theme_version}" %>
+      <%= link_to version.archive.url do %>
+         <i class="icon-download-alt"></i>
+      <% end %>
+      <%= link_to version_theme_path(@theme, version.version), method: :delete, confirm: "Are you sure?" do %>
+        <i class="icon-remove"></i>
+      <% end %> 
     </li>
   <% end %>
 </ul>

@@ -1,15 +1,13 @@
 class VersionValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, new_value)
     values = new_value.split('.') unless new_value.nil?
+    old_value = record.send("#{attribute}_was")
 
-    if values.nil? || values.length < 1
+    if new_value !~ /^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)$/
       record.errors.add(attribute, :incorrect_version_number_format)
-    else
-      values.each do |part|
-        if part !~ /^\d+$/
-          record.errors.add(attribute, :incorrect_version_number_format)
-          break
-        end
+    elsif record.send("#{attribute}_changed?")
+      if !old_value.nil? && !old_value.blank? && PHPVersioning.compare(old_value, new_value) == 1
+        record.errors.add(:theme_version, :not_higher_version_number)
       end
     end
   end

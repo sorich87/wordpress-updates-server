@@ -25,7 +25,7 @@ class Theme
   validates_uniqueness_of :name, :scope => :business_id
   validates :name, :on => :update, :immutable => true
   validates :theme_version, :version => true
-  validate :version_number_is_higher, :on => :update, :if => :theme_version_changed?
+  #validate :version_number_is_higher, :on => :update, :if => :theme_version_changed?
 
   belongs_to :business
   has_and_belongs_to_many :purchases

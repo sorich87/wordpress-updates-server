@@ -1,35 +1,8 @@
 # TODO: Make archives (.zip) private
 
-class Theme
-  include Mongoid::Document
-  include Mongoid::Paperclip
-  include Mongoid::Versioning
-  include Mongoid::Timestamps::Created
-
-  field :name,                type: String
-  field :uri,                 type: String
-  field :author,              type: String
-  field :author_uri,          type: String
-  field :description,         type: String
-  field :theme_version,       type: String
-  field :license,             type: String
-  field :license_uri,         type: String
-  field :tags,                type: Array
-  field :status,              type: String
-  field :template,            type: String
+class Theme < Extension
   field :access_token,        type: String
   field :active,              type: Boolean,   default: true
-  
-
-  validates_presence_of [:name, :theme_version, :business_id]
-  validates_uniqueness_of :name, :scope => :business_id
-  validates :name, :on => :update, :immutable => true
-  validates :theme_version, :version => true
-  #validate :version_number_is_higher, :on => :update, :if => :theme_version_changed?
-
-  belongs_to :business
-  has_and_belongs_to_many :purchases
-  has_and_belongs_to_many :packages
 
   # TODO: Make private.
   # TODO: Files should not be preserved when theme is deleted.
@@ -49,6 +22,7 @@ class Theme
 
   alias_attribute :theme_name, :name
   alias_attribute :theme_uri, :uri
+  alias_attribute :theme_version, :extension_version # So lazy :)
 
   attr_accessor :screenshot_path_in_zip
 

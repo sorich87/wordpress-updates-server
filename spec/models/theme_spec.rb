@@ -37,7 +37,7 @@ describe Theme do
 
     it 'should reject invalid version numbers' do
       ['.0.1', '.1', '0.a.1', '10.*.1'].each do |version_number|
-        Theme.new(theme_version: version_number).should have(1).error_on(:theme_version)
+        Theme.new(extension_version: version_number).should have(1).error_on(:extension_version)
       end
     end
   end

@@ -24,6 +24,8 @@ class Theme
   validates_presence_of [:name, :theme_version, :business_id]
   validates_uniqueness_of :name, :scope => :business_id
   validates :name, :on => :update, :immutable => true
+  validates :theme_version, :version => true
+  validate :version_number_is_higher, :on => :update, :if => :theme_version_changed?
 
   belongs_to :business
   has_and_belongs_to_many :purchases
@@ -150,6 +152,19 @@ class Theme
   end
 
   private
+  def version_number_is_higher
+    new_version = theme_version.split('.')
+    old_version = theme_version_was.split('.')
+
+    new_version.each_index do |i|
+      if !old_version[i].nil? && new_version[i].to_i < old_version[i].to_i
+        errors.add(:theme_version, :not_higher_version_number)
+      else
+        break
+      end
+    end
+  end
+  
   def grab_screenshot_from_zip(zip_file)
     # TODO: Needs testing with Amazon
     return if screenshot_path_in_zip.nil?

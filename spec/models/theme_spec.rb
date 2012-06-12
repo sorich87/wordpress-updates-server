@@ -34,6 +34,12 @@ describe Theme do
 
       second_theme.should be_valid
     end
+
+    it 'should reject invalid version numbers' do
+      ['.0.1', '.1', '0.a.1', '10.*.1'].each do |version_number|
+        Theme.new(theme_version: version_number).should have(1).error_on(:theme_version)
+      end
+    end
   end
 
   it { should belong_to(:business) }
@@ -90,6 +96,26 @@ describe Theme do
       specify { @theme.get_newer_versions_than(@old_version.version).should == [@theme] }
       specify { @theme.get_newer_versions_than(@old_version).should == [@theme] }
     end
-  end
 
+    describe 'adding new versions' do
+      before do
+        @theme.update_attributes(theme_version: '2.0')
+        @theme.reload
+      end
+
+      it 'should reject older versions' do
+        ['0.1', '0.9.1', '1.8', '1.9'].each do |version|
+          @theme.theme_version = version
+          @theme.should have(1).error_on(:theme_version)
+        end
+      end
+
+      it 'should accept newer versions' do
+        ['2.0.1', '2.5', '10.3', '13.37'].each do |version|
+          @theme.theme_version = version
+          @theme.should be_valid
+        end
+      end
+    end
+  end
 end

@@ -46,7 +46,9 @@ ThemeMy::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :tokens, only: [:create, :destroy]
-      resources :sites, only: [:create]
+      resources :sites, only: [:create] do
+        get 'themes', :on => :collection
+      end
     end
   end
 

@@ -1,5 +1,5 @@
 class Api::V1::SitesController < Api::V1::BaseController
-  skip_before_filter :authenticate_customer!
+  skip_before_filter :authenticate_customer!, only: :create
 
   def create
     if params[:email].nil? || params[:domain_name].nil? || params[:secret_key].nil?
@@ -32,6 +32,36 @@ class Api::V1::SitesController < Api::V1::BaseController
     else
       render status: 400, json: { code: 2, message: "An error occured.", errors: @site.errors.full_messages }
     end
+  end
+
+  def themes
+    if params[:domain_name].nil? || params[:themes].nil?
+      render status: 400, json: { code: 1, message: "The request must contain a domain name and the themes to get." }
+      return
+    end
+
+    installed_themes = params[:themes].values.collect { |t| [t[:Name], t] }.uniq
+    installed_themes = Hash[installed_themes]
+    theme_names = params[:themes].values.collect { |t| t[:Name] }.uniq
+    themes = Hash.new
+
+    Theme.where(:name.in => theme_names).each do |t|
+      latest_version = t.theme_version
+      installed_theme = installed_themes[t.name]
+      installed_version = installed_theme["Version"]
+      slug = installed_theme["Stylesheet"]
+
+      if PHPVersioning::compare(installed_version, latest_version) < 0
+        version = t.versions.where(theme_version: installed_theme["Version"],
+                                   author: installed_theme["Author"],
+                                   author_uri: installed_theme["Author URI"])
+        if version
+          themes[slug] = Hash["package" => root_url.concat(t.archive.url), "new_version" => t.theme_version, "url" => t.uri]
+        end
+      end
+    end
+
+    render status: 200, json: themes
   end
 
 end

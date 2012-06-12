@@ -96,11 +96,11 @@ class PHPVersioning
   end
 
   def self.isdigit(x)
-    !!x.match(/[0-9]/)
+    x.is_a?(Fixnum) || !!x.match(/[0-9]/)
   end
 
 	def self.isdig(x)
-		!!x.match(/[0-9]/) && x != "."
+		x.is_a?(Fixnum) || (!!x.match(/[0-9]/) && x != ".")
 	end
 
 	def self.isndig(x)

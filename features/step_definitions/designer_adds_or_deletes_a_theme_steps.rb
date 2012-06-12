@@ -24,8 +24,8 @@ Then /^I should see the new theme screenshot, name and version number$/ do
 end
 
 When /^I have one theme$/ do
-  if @user.business.themes.empty?
-    @theme = FactoryGirl.create(:theme, business: @user.business)
+  if @user.business.themes.empty? || @business.themes.where(name: 'Annotum Base').first.nil?
+    @theme = FactoryGirl.create(:theme, name: "Annotum Base", business: @user.business)
     @theme.should be_persisted
   end
 end
@@ -47,15 +47,17 @@ Then /^I should not see the theme anymore$/ do
 end
 
 When /^I upload a new version of that theme$/ do
-  theme_archive = File.join(Rails.root, 'spec/fixtures/themes/zips/annotum-base.zip')
+  theme_archive = File.join(Rails.root, 'spec/fixtures/themes/zips/annotum-base-1.1.zip')
   @theme_container = page.find("li#theme-#{@theme.id}")
   input = @theme_container.find("input[type=file]")
   attach_file input[:id], theme_archive
 
-  wait_until { @theme_container[:'data-updated'] == 'true' }
+  wait_until { 
+    page.find("li#theme-#{@theme.id}")[:'data-updated'] == 'true' 
+  }
 end
 
 Then /^I should see the new version number$/ do
   version = @theme_container.find('span.version')
-  version.should have_content('1.0')
+  version.should have_content('1.1')
 end

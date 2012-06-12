@@ -2,27 +2,7 @@
 
 <ul class="thumbnails" id="theme_list">
   <% @themes.each do |theme| %>
-  <li class="span3 theme" id="theme-<%=theme.id%>" data-theme-id="<%=theme.id%>">
-    <div class="thumbnail">
-      <%= link_to theme do %>
-        <%= image_tag theme.screenshot.url %>
-        <!--<img src="http://placehold.it/300x225" alt="<%= theme.name %>" />-->
-      <% end %>
-      <div class="caption">
-        <h4>
-          <span class="name"><%= theme.name %></span> <span class="version"><%= theme.theme_version %></span>
-        </h4>
-        <div class="btn-toolbar">
-          <div class="btn-group">
-            <a class="btn btn-mini btn-primary update-theme-button" id="update-<%=theme.id%>" href="#">new version</a>
-
-            <%= link_to 'delete theme', theme_path(theme), method: :delete,
-                confirm: 'Are you sure?', class: 'btn btn-mini btn-danger' %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </li>
+    <%= render theme %>
   <% end %>
 
   <li class="span3">
@@ -35,50 +15,50 @@
 <% content_for(:head) do %>
   <%= stylesheet_link_tag 'jquery.plupload.queue' %>
 <% end %>
+
 <% content_for(:javascript) do %>
-<%= javascript_include_tag "plupload.full", "jquery.plupload.queue" %>
-<%= javascript_include_tag "theme_uploader" %>
-<script type="text/javascript">
-  var uploader = null;
+  <%= javascript_include_tag "plupload.full", "jquery.plupload.queue" %>
+  <%= javascript_include_tag "theme_uploader" %>
 
-  <% session_key_name = Rails.application.config.session_options[:key] %>
-  var uploaderSettings = {
-        '_http_accept': 'application/javascript',
-        'authenticity_token' : '<%= form_authenticity_token %>',
-        '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
-  };
-  jQuery(document).ready(function() {
-    var $new_theme = $('#upload_new_theme_file > img');
+  <script type="text/javascript">
+    var uploader = null;
 
-    uploader = new plupload.Uploader({
-      runtimes: 'html5, flash, silverlight',
-      url: '<%= themes_path %>',
-      max_file_size: '10mb',
-      container: 'upload_theme',
-      multiple_queues: false,
-      browse_button: 'upload_new_theme_file',
-      multipart: true,
-      multipart_params: uploaderSettings,
-      filters: [
-        {title: "Compressed theme file", extensions: "zip"}
-      ],
+    <% session_key_name = Rails.application.config.session_options[:key] %>
+    var uploaderSettings = {
+          '_http_accept': 'application/javascript',
+          'authenticity_token' : '<%= form_authenticity_token %>',
+          '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
+    };
+    jQuery(document).ready(function() {
+      var $new_theme = $('#upload_new_theme_file > img');
+
+      uploader = new plupload.Uploader({
+        runtimes: 'html5, flash, silverlight',
+        url: '<%= themes_path %>',
+        max_file_size: '10mb',
+        container: 'upload_theme',
+        multiple_queues: false,
+        browse_button: 'upload_new_theme_file',
+        multipart: true,
+        multipart_params: uploaderSettings,
+        filters: [
+          {title: "Compressed theme file", extensions: "zip"}
+        ],
+      });
+
+      uploader.init();
+
+      uploader.bind('FileUploaded', function(up, file, info) {
+        eval(info.response);
+        $new_theme.attr('src', 'http://placehold.it/300x313&text=new+theme');
+      });
+
+      uploader.bind('FilesAdded', function(up, files) {
+        $new_theme.attr('src', 'http://placehold.it/300x313&text=uploading...');
+        uploader.start();
+      });
     });
-
-    uploader.init();
-
-    uploader.bind('FileUploaded', function(up, file, info) {
-      themeMy.themeForm.handleCreate(info);
-      $new_theme.attr('src', 'http://placehold.it/300x313&text=new+theme');
-    });
-
-    uploader.bind('FilesAdded', function(up, files) {
-      $new_theme.attr('src', 'http://placehold.it/300x313&text=uploading...');
-      uploader.start();
-    });
-
-
-  });
-</script>
+  </script>
 <% end %>
 
 <div id="upload_theme">

@@ -1,0 +1,20 @@
+<li class="span3 theme" id="theme-<%=theme.id%>" data-theme-id="<%=theme.id%>" data-update-path="<%=escape_javascript(theme_path(theme))%>">
+  <div class="thumbnail">
+    <%= link_to theme do %>
+      <%= image_tag theme.screenshot.url %>
+    <% end %>
+    <div class="caption">
+      <h4>
+        <span class="name"><%= theme.name %></span> <span class="version"><%= theme.theme_version %></span>
+      </h4>
+      <div class="btn-toolbar">
+        <div class="btn-group">
+          <a class="btn btn-mini btn-primary update-theme-button" id="update-<%=theme.id%>" href="#">new version</a>
+
+          <%= link_to 'delete theme', theme_path(theme), method: :delete,
+              confirm: 'Are you sure?', class: 'btn btn-mini btn-danger' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

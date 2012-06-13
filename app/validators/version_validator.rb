@@ -7,7 +7,7 @@ class VersionValidator < ActiveModel::EachValidator
       record.errors.add(attribute, :incorrect_version_number_format)
     elsif record.send("#{attribute}_changed?")
       if !old_value.nil? && !old_value.blank? && PHPVersioning.compare(old_value, new_value) == 1
-        record.errors.add(:theme_version, :not_higher_version_number)
+        record.errors.add(attribute, :not_higher_version_number)
       end
     end
   end

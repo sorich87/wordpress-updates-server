@@ -68,6 +68,20 @@ FactoryGirl.define do
     end
   end
 
+  factory :extension do
+    name                { Forgery(:lorem_ipsum).title }
+    uri                 "http://awesome.example.com"
+    description         { Forgery(:lorem_ipsum).sentence }
+    extension_version   "0.1.0"
+    license             "MIT License"
+    license_uri         "http://license.example.com"
+    tags                ['awesome', 'nice', 'pretty']
+
+    factory :extension_in_business do
+      business
+    end
+  end
+
   factory :site do
     domain_name { Forgery(:internet).domain_name }
     customer

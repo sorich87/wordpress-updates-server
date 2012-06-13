@@ -15,7 +15,7 @@ class Extension
   field :screenshot_file_size,    :type => Integer
   field :screenshot_updated_at,   :type => DateTime
 
-  validates_presence_of [:name, :business_id]
+  validates_presence_of [:name, :current_version, :business, :versions]
   validates_uniqueness_of :name, :scope => :business_id
   validates :name, :on => :update, :immutable => true
   validates :current_version, :version => true

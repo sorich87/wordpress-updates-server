@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Theme do 
+describe Theme do
   before do
     @business = FactoryGirl.create(:business)
   end
@@ -11,7 +11,8 @@ describe Theme do
       file = File.new(filename)
       tempfile = ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file))
       tp = ThemeParser.new(file)
-      theme = @business.themes.new( tp.attributes.merge(archive:  tempfile) )
+      theme = @business.themes.new( name: tp.attributes[:theme_name],
+                                        new_version: tp.attributes.merge(attachment: tempfile) )
       theme.screenshot.should be_present
     end
   end

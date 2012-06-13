@@ -50,7 +50,7 @@ describe ThemeParser do
                     'or photobloggers. Responsive layout, optimized for mobile browsing (iPhone and iPad). '\
                     'Ideal for sites where images are the main type of content. The customization options '\
                     'include theme settings page, custom background, custom header.',
-      theme_version:'0.1.8',
+      version:'0.1.8',
       author:       'Galin Simeonov',
       author_uri:   'http://devpress.com',
       tags:         %w{flexible-width theme-options threaded-comments microformats translation-ready 

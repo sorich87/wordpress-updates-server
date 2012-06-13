@@ -6,7 +6,7 @@ describe Purchase do
   it { should have_and_belong_to_many(:themes) }
 
   it { should validate_presence_of(:customer) }
-  it { should validate_presence_of(:package) }
+  it { should validate_presence_of(:package_id) }
   it { should validate_presence_of(:purchase_date) }
-  it { should validate_presence_of(:themes) }
+  it { should validate_presence_of(:theme_ids) }
 end

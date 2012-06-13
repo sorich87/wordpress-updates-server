@@ -32,7 +32,7 @@ class Version
 
   validates_presence_of :version
 
-  embedded_in :theme
+  embedded_in :extension
 
   has_attached_file :attachment,
     fog_public: false,

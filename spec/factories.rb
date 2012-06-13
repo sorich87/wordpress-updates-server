@@ -54,14 +54,26 @@ FactoryGirl.define do
     email      { Forgery(:email).address }
   end
 
-  factory :theme do
-    name            { Forgery(:lorem_ipsum).title }
+  factory :version do
     uri             "http://awesome.example.com"
     description     { Forgery(:lorem_ipsum).sentence }
-    theme_version   "0.1.0"
+    version         "0.1.0"
     license         "MIT License"
     license_uri     "http://license.example.com"
     tags            ['awesome', 'nice', 'pretty']
+  end
+
+  factory :theme do
+    name            { Forgery(:lorem_ipsum).title }
+    current_version "0.1.0"
+
+    ignore do
+      versions_count 1
+    end
+
+    after(:build) do |theme, evaluator|
+      FactoryGirl.create_list(:version, evaluator.versions_count, extension: theme)
+    end
 
     factory :theme_in_business do
       business
@@ -70,12 +82,15 @@ FactoryGirl.define do
 
   factory :extension do
     name                { Forgery(:lorem_ipsum).title }
-    uri                 "http://awesome.example.com"
-    description         { Forgery(:lorem_ipsum).sentence }
-    extension_version   "0.1.0"
-    license             "MIT License"
-    license_uri         "http://license.example.com"
-    tags                ['awesome', 'nice', 'pretty']
+    current_version "0.1.0"
+
+    ignore do
+      versions_count 1
+    end
+
+    after(:build) do |extension, evaluator|
+      FactoryGirl.create_list(:version, evaluator.versions_count, extension: extension)
+    end
 
     factory :extension_in_business do
       business

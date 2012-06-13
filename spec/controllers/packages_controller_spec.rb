@@ -2,9 +2,10 @@ require 'spec_helper'
 
 describe PackagesController do
   sign_in_user
+  let(:theme) { create(:theme, business: @user.business) }
 
   describe 'GET #edit' do
-    let(:package) { create(:package, business: @user.business) }
+    let(:package) { create(:package, business: @user.business, theme_ids: [theme.id]) }
 
     before do
       get :edit, :id => package.id
@@ -16,8 +17,6 @@ describe PackagesController do
 
   describe 'POST #create' do
     context 'with valid attributes' do
-      let(:theme) { create(:theme, business: @user.business) }
-
       it 'saves the new package in the database' do
         expect{
           post :create, package: attributes_for(:package, theme_ids: [theme.id])
@@ -55,7 +54,10 @@ describe PackagesController do
   end
 
   describe 'PUT #update' do
-    let(:package) { create(:package, business: @user.business, name: 'Some Package', description: 'A great description') }
+    let(:package) do
+      create(:package, business: @user.business, name: 'Some Package', 
+              description: 'A great description', theme_ids: [theme.id])
+    end
 
     it "locates the requested package" do
       put :update, id: package.id, package: attributes_for(:package)
@@ -64,20 +66,22 @@ describe PackagesController do
 
     context 'with valid attributes' do
       it "change package's attributes" do
-        put :update, id: package.id, package: attributes_for(:package, name: 'A Package')
+        put :update, id: package.id, 
+                     package: attributes_for(:package, name: 'A Package', theme_ids: [theme.id])
         package.reload
         package.name.should == 'A Package'
       end
 
       it 'redirects to the packages page' do
-        put :update, id: package.id, package: attributes_for(:package)
+        put :update, id: package.id, package: attributes_for(:package, theme_ids: [theme.id])
         response.should redirect_to packages_path
       end
     end
 
     context 'with invalid attributes' do
       it "does not change package's attributes" do
-        put :update, id: package.id, package: attributes_for(:package, name: 'A Broken Package', description: nil)
+        put :update, id: package.id, 
+                     package: attributes_for(:package, name: 'A Broken Package', description: nil)
         package.reload
         package.name.should_not == 'A Broken Package'
         package.description.should == 'A great description'
@@ -91,7 +95,7 @@ describe PackagesController do
   end
 
   describe 'DELETE #destroy' do
-    let!(:package) { create(:package, business: @user.business) }
+    let!(:package) { create(:package, business: @user.business, theme_ids: [theme.id]) }
 
     it 'deletes the package from the database' do
       expect{

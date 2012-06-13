@@ -30,26 +30,13 @@ describe ThemesController do
     describe 'a theme with previous versions' do
       before do
         theme.update_attributes(theme_version: '0.2.0')
-        @first_version = theme.versions[0]
+        theme.reload
+        @first_version = theme.versions[-1]
+        get :show, id: theme.id
       end
 
-      describe 'when requesting the latest version' do
-        before do
-          get :show, id: theme.id
-        end
-
-        it { should assign_to(:older_versions).with([@first_version]) }
-      end
-
-      describe 'when requesting the previous version' do
-        before do
-          get :show, id: theme.id, version: @first_version.version
-        end
-
-        it { should assign_to(:parent_theme).with(theme) }
-        it { should assign_to(:theme).with(@first_version) }
-        it { should assign_to(:newer_versions).with([theme])}
-      end
+      it { should assign_to(:theme).with(theme) }
+      it { should assign_to(:older_versions).with([@first_version]) }
     end
   end
 end

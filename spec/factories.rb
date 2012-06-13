@@ -33,6 +33,7 @@ FactoryGirl.define do
     billing           Package::BILLING[:subscription]
     validity          { Forgery(:basic).number(at_least: 0) }
     business
+    theme_ids         { [] }
 
     ignore do
       themes_count 3

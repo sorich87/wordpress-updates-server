@@ -1,14 +1,14 @@
-<h2 class="page-header"><%= @theme.name %> <%= @theme.theme_version %></h2>
+<h2 class="page-header"><%= @theme.name %> <%= @theme.current_version %></h2>
 
-<% attributes = [:theme_version, :uri, :author, :author_uri, :description,
+<% attributes = [:version, :uri, :author, :author_uri, :description,
                  :license, :license_uri, :status, :template] %>
 
 <div class="row">
   <ul class="span6 ">
     <% attributes.each do |attr| %>
-      <% unless @theme.read_attribute(attr).nil? %>
+      <% unless @theme.versions.current.read_attribute(attr).nil? %>
       <li>
-        <%= Theme.human_attribute_name(attr) %>: <%= @theme.read_attribute(attr) %>
+        <%= Theme.human_attribute_name(attr) %>: <%= @theme.versions.current.read_attribute(attr) %>
       </li>
       <% end %>
     <% end %>
@@ -31,20 +31,20 @@
 </ul>
 <% end %>
 
-<% unless @older_versions.empty? %>
+<% unless @versions.empty? %>
 <hr />
 
-<h3>Older versions</h3>
+<h3>All Versions</h3>
 <ul>
-  <% @older_versions.each do |version| %>
+  <% @versions.each do |version| %>
     <li>
-      <%= "#{version.name} #{version.theme_version}" %>
-      <%= link_to version.archive.url do %>
+      <%= version.version %>
+      <%= link_to version.attachment.url do %>
          <i class="icon-download-alt"></i>
       <% end %>
-      <%= link_to version_theme_path(@theme, version.version), method: :delete, confirm: "Are you sure?" do %>
+      <%# link_to versions_path(@theme, version.version), method: :delete, confirm: "Are you sure?" do %>
         <i class="icon-remove"></i>
-      <% end %> 
+      <%# end %>
     </li>
   <% end %>
 </ul>

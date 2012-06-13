@@ -12,7 +12,7 @@ String.prototype.capitalize = ->
   ui: {}
 }
 
-themeMy.ui.createFlashMessage = (message, type='info') ->
+themeMy.ui.createFlashMessage = (message, type='notice') ->
   $flashHTML = $('
     <div class="alert alert-'+type+'">    
     </div>'

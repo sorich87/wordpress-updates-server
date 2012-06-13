@@ -9,16 +9,15 @@ gem 'simple_form', '~> 2.0.0'
 gem 'country_select', '~> 0.0.1'
 gem 'simple-navigation', '~> 3.0'
 gem 'devise', '~> 2.0'
-gem 'mongoid-paperclip', :require => "mongoid_paperclip"
+gem 'paperclip', '~> 3.0'
 gem 'jquery-rails'
 gem 'kaminari', '~> 0.13'
+gem 'fog', '~> 1.3.0'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
   gem 'therubyracer', :platform => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 end
 

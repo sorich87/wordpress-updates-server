@@ -1,0 +1,18 @@
+development:
+  aws_access_key_id: 'AKIAJJWCERXLBPMNAGGA'
+  aws_secret_access_key: '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'
+  provider: 'AWS'
+  region: 'us-east-1'
+
+test:
+  aws_access_key_id: 'AKIAJJWCERXLBPMNAGGA'
+  aws_secret_access_key: 'SdfwkoDDs7vZRdUg9zXNvrHUF4GY8nqXCrfGN4hp'
+  provider: 'AWS'
+  region: 'us-east-1'
+
+# set these environment variables on your prod server
+production:
+  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  provider: 'AWS'
+  region: <%= ENV['AWS_REGION'] %>

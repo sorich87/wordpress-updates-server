@@ -41,6 +41,8 @@ en:
     attributes:
       theme:
         name: Name
+        current_version: Current Version
+      version:
         uri: URI
         author: Author
         author_uri: Author URI

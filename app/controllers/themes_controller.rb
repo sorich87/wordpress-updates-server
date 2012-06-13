@@ -2,7 +2,7 @@ class ThemesController < ApplicationController
   def show
     @theme = @business.themes.find(params[:id])
     @packages = @theme.packages.includes(:purchases)
-    @older_versions = @theme.get_older_versions_than (@theme)
+    @versions = @theme.versions
   end
 
   def index
@@ -15,7 +15,8 @@ class ThemesController < ApplicationController
     respond_to do |format|
       format.js do
         if @tp.valid?
-          @theme = @business.themes.new(@tp.attributes.merge(archive: params[:file]))
+          @theme = @business.themes.new(name: @tp.attributes[:theme_name],
+                                        new_version: @tp.attributes.merge(attachment: params[:file]))
           unless @theme.save
             @errors = @theme.errors
           end
@@ -39,7 +40,7 @@ class ThemesController < ApplicationController
     @theme = @business.themes.find(params[:id])
 
     requested_version = params[:version].to_i
-    if @theme.deactivate_version!(requested_version)
+    if @theme.archives.where(version: requested_version)
       flash[:notice] = "Version deleted."
       redirect_to @theme
     else

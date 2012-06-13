@@ -3,7 +3,7 @@ require 'sanitize'
 
 class CSSParser
   FIELDS = [
-    :theme_name, :theme_uri, :description, :theme_version,
+    :theme_name, :theme_uri, :description, :version,
     :license, :license_uri, :tags, :author, :author_uri,
     :template, :status
   ]
@@ -47,15 +47,12 @@ class CSSParser
     matches = %r/\s?\*?\s?([a-zA-Z ]*): (.+)/.match(line)
 
     return if matches.nil?
-    
+
     type = matches[1]
     value = matches[2]
 
     type = type.downcase.gsub(' ', '_').to_sym
     value = strip(value)
-
-
-    type = :theme_version if type == :version
 
     if type == :tags
       @@theme[:tags] ||= []
@@ -110,7 +107,7 @@ class CSSParser
   end
 
   private
-  
+
   def strip(line)
     # TODO: Add HTML whitelist
     line.strip!

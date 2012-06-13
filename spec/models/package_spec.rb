@@ -11,13 +11,13 @@ describe Package do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:description) }
   it { should validate_presence_of(:price) }
-  it { should validate_presence_of(:number_of_themes) }
+  it { should validate_presence_of(:number_of_extensions) }
   it { should validate_presence_of(:number_of_domains) }
   it { should validate_presence_of(:billing) }
   it { should validate_presence_of(:validity) }
 
   it { should validate_numericality_of(:number_of_domains) }
-  it { should validate_numericality_of(:number_of_themes) }
+  it { should validate_numericality_of(:number_of_extensions) }
   it { should validate_numericality_of(:price) }
   it { should validate_numericality_of(:validity) }
 
@@ -27,7 +27,7 @@ describe Package do
 
   it { should belong_to(:business) }
   it { should have_many(:purchases) }
-  it { should have_and_belong_to_many(:themes) }
+  it { should have_and_belong_to_many(:extensions) }
 
   context "helpers" do
     it 'should respond to validity methods' do

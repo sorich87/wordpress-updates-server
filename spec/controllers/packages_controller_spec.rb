@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe PackagesController do
   sign_in_user
-  let(:theme) { create(:theme, business: @user.business) }
+  let(:extension) { create(:extension, business: @user.business) }
 
   describe 'GET #edit' do
-    let(:package) { create(:package, business: @user.business, theme_ids: [theme.id]) }
+    let(:package) { create(:package, business: @user.business, extension_ids: [extension.id]) }
 
     before do
       get :edit, :id => package.id
@@ -19,12 +19,12 @@ describe PackagesController do
     context 'with valid attributes' do
       it 'saves the new package in the database' do
         expect{
-          post :create, package: attributes_for(:package, theme_ids: [theme.id])
+          post :create, package: attributes_for(:package, extension_ids: [extension.id])
         }.to change(Package,:count).by(1)
       end
 
       it 'redirects to the packages page' do
-        post :create, package: attributes_for(:package, theme_ids: [theme.id])
+        post :create, package: attributes_for(:package, extension_ids: [extension.id])
         response.should redirect_to packages_path
       end
     end
@@ -56,7 +56,7 @@ describe PackagesController do
   describe 'PUT #update' do
     let(:package) do
       create(:package, business: @user.business, name: 'Some Package', 
-              description: 'A great description', theme_ids: [theme.id])
+              description: 'A great description', extension_ids: [extension.id])
     end
 
     it "locates the requested package" do
@@ -67,13 +67,13 @@ describe PackagesController do
     context 'with valid attributes' do
       it "change package's attributes" do
         put :update, id: package.id, 
-                     package: attributes_for(:package, name: 'A Package', theme_ids: [theme.id])
+                     package: attributes_for(:package, name: 'A Package', extension_ids: [extension.id])
         package.reload
         package.name.should == 'A Package'
       end
 
       it 'redirects to the packages page' do
-        put :update, id: package.id, package: attributes_for(:package, theme_ids: [theme.id])
+        put :update, id: package.id, package: attributes_for(:package, extension_ids: [extension.id])
         response.should redirect_to packages_path
       end
     end
@@ -95,7 +95,7 @@ describe PackagesController do
   end
 
   describe 'DELETE #destroy' do
-    let!(:package) { create(:package, business: @user.business, theme_ids: [theme.id]) }
+    let!(:package) { create(:package, business: @user.business, extension_ids: [extension.id]) }
 
     it 'deletes the package from the database' do
       expect{

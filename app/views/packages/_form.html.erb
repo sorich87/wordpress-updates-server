@@ -23,16 +23,17 @@
     <p class="help-inline">Number of months the customer gets updates for. 0 unlimited.</p>
   <% end %>
 
-  <%= f.association :themes, as: :check_boxes, collection: @business.themes.all %>
+  <%= f.association :extensions, label: 'Themes',
+    as: :check_boxes, collection: @business.themes.all %>
 
-  <%= f.input :number_of_themes, label: 'Number of Themes' do %>
-    <%= f.input_field :number_of_themes, class: 'input-mini' %>
-    <p class="help-inline">Number of themes the customer gets at once after buying this package. 0 for all themes.</p>
+  <%= f.input :number_of_extensions, label: 'Number of Extensions' do %>
+    <%= f.input_field :number_of_extensions, class: 'input-mini' %>
+    <p class="help-inline">Number of themes and plugins the customer gets at once after buying this package. 0 for all themes and/or plugins selected above.</p>
   <% end %>
 
   <%= f.input :number_of_domains, label: 'Number of Domains' do %>
     <%= f.input_field :number_of_domains, class: 'input-mini' %>
-    <p class="help-inline">Number of domains the customer can install the themes on. 0 for unlimited.</p>
+    <p class="help-inline">Number of domains the customer can install the themes and/or plugins on. 0 for unlimited.</p>
   <% end %>
 
   <div class="form-actions">

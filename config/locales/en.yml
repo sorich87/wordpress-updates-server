@@ -6,11 +6,11 @@ en:
         subscription: Subscription with recurring billing
 
     descriptions:
-      themes:
+      extensions:
         price_for_number:
-          one: "%{price} for 1 theme"
-          other: "%{price} for %{themes} themes"
-        price_for_all: "%{price} for all themes"
+          one: "%{price} for 1 theme or plugin"
+          other: "%{price} for %{extensions} themes and/or plugins"
+        price_for_all: "%{price} for all themes and/or plugins"
       validity:
         valid_for_months:
           one: "Valid for 1 month"

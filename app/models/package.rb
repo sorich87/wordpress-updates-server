@@ -1,29 +1,29 @@
 class Package
   include Mongoid::Document
 
-  field :name,              :type => String
-  field :description,       :type => String
-  field :price,             :type => Float
-  field :number_of_themes,  :type => Integer
-  field :number_of_domains, :type => Integer
-  field :billing,           :type => Integer
-  field :validity,          :type => Integer
+  field :name,                 :type => String
+  field :description,          :type => String
+  field :price,                :type => Float
+  field :number_of_extensions, :type => Integer
+  field :number_of_domains,    :type => Integer
+  field :billing,              :type => Integer
+  field :validity,             :type => Integer
 
   belongs_to :business
   has_many :purchases
-  has_and_belongs_to_many :themes
+  has_and_belongs_to_many :extensions
 
   BILLING = {
     :one_time_payment => 0,
     :subscription => 1
   }
 
-  attr_accessible :name, :description, :price, :number_of_themes, :number_of_domains, :billing, :validity, :theme_ids
+  attr_accessible :name, :description, :price, :number_of_extensions, :number_of_domains, :billing, :validity, :extension_ids
 
-  validates_presence_of [:name, :description, :price, :number_of_themes, :number_of_domains, :billing, :validity, :business, :theme_ids]
+  validates_presence_of [:name, :description, :price, :number_of_extensions, :number_of_domains, :billing, :validity, :business, :extension_ids]
 
   validates_numericality_of :number_of_domains, greater_than_or_equal_to: 0, only_integers: true
-  validates_numericality_of :number_of_themes, greater_than_or_equal_to: 0, only_integers: true
+  validates_numericality_of :number_of_extensions, greater_than_or_equal_to: 0, only_integers: true
   validates_numericality_of :price, greater_than_or_equal_to: 0
   validates_numericality_of :validity, greater_than_or_equal_to: 0, only_integers: true
 
@@ -44,5 +44,9 @@ class Package
 
   def price
     "%.2f" % read_attribute(:price) unless read_attribute(:price).nil?
+  end
+
+  def themes
+    extensions.where(_type: "Theme")
   end
 end

@@ -6,13 +6,13 @@ module PackageHelper
     end
   end
 
-  def package_theme_price_description(package)
+  def package_extension_price_description(package)
     price = number_to_currency(package.price, precision: 2)
-    case package.number_of_themes
+    case package.number_of_extensions
     when 0
-      I18n.t :price_for_all, scope: [:packages, :descriptions, :themes], price: price
+      I18n.t :price_for_all, scope: [:packages, :descriptions, :extensions], price: price
     else
-      I18n.t :price_for_number, scope: [:packages, :descriptions, :themes], price: price, themes: package.number_of_themes, count: package.number_of_themes
+      I18n.t :price_for_number, scope: [:packages, :descriptions, :extensions], price: price, extensions: package.number_of_extensions, count: package.number_of_extensions
     end
   end
 

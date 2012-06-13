@@ -25,15 +25,15 @@ FactoryGirl.define do
   end
 
   factory :package do
-    name              { Forgery(:lorem_ipsum).title }
-    description       { Forgery(:lorem_ipsum).sentence }
-    price             { Forgery(:monetary).money }
-    number_of_themes  { Forgery(:basic).number(at_least: 0) }
-    number_of_domains { Forgery(:basic).number(at_least: 0) }
-    billing           Package::BILLING[:subscription]
-    validity          { Forgery(:basic).number(at_least: 0) }
+    name                 { Forgery(:lorem_ipsum).title }
+    description          { Forgery(:lorem_ipsum).sentence }
+    price                { Forgery(:monetary).money }
+    number_of_extensions { Forgery(:basic).number(at_least: 0) }
+    number_of_domains    { Forgery(:basic).number(at_least: 0) }
+    billing              Package::BILLING[:subscription]
+    validity             { Forgery(:basic).number(at_least: 0) }
     business
-    theme_ids         { [] }
+    extension_ids        { [] }
 
     ignore do
       themes_count 3

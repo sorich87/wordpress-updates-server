@@ -9,9 +9,8 @@ Feature: Designer adds a customer
 
   Scenario: Successful addition of a customer
     When I add a new customer to my account
-    Then I should be on the customers management page
+    Then I should be on the customer's purchases page
     And I should see a success message
-    And I should see the customer in the list
 
   Scenario: Customer exists
     When I there is a customer in my account

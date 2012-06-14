@@ -56,7 +56,9 @@ class Api::V1::SitesController < Api::V1::BaseController
                                    author: installed_theme["Author"],
                                    author_uri: installed_theme["Author URI"])
         if version
-          themes[slug] = Hash["package" => root_url.concat(t.archive.url), "new_version" => t.theme_version, "url" => t.uri]
+          themes[slug] = Hash["package" => root_url.concat(t.archive.url),
+                              "new_version" => t.theme_version,
+                              "url" => download_theme_url(t)]
         end
       end
     end

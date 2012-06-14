@@ -9,8 +9,8 @@
       </h4>
       <div class="btn-toolbar">
         <div class="btn-group">
-          <a class="btn btn-mini btn-primary update-theme-button" id="update-<%=theme.id%>" href="#">new version</a>
-
+          <%= link_to 'view details', theme_path(theme), class: 'btn btn-mini' %>
+          <%= link_to 'new version', '#', class: 'btn btn-mini update-theme-button', id: "update-#{theme.id}" %>
           <%= link_to 'delete theme', theme_path(theme), method: :delete,
               confirm: 'Are you sure?', class: 'btn btn-mini btn-danger' %>
         </div>

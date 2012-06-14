@@ -1,6 +1,6 @@
 Given /^there is one package$/ do
   @theme = FactoryGirl.create(:theme, name: "A Theme", business: @user.business)
-  @package = FactoryGirl.create(:package, business: @business, themes: [@theme])
+  @package = FactoryGirl.create(:package, business: @business, extension_ids: [@theme.id])
 end
 
 When /^I go to the edit package page$/ do
@@ -14,7 +14,7 @@ Then /^I see the package details filled in the fields$/ do
   find_field('Validity').value.should == "#{@package.validity}"
   find_field('Subscription with recurring billing').should be_checked
   find_field('A Theme').should be_checked
-  find_field('Number of Themes').value.should == "#{@package.number_of_themes}"
+  find_field('Number of Extensions').value.should == "#{@package.number_of_extensions}"
   find_field('Number of Domains').value.should == "#{@package.number_of_domains}"
 end
 

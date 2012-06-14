@@ -4,7 +4,7 @@ class Extension
   include Paperclip
   include Paperclip::Glue
 
-  before_save :set_current_version
+  before_validation :set_current_version
 
   field :name,            type: String
   field :current_version, type: String
@@ -37,16 +37,22 @@ class Extension
 
   alias_attribute :theme_name, :name
 
+  def download_url(version = nil, expires = nil)
+    version ||= versions.current
+    version = versions.where(version: version).first unless version.is_a?(Version)
+    version.download_url(expires)
+  end
+
   # Interrupt the assignment of the attachment and grab the tempfile
   # so we can extract the screenshot from it.
   def new_version=(value)
     grab_screenshot_from_zip(value)
-    versions = versions || []
-    versions << value
-    self.versions = versions
+    self.versions.new(value)
   end
 
+  private
+
   def set_current_version
-    self.current_version = versions.last.version
+    self.current_version = self.versions.last.version
   end
 end

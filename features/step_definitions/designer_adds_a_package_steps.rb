@@ -10,7 +10,7 @@ When /^I add a package$/ do
   fill_in "Price", with: @package[:price]
   fill_in "Validity", with: @package[:validity]
   choose "One time payment"
-  fill_in "Number of Themes", with: @package[:number_of_themes]
+  fill_in "Number of Extensions", with: @package[:number_of_extensions]
   fill_in "Number of Domains", with: @package[:number_of_domains]
   check @theme.name
   click_on "Save Package"

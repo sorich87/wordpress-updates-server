@@ -59,3 +59,5 @@ en:
           attributes:
             name:
               immutable_attribute: cannot be changed after creation
+            current_version:
+              not_higher_version_number: cannot be higher than or the same as the new version

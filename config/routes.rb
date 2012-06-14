@@ -14,8 +14,10 @@ ThemeMy::Application.routes.draw do
     member do
       # Because plupload does not support PUT requests (POST is hardcoded into it)
       post :update
-      delete ':version', :action => :destroy_version, :as => 'version', :constraints => {:version => /\d+/}
+      get '/download', to: :download
     end
+
+    resources :versions, only: :destroy
   end
 
   resources :packages

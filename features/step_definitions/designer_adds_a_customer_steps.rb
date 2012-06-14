@@ -2,6 +2,11 @@ Then /^I should be on the customers management page$/ do
   current_path.should == customers_path
 end
 
+Then /^I should be on the customer's purchases page$/ do
+  customer = Customer.where(email: "drew.allis@myemail.email").first
+  current_path.should == customer_purchases_path(customer)
+end
+
 When /^I go to the add customer page$/ do
   visit new_customer_path
 end
@@ -13,12 +18,6 @@ end
 
 Then /^I should see a success message$/ do
   page.should have_content "Customer saved"
-end
-
-Then /^I should see the customer in the list$/ do
-  within "#customers-table" do
-    page.should have_content "drew.allis@myemail.email"
-  end
 end
 
 When /^I there is a customer in my account$/ do

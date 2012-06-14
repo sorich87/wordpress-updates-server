@@ -13,6 +13,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find_or_initialize_by(email: customer_params[:email])
 
     if @customer.business_ids.include?(@business.id)
+      @customer = @business.customers.new(email: customer_params[:email])
       @customer.errors.add(:email, "is already taken")
       @customer._id = nil
       render :new

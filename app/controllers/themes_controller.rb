@@ -35,19 +35,6 @@ class ThemesController < ApplicationController
     redirect_to themes_path, notice: 'Theme deleted.'
   end
 
-  # We just inactive it in reality, but destroy 'makes sense'
-  def destroy_version
-    @theme = @business.themes.find(params[:id])
-
-    requested_version = params[:version].to_i
-    if @theme.archives.where(version: requested_version)
-      flash[:notice] = "Version deleted."
-      redirect_to @theme
-    else
-      flash[:notice] = "Theme version could not be found."
-    end
-  end
-
   def update
     @theme = @business.themes.find(params[:id])
     @tp = ThemeParser.new(params[:file].tempfile)
@@ -55,7 +42,7 @@ class ThemesController < ApplicationController
     respond_to do |format|
       format.js do
         if @tp.valid?
-          unless @theme.update_attributes(@tp.attributes.merge(archive: params[:file]))
+          unless @theme.update_attributes(new_version: @tp.attributes.merge(attachment: params[:file]))
             @errors = @theme.errors
           end
         else
@@ -65,5 +52,10 @@ class ThemesController < ApplicationController
         render
       end
     end
+  end
+
+  def download
+    @theme = @business.themes.find(params[:id])
+    redirect_to @theme.download_url
   end
 end

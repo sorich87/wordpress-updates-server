@@ -24,15 +24,14 @@ Then /^I should see the new theme screenshot, name and version number$/ do
 end
 
 When /^I have one theme$/ do
-  if @user.business.themes.empty? || @business.themes.where(name: 'Annotum Base').first.nil?
-    @theme = FactoryGirl.create(:theme, name: "Annotum Base", business: @user.business)
-    @theme.should be_persisted
-  end
+  @user.business.themes.destroy_all
+  @theme = FactoryGirl.create(:theme, name: "Annotum Base", business: @user.business)
+  @theme.should be_persisted
 end
 
 When /^I delete a theme and confirm deletion$/ do
-  within '#theme_list > li' do
-    handle_js_confirm accept do
+  within "#theme-#{@theme.id}" do
+    handle_js_confirm do
       click_on 'delete theme'
     end
   end
@@ -52,8 +51,8 @@ When /^I upload a new version of that theme$/ do
   input = @theme_container.find("input[type=file]")
   attach_file input[:id], theme_archive
 
-  wait_until { 
-    page.find("li#theme-#{@theme.id}")[:'data-updated'] == 'true' 
+  wait_until {
+    page.find("li#theme-#{@theme.id}")[:'data-updated'] == 'true'
   }
 end
 

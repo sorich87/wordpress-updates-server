@@ -11,7 +11,7 @@ Given /^I follow "(.*?)"$/ do |arg1|
 end
 
 Then /^I should see a success message "(.*?)"$/ do |arg1|
-  page.find('div.alert-info').should have_content(arg1)
+  page.find('div.alert-notice').should have_content(arg1)
 end
 
 When /^I select "(.*?)" as "(.*?)"$/ do |arg1, arg2|

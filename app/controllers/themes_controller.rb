@@ -1,4 +1,6 @@
 class ThemesController < ApplicationController
+  skip_before_filter :authenticate_user!, only: :download
+
   def show
     @theme = @business.themes.find(params[:id])
     @packages = @theme.packages.includes(:purchases)
@@ -55,7 +57,22 @@ class ThemesController < ApplicationController
   end
 
   def download
-    @theme = @business.themes.find(params[:id])
-    redirect_to @theme.download_url
+    if params[:auth_token]
+      authenticate_customer!
+    else
+      authenticate_user!
+    end
+
+    if current_user
+      @theme = current_user.business.themes.find(params[:id])
+    elsif current_customer
+      @theme = current_customer.themes.find { |t| t.id = params[:id] }
+    end
+
+    if @theme
+      redirect_to @theme.download_url
+    else
+      render status: 404, nothing: true
+    end
   end
 end

@@ -46,19 +46,19 @@ class Api::V1::SitesController < Api::V1::BaseController
     themes = Hash.new
 
     Theme.where(:name.in => theme_names).each do |t|
-      latest_version = t.theme_version
+      latest_version = t.current_version
       installed_theme = installed_themes[t.name]
       installed_version = installed_theme["Version"]
       slug = installed_theme["Stylesheet"]
 
       if PHPVersioning::compare(installed_version, latest_version) < 0
-        version = t.versions.where(theme_version: installed_theme["Version"],
+        version = t.versions.where(version: installed_theme["Version"],
                                    author: installed_theme["Author"],
                                    author_uri: installed_theme["Author URI"])
         if version
-          themes[slug] = Hash["package" => root_url.concat(t.archive.url),
-                              "new_version" => t.theme_version,
-                              "url" => download_theme_url(t)]
+          themes[slug] = Hash["package" => download_theme_url(t).concat("?auth_token=#{params[:auth_token]}"),
+                              "new_version" => t.current_version,
+                              "url" => t.versions.current.uri]
         end
       end
     end

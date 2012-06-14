@@ -49,7 +49,10 @@ class Customer
   end
 
   def theme_names
-    themes = purchases.current.collect { |p| p.themes }
-    themes.flatten.collect { |t| t.name }.uniq
+    themes.collect { |t| t.name }.uniq
+  end
+
+  def themes
+    themes = purchases.current.collect { |p| p.themes }.flatten
   end
 end

@@ -39,15 +39,15 @@ class PluginParser < Parser
   end
 
   def parsed?
-    if @@extracted_readme_headers == false
+    if @extracted_readme_headers == false
       puts "readme headers weren't extracted"
     end
 
-    if @@extracted_php_headers == false
+    if @extracted_php_headers == false
       puts "php headers weren't extracted"
     end
 
-    @@extracted_php_headers && @@extracted_readme_headers
+    @extracted_php_headers && @extracted_readme_headers
   end
 
   private
@@ -72,8 +72,8 @@ class PluginParser < Parser
   end
 
   def extract_headers_from_php(file_path)
-    @@extracted_php_headers ||= false
-    return if @@extracted_php_headers
+    @extracted_php_headers ||= false
+    return if @extracted_php_headers
 
     get_input_stream file_path do |php_file|
       is_comment = false
@@ -90,7 +90,7 @@ class PluginParser < Parser
           attribute = extract_attribute(line)
           unless attribute.empty?
             @attributes[attribute[0]] = attribute[1]
-            @@extracted_php_headers = true
+            @extracted_php_headers = true
           end
         end
       end
@@ -98,8 +98,8 @@ class PluginParser < Parser
   end
 
   def extract_headers_from_readme(file_path)
-    @@extracted_readme_headers ||= false
-    return if @@extracted_readme_headers # This is probably never true, but still.
+    @extracted_readme_headers ||= false
+    return if @extracted_readme_headers # This is probably never true, but still.
 
     get_input_stream file_path do |readme_file|
       last_line_was_attribute = false
@@ -110,7 +110,7 @@ class PluginParser < Parser
         attribute = extract_attribute(line)
         unless attribute.empty?
           last_line_was_attribute = true
-          @@extracted_readme_headers = true
+          @extracted_readme_headers = true
           @attributes[attribute[0]] = attribute[1]
         end
       end

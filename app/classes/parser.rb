@@ -56,15 +56,16 @@ class Parser
   def strip(line)
     # TODO: Add HTML whitelist
     line.strip!
+    # TODO: Figure out a proper way to strip when Nokogiri complains about encoding.
     Sanitize.clean(line)
   end
 
   def extract_attribute(line)
-    matches = line.match(/^\s?\*?\s?(?<attribute>[a-zA-Z ]*): (?<value>.+)$/)
+    matches = line.match(/^\s?\*?\s?(?<attribute>[a-zA-Z ]*):\s?(?<value>.+)$/)
     return [] if matches.nil?
 
     attribute = matches[:attribute].downcase.gsub(' ', '_').to_sym
-    value = strip(matches[:value].force_encoding("UTF-8"))
+    value = strip(matches[:value])
 
     ret = []
     if attribute == :tags and @FIELDS.include? attribute
@@ -92,6 +93,15 @@ class Parser
       end
     end
     all_present
+  end
+
+  def all_attributes_present?
+    @FIELDS.each do |attribute|
+      if @attributes[attribute].nil?
+        return false
+      end
+    end
+    return true
   end
 
   def add_error(attribute, error_message)

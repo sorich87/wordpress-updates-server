@@ -15,7 +15,7 @@ class Site
   index :confirmation_token
 
   validates_presence_of :domain_name
-  validates_uniqueness_of :domain_name
+  validates_uniqueness_of :domain_name, scope: :customer_id
   validates :domain_name, format: { with: /^[a-z0-9\-\.]+\.[a-z]{2,}$/i }
 
   attr_accessible :domain_name

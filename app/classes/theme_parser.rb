@@ -1,5 +1,3 @@
-require 'zip/zip'
-
 class ThemeParser
   REQUIRED_FILES = [:style, :screenshot]
 

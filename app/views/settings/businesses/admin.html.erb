@@ -4,11 +4,11 @@
   <div class="span5 well alert-error">
     <h3>Delete Account</h3>
     <p>Do you want to delete your account and all of your data, and lose everything?<br />
-    If you have a problem, please <a href="mailto:contact@thememy.com">contact us</a>
+    If you have a problem, please <a href="mailto:contact@push.ly">contact us</a>
     instead and we will help you solve it.</p>
     <p>
       <a class="btn btn-danger" href="#delete-account" data-toggle="modal">I want to delete my account</a>
-      <a class="btn" href="mailto:contact@thememy.com">Contact us</a>
+      <a class="btn" href="mailto:contact@push.ly">Contact us</a>
     </p>
   </div>
 </div>
@@ -20,7 +20,7 @@
   </div>
   <div class="modal-body">
 		<p>Deleting your account will delete all the data in your account including all the themes you uploaded.<br />
-		If you want to use ThemeMy! again in the future, you will need to start over from zero! Are you sure you want to delete your account?</p>
+		If you want to use Push.ly again in the future, you will need to start over from zero! Are you sure you want to delete your account?</p>
 
     <%= simple_form_for @business, url: settings_business_path, method: :delete, html: {id: 'delete-form'} do |f| %>
 			<label for="delete-password">Please enter your password below to confirm:</label>

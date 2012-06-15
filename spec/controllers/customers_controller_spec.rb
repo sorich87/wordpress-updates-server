@@ -24,14 +24,14 @@ describe CustomersController do
       end
 
       it "adds an existing customer to the business" do
-        customer_attributes = attributes_for(:customer)
-        @customer = Customer.create(customer_attributes)
-        post :create, customer: customer_attributes
+        @customer = create(:customer)
+        post :create, customer: { email: @customer.email }
         Business.find(@business.id).customer_ids.should include @customer.id
       end
 
       it "redirects to the customer purchases list" do
-        post :create, customer: attributes_for(:customer)
+        @customer = create(:customer)
+        post :create, customer: { email: @customer.email }
         response.should redirect_to customer_purchases_path(@customer)
       end
     end

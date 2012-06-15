@@ -12,12 +12,8 @@
   </li>
 </ul>
 
-<% content_for(:head) do %>
-  <%= stylesheet_link_tag 'jquery.plupload.queue' %>
-<% end %>
-
 <% content_for(:javascript) do %>
-  <%= javascript_include_tag "plupload.full", "jquery.plupload.queue" %>
+  <%= javascript_include_tag "plupload.full" %>
   <%= javascript_include_tag "extension_uploader" %>
 
   <script type="text/javascript">

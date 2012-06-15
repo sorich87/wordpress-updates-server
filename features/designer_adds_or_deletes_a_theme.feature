@@ -23,7 +23,7 @@ Feature: Designer adds or deletes a theme
     When I have one theme
     And I go to the themes management page
     And I upload a new version of that theme
-    Then I should see the new version number
+    Then I should see the new theme version number
     And I should see a success message "Theme updated."
 
   @javascript

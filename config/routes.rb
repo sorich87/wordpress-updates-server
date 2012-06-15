@@ -20,6 +20,16 @@ ThemeMy::Application.routes.draw do
     resources :versions, only: :destroy
   end
 
+  resources :plugins, except: :edit do
+    member do
+      # Because plupload does not support PUT requests (POST is hardcoded into it)
+      post :update
+      get '/download', to: :download
+    end
+
+    resources :versions, only: :destroy
+  end
+
   resources :packages
 
   namespace :settings do

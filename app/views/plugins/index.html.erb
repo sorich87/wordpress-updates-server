@@ -1,13 +1,13 @@
-<h1 class="page-header">Themes</h1>
+<h1 class="page-header">Plugins</h1>
 
 <ul class="thumbnails" id="extension_list">
-  <% @themes.each do |theme| %>
-    <%= render :partial => 'extensions/extension', locals: {extension: theme} %>
+  <% @plugins.each do |plugin| %>
+    <%= render :partial => 'extensions/extension', locals: {extension: plugin} %>
   <% end %>
 
   <li class="span3">
     <%= link_to '#', id: 'upload_new_extension_file' do %>
-      <img src="http://placehold.it/300x313&amp;text=new+theme" alt="New theme" />
+      <img src="http://placehold.it/300x313&amp;text=new+plugin" alt="New plugin" />
     <% end %>
   </li>
 </ul>
@@ -21,7 +21,7 @@
   <%= javascript_include_tag "extension_uploader" %>
 
   <script type="text/javascript">
-    window.pushLy.extensionForm.config.model = "theme";
+    window.pushLy.extensionForm.config.model = "plugin";
     var uploader = null;
 
     <% session_key_name = Rails.application.config.session_options[:key] %>
@@ -31,11 +31,11 @@
           '<%= session_key_name %>' : encodeURIComponent('<%= u cookies[session_key_name] %>')
     };
     jQuery(document).ready(function() {
-      var $new_theme = $('#upload_new_theme_file > img');
+      var $new_plugin = $('#upload_new_extension_file > img');
 
       uploader = new plupload.Uploader({
         runtimes: 'html5, flash, silverlight',
-        url: '<%= themes_path %>',
+        url: '<%= plugins_path %>',
         max_file_size: '10mb',
         container: 'upload_extension',
         multiple_queues: false,
@@ -43,7 +43,7 @@
         multipart: true,
         multipart_params: uploaderSettings,
         filters: [
-          {title: "Compressed theme file", extensions: "zip"}
+          {title: "Compressed plugin file", extensions: "zip"}
         ],
       });
 
@@ -51,11 +51,11 @@
 
       uploader.bind('FileUploaded', function(up, file, info) {
         eval(info.response);
-        $new_theme.attr('src', 'http://placehold.it/300x313&text=new+theme');
+        $new_plugin.attr('src', 'http://placehold.it/300x313&text=new+plugin');
       });
 
       uploader.bind('FilesAdded', function(up, files) {
-        $new_theme.attr('src', 'http://placehold.it/300x313&text=uploading...');
+        $new_plugin.attr('src', 'http://placehold.it/300x313&text=uploading...');
         uploader.start();
       });
     });

@@ -7,15 +7,15 @@ When /^I upload a new theme$/ do
   old_themes_count = page.all('ul#theme_list li.theme').length
 
   theme = File.join(Rails.root, 'spec/fixtures/themes/zips/annotum-base.zip')
-  input = page.find('#upload_theme input[type=file]')
+  input = page.find('#upload_extension input[type=file]')
   attach_file input[:id], theme
 
-  wait_until { page.all('ul#theme_list li.theme').length > old_themes_count }
+  wait_until { page.all('ul#extension_list li.theme').length > old_themes_count }
 end
 
 When /^I upload a non\-valid theme archive$/ do
   theme = File.join(Rails.root, 'spec/fixtures/themes/zips/invalid/style_missing.zip')
-  input = page.find('#upload_theme input[type=file]')
+  input = page.find('#upload_extension input[type=file]')
   attach_file input[:id], theme
 end
 
@@ -30,7 +30,7 @@ When /^I have one theme$/ do
 end
 
 When /^I delete a theme and confirm deletion$/ do
-  within "#theme-#{@theme.id}" do
+  within "#extension-#{@theme.id}" do
     handle_js_confirm do
       click_on 'delete theme'
     end
@@ -42,21 +42,21 @@ Then /^I should be on the themes management page$/ do
 end
 
 Then /^I should not see the theme anymore$/ do
-  page.should_not have_selector("#theme-#{@theme.id}")
+  page.should_not have_selector("#extension-#{@theme.id}")
 end
 
 When /^I upload a new version of that theme$/ do
   theme_archive = File.join(Rails.root, 'spec/fixtures/themes/zips/annotum-base-1.1.zip')
-  @theme_container = page.find("li#theme-#{@theme.id}")
+  @theme_container = page.find("li#extension-#{@theme.id}")
   input = @theme_container.find("input[type=file]")
   attach_file input[:id], theme_archive
 
   wait_until {
-    page.find("li#theme-#{@theme.id}")[:'data-updated'] == 'true'
+    page.find("li#extension-#{@theme.id}")[:'data-updated'] == 'true'
   }
 end
 
-Then /^I should see the new version number$/ do
+Then /^I should see the new theme version number$/ do
   version = @theme_container.find('span.version')
   version.should have_content('1.1')
 end

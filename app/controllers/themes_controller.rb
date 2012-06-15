@@ -17,15 +17,15 @@ class ThemesController < ApplicationController
     respond_to do |format|
       format.js do
         if @tp.valid?
-          @theme = @business.themes.new(name: @tp.attributes[:theme_name],
+          @extension = @business.themes.new(name: @tp.attributes[:theme_name],
                                         new_version: @tp.attributes.merge(attachment: params[:file]))
-          unless @theme.save
-            @errors = @theme.errors
+          unless @extension.save
+            @errors = @extension.errors
           end
         else
           @errors = @tp.errors
         end
-        render
+        render 'extensions/create'
       end
     end
   end
@@ -38,20 +38,20 @@ class ThemesController < ApplicationController
   end
 
   def update
-    @theme = @business.themes.find(params[:id])
+    @extension = @business.themes.find(params[:id])
     @tp = ThemeParser.new(params[:file].tempfile)
 
     respond_to do |format|
       format.js do
         if @tp.valid?
-          unless @theme.update_attributes(new_version: @tp.attributes.merge(attachment: params[:file]))
-            @errors = @theme.errors
+          unless @extension.update_attributes(new_version: @tp.attributes.merge(attachment: params[:file]))
+            @errors = @extension.errors
           end
         else
           @errors = @tp.errors
         end
 
-        render
+        render 'extensions/update'
       end
     end
   end

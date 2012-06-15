@@ -1,0 +1,10 @@
+(function(){
+  <% if !@errors.nil? && !@errors.empty? %>
+    var errors = $.parseJSON('<%= @errors.to_json.html_safe %>');
+    pushLy.extensionForm.handleUploadErrors(errors);
+  <% else %>
+    var html = '<%= escape_javascript(render :partial => "extensions/extension", locals: {extension:  @extension}) %>';
+    var $element = pushLy.extensionForm.updateExtension('<%=@extension.id%>', html);
+    pushLy.extensionForm.initExtension($element);
+  <% end %>
+})()

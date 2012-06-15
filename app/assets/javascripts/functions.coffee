@@ -8,11 +8,11 @@ String.prototype.capitalize = ->
 
 
 # Our 'namespace'
-@themeMy = {
+@pushLy = {
   ui: {}
 }
 
-themeMy.ui.createFlashMessage = (message, type='notice') ->
+pushLy.ui.createFlashMessage = (message, type='notice') ->
   $flashHTML = $('
     <div class="alert alert-'+type+'">    
     </div>'

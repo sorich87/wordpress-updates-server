@@ -80,6 +80,23 @@ FactoryGirl.define do
     end
   end
 
+  factory :plugin do
+    name            { Forgery(:lorem_ipsum).title }
+    current_version "0.1.0"
+
+    ignore do
+      versions_count 1
+    end
+
+    after(:build) do |plugin, evaluator|
+      FactoryGirl.create_list(:version, evaluator.versions_count, extension: plugin)
+    end
+
+    factory :plugin_in_business do
+      business
+    end
+  end
+
   factory :extension do
     name                { Forgery(:lorem_ipsum).title }
     current_version "0.1.0"

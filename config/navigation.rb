@@ -77,6 +77,12 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
+    primary.item :plugins, 'Plugins', plugins_path do |sub_nav|
+      unless @plugin.nil? || ! @plugin.persisted?
+        sub_nav.item :show_plugin, "#{@plugin.name} #{@plugin.current_version}", plugin_path(@plugin)
+      end
+    end
+
     primary.item :packages, 'Packages', packages_path do |sub_nav|
       unless @package.nil? || ! @package.persisted?
         sub_nav.item :edit_package, "Edit Package", edit_package_path(@package)

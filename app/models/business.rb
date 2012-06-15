@@ -5,6 +5,7 @@ class Business
   has_many :users, dependent: :delete
   has_many :packages, dependent: :delete
   has_many :themes, dependent: :delete
+  has_many :plugins, dependent: :delete
   has_and_belongs_to_many :customers
 
   field :name,      :type => String

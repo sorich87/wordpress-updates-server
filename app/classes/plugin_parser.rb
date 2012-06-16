@@ -13,14 +13,6 @@ class PluginParser < Parser
   ]
 
   def parsed?
-    if @extracted_readme_headers == false
-      puts "readme headers weren't extracted"
-    end
-
-    if @extracted_php_headers == false
-      puts "php headers weren't extracted"
-    end
-
     @extracted_php_headers && @extracted_readme_headers
   end
 

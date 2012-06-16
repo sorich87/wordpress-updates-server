@@ -25,20 +25,14 @@ describe ThemeParser do
       it 'should add an error when screenshot is missing' do
         zip_file = File.join(Rails.root, 'spec/fixtures/themes/zips/invalid/screenshot_missing.zip')
         tp = ThemeParser.new(zip_file)
-        tp.errors.should have_key(:screenshot)
+        tp.errors.should have_key(:screenshot_path_in_zip)
       end
 
-      it 'should add an error when style.css is missing' do
+      it 'should add be invalid when style.css is missing' do
         zip_file = File.join(Rails.root, 'spec/fixtures/themes/zips/invalid/style_missing.zip')
         tp = ThemeParser.new(zip_file)
-        tp.errors.should have_key(:style)
+        tp.should_not be_valid
       end
-    end
-
-    it 'should an error when the .zip is not a file' do
-      zip_file = File.join(Rails.root, 'spec/fixtures/this_file_is_mising.zip')
-      tp = ThemeParser.new(zip_file)
-      tp.errors.should have_key(:base)
     end
   end
 
@@ -60,6 +54,8 @@ describe ThemeParser do
       license_uri:  'http://www.gnu.org/licenses/gpl-2.0.html'
     }
     tp = ThemeParser.new(File.join(Rails.root, 'spec/fixtures/themes/zips/hatch.zip'))
-    tp.css.attributes.should eq(@attributes)
+    attributes = tp.attributes
+    attributes.delete(:screenshot_path_in_zip)
+    attributes.should eq(@attributes)
   end
 end

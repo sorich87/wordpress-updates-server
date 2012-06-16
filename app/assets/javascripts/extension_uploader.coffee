@@ -12,18 +12,12 @@
   return html
 
 @pushLy.extensionForm.handleUploadErrors = (errors) ->
-  $ul = $('<ul class="errors"></ul>')
-
   $.each(errors, (attribute, attribute_errors) ->
     $.each(attribute_errors, (index, error) ->
-      $li = $(
-        '<li>'+attribute.capitalize()+' '+error+
-        '</li>'
-      )
-      $li.appendTo($ul)
+      message = attribute.capitalize() + ' ' + error
+      pushLy.ui.createFlashMessage(message, 'error')
     )
   )
-  pushLy.ui.createFlashMessage($ul, 'error')
 
 @pushLy.extensionForm.updateExtension = (extension_id, html) ->
   $container = $('#extension-'+extension_id)

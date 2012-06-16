@@ -99,4 +99,3 @@ en:
         email: The email address is used to securely identify the customer and manage their permissions.
       user:
         current_password: We need your current password to confirm your changes
-        password: Leave it blank if you don't want to change it

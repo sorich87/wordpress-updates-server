@@ -28,15 +28,16 @@ class Site
     self[:secret_key] = self[:unconfirmed_secret_key]
     self[:unconfirmed_secret_key] = nil
     self[:confirmation_token] = nil
+    self[:confirmation_sent_at] = nil
     self[:confirmed_at] = Time.now.utc
     save(:validate => false)
   end
 
   def send_confirmation_instructions
     generate_confirmation_token
-    SiteMailer.confirmation_instructions(self).deliver
     self[:confirmation_sent_at] = Time.now.utc
     save(:validate => false)
+    SiteMailer.confirmation_instructions(self).deliver
   end
 
   def generate_confirmation_token

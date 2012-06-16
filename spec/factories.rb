@@ -122,6 +122,8 @@ FactoryGirl.define do
       unconfirmed_secret_key { Forgery(:basic).password }
       confirmation_token { Forgery(:basic).password }
       confirmation_sent_at Time.now.utc
+      secret_key nil
+      confirmed_at nil
     end
 
     factory :confirmed_site do

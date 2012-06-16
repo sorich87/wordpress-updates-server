@@ -4,13 +4,9 @@ class SitesController < ApplicationController
   def confirm
     unless params[:confirm_id].nil?
       @site = Site.where(confirmation_token: params[:confirm_id]).first
-      unless @site.nil?
-        @site.confirm!
-      end
+      @site.confirm! unless @site.nil?
     end
 
-    if @site.nil?
-      @site = Site.new
-    end
+    @site = Site.new if @site.nil?
   end
 end

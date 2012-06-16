@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe SitesController do
-  let!(:site) { FactoryGirl.create(:unconfirmed_site) }
+  let(:site) { FactoryGirl.create(:unconfirmed_site) }
 
   describe "GET confirm" do
     context "with valid attributes" do
@@ -14,7 +14,8 @@ describe SitesController do
       it { should render_template(:confirm)  }
 
       it "confirms the site" do
-        Site.find(site.id).confirmed?.should be_true
+        site.reload
+        site.confirmed?.should be_true
       end
     end
 

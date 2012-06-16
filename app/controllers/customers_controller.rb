@@ -5,7 +5,7 @@ class CustomersController < ApplicationController
   end
 
   def new
-    @customer = @business.customers.new
+    @customer = @business.customers.new(email: params[:email])
     @packages = @business.packages
   end
 

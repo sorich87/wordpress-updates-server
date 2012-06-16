@@ -1,0 +1,7 @@
+<p>Hello <%= @user.first_name %>!</p>
+
+<p>A customer with email "<%= @customer.email %>" want to get updates for your product "<%= @extension.name %>.</p>
+
+<p>To allow them to download the updates, please add them to your account.</p>
+
+<p><%= link_to "Add #{@customer.email} to my account", new_customer_url(email: @customer.email, auth_token: @user.authentication_token) %></p>

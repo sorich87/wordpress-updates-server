@@ -50,6 +50,10 @@ class Extension
     self.versions.new(value)
   end
 
+  def send_permission_notification(customer)
+    ExtensionMailer.permission_notification(self, customer).deliver
+  end
+
   private
 
   def set_current_version

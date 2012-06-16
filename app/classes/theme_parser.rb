@@ -18,7 +18,6 @@ class ThemeParser < Parser
   private
 
   def parse_entry(entry)
-    #puts entry unless entry.to_s[0..7] == "__MACOSX"
     if entry.name =~ /^[\w\.-]+\/[^\/]+\.css$/
       extract_headers_from_css(entry)
     elsif entry.name =~ /^[\w\.-]+\/[\w\.-]?screenshot[\w\.-]?\.(png|jpg|jpeg|gif)$/

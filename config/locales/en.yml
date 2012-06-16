@@ -75,6 +75,24 @@ en:
         themes: Themes
         number_of_extensions: Number of Extensions
         number_of_domains: Number of Domains
+      user:
+        first_name: First Name
+        last_name: Last Name
+        email: Email Address
+        current_password: Password
+        password: New Password
+        password_confirmation: Confirm New Password
+      business:
+        name: Business Name
+        email: Email Address
+      purchase:
+        package_id: Package
+        theme_ids: Themes
+        purchase_date: Purchase Date
+
     hints:
       customer:
         email: The email address is used to securely identify the customer and manage their permissions.
+      user:
+        current_password: We need your current password to confirm your changes
+        password: Leave it blank if you don't want to change it

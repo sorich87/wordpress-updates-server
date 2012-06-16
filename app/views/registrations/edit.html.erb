@@ -7,16 +7,16 @@
 
   <fieldset>
     <legend>Personal Details</legend>
-    <%= f.input :first_name, :autofocus => true, :label => "First Name" %>
-    <%= f.input :last_name, :label => "Last Name" %>
-    <%= f.input :email, :label => "Email Address" %>
-    <%= f.input :current_password, :label => "Password", :hint => "We need your current password to confirm your changes" %>
+    <%= f.input :first_name, :autofocus => true %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.input :current_password %>
   </fieldset>
 
   <fieldset>
     <legend>Change Password</legend>
-    <%= f.input :password, :label => "New Password", :autocomplete => "off", :hint => "Leave it blank if you don't want to change it" %>
-    <%= f.input :password_confirmation, :label => "Confirm New Password" %>
+    <%= f.input :password, :autocomplete => "off" %>
+    <%= f.input :password_confirmation %>
   </fieldset>
 
   <div class="form-actions">

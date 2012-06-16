@@ -11,16 +11,17 @@
       <fieldset id="business-details">
         <legend>Business details</legend>
         <%= f.simple_fields_for :business, resource.business do |g| %>
-          <%= g.input :name, :label => "Business Name", :autofocus => true %>
-          <%= g.input :email, :label => "Business Email" %>
+          <%= g.input :name, :autofocus => true %>
+          <%= g.input :email %>
         <% end %>
       </fieldset>
 
       <fieldset id="user-details">
         <legend>User details</legend>
-        <%= f.input :first_name, :label => "First Name" %>
-        <%= f.input :last_name, :label => "Last Name" %>
-        <%= f.input :email, :label => "Email Address" %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :email %>
+        <%# TODO: i18n password & confirmation (don't clash with registrations#edit)
         <%= f.input :password, :label => "Password" %>
         <%= f.input :password_confirmation, :label => "Password Again" %>
       </fieldset>

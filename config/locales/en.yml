@@ -61,3 +61,20 @@ en:
               immutable_attribute: cannot be changed after creation
             current_version:
               not_higher_version_number: cannot be higher than or the same as the new version
+
+  simple_form:
+    labels:
+      customer:
+        email: Email Address
+      package:
+        name: Package Name
+        description: Package Description
+        price: Price
+        billing: Billing
+        validity: Validity
+        themes: Themes
+        number_of_extensions: Number of Extensions
+        number_of_domains: Number of Domains
+    hints:
+      customer:
+        email: The email address is used to securely identify the customer and manage their permissions.

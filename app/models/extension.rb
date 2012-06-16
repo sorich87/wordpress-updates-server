@@ -32,6 +32,7 @@ class Extension
   accepts_nested_attributes_for :versions
 
   has_attached_file :screenshot,
+    styles: { thumb: '320x240>' },
     fog_public: true,
     path: 'extensions/:attachment/:id/:style/:filename'
 

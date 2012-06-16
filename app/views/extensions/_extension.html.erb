@@ -1,7 +1,7 @@
 <li class="span3 extension <%=extension._type.downcase%>" id="extension-<%=extension.id%>" data-extension-id="<%=extension.id%>" data-update-path="<%=escape_javascript(extension_path(extension))%>">
   <div class="thumbnail">
     <%= link_to extension do %>
-      <%= image_tag extension.screenshot.url %>
+      <%= image_tag extension.screenshot.public_url('thumb') %>
     <% end %>
     <div class="caption">
       <h4>

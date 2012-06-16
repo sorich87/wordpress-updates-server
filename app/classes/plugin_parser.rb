@@ -19,11 +19,12 @@ class PluginParser < Parser
   private
 
   def parse_entry(entry)
-    if entry.name =~ /^[\w-]+\/[^\/]+\.php$/ # http://rubular.com/r/ARxqDqI7qu
+    puts entry
+    if entry.name =~ /^[\w\.-]+\/[^\/]+\.php$/ # http://rubular.com/r/ARxqDqI7qu
       extract_headers_from_php(entry)
-    elsif entry.name.downcase =~ /^[\w-]+\/readme\.txt$/ # http://rubular.com/r/Fb5AedD7ub
+    elsif entry.name.downcase =~ /^[\w\.-]+\/readme\.txt$/ # http://rubular.com/r/Fb5AedD7ub
       extract_headers_from_readme(entry)
-    elsif entry.name =~ /^[\w-]+\/screenshot-1\.(png|jpg|jpeg|gif)$/
+    elsif entry.name =~ /^[\w\.-]+\/screenshot\.(png|jpg|jpeg|gif)$/
       @attributes[:screenshot_path_in_zip] = entry.name
     end
   end

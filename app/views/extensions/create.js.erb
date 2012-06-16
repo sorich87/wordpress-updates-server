@@ -3,7 +3,7 @@
     var errors = $.parseJSON('<%= @errors.to_json.html_safe %>');
     pushLy.extensionForm.handleUploadErrors(errors);
   <% else %>
-    var html = '<%= escape_javascript(render :partial => "extensions/extension", locals: {extension:  @extension}) %>';
+    var html = '<%= escape_javascript(render :partial => "extension", locals: {extension:  @extension}) %>';
     var $element = pushLy.extensionForm.insertNewExtension(html);
     pushLy.extensionForm.initExtension($element);
   <% end %>

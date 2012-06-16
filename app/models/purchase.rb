@@ -9,7 +9,7 @@ class Purchase
 
   field :purchase_date, type: Date
 
-  attr_accessible :package_id, :purchase_date, :theme_ids
+  attr_accessible :package_id, :purchase_date, :extension_ids
 
   validates_presence_of :customer, :package_id, :purchase_date, :extension_ids
 

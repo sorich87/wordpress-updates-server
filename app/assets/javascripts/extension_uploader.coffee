@@ -8,7 +8,7 @@
   $newButton = $('a#upload_new_extension_file')
   html = $(html).insertBefore($newButton.parent())
   html.addClass('new_extension')
-  pushLy.ui.createFlashMessage("#{pushLy.extensionForm.config.model.capitalize()} saved.")
+  pushLy.ui.createFlashMessage("#{pushLy.extensionForm.config.model} saved.")
   return html
 
 @pushLy.extensionForm.handleUploadErrors = (errors) ->
@@ -27,7 +27,7 @@
 
   new_extension = $("#extension-#{extension_id}")
 
-  pushLy.ui.createFlashMessage("#{pushLy.extensionForm.config.model.capitalize()} updated.")
+  pushLy.ui.createFlashMessage("#{pushLy.extensionForm.config.model} updated.")
   new_extension.addClass('new_extension')
   new_extension.attr('data-updated', 'true')
   return new_extension
@@ -46,7 +46,7 @@
     multipart: true,
     multipart_params: uploaderSettings,
     filters: [
-      {title: "Compressed #{pushLy.extensionForm.config.model} file", extensions: "zip"}
+      {title: "ZIP Compressed File", extensions: "zip"}
     ],
   })
 

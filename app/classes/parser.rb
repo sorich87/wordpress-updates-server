@@ -1,7 +1,8 @@
 class Parser
 
   FIELDS = []
-  REQUIRED_ATTRIBUTES = []
+  ALIASES = {}
+  REQUIRED_ATTRIBUTES = [:name, :version, :screenshot_path_in_zip]
 
   def initialize(file)
     if file.is_a? File
@@ -12,6 +13,7 @@ class Parser
 
     @FIELDS = self.class::FIELDS
     @REQUIRED_ATTRIBUTES = self.class::REQUIRED_ATTRIBUTES
+    @ALIASES = self.class::ALIASES
     @parsed = false
     @errors = {}
     @attributes = {}
@@ -33,22 +35,6 @@ class Parser
     @valid
   end
 
-  def method_missing(m)
-    if @FIELDS.include? m.to_sym
-      @attributes[m.to_sym]
-    else
-      super
-    end
-  end
-
-  def respond_to?(m)
-    if @FIELDS.include? m
-      true
-    else
-      super
-    end
-  end
-
   private
 
   def strip(line)
@@ -66,15 +52,18 @@ class Parser
     value = strip(matches[:value])
 
     ret = []
-    if attribute == :tags and @FIELDS.include? attribute
-      val = []
-      value = value.split(',')
-      value.each do |tag|
-        val << tag.strip
+    if @FIELDS.include?(attribute)
+      if attribute == :tags
+        val = []
+        value = value.split(',')
+        value.each do |tag|
+          val << tag.strip
+        end
+        value = val
       end
-      ret << attribute
-      ret << val
-    elsif @FIELDS.include? attribute
+
+      attribute = @ALIASES[attribute] if @ALIASES.keys.include?(attribute)
+
       ret << attribute
       ret << value
     end

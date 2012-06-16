@@ -48,11 +48,23 @@ class Customer
     purchases.current.collect { |p| p.package.name }.uniq
   end
 
-  def theme_names
-    themes.collect { |t| t.name }.uniq
+  def extensions
+    purchases.current.collect { |p| p.extensions }.flatten
+  end
+
+  def plugins
+    extensions.find { |e| e._type == 'Plugin' }
   end
 
   def themes
-    themes = purchases.current.collect { |p| p.themes }.flatten
+    extensions.find { |e| e._type == 'Theme' }
+  end
+
+  def plugin_names
+    plugins.collect { |p| p.name }.uniq
+  end
+
+  def theme_names
+    themes.collect { |t| t.name }.uniq
   end
 end

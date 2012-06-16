@@ -11,22 +11,16 @@ describe PluginParser do
   describe 'attributes' do
     plugin_parser = PluginParser.new(sample_file)
 
-    attributes = [:plugin_name, :plugin_uri, :description, :version, 
+    attributes = [:name, :uri, :description, :version, 
       :license, :license_uri, :tags, :author]
 
-    attributes.each do |attr|
-      it "should respond to #{attr}" do
-        plugin_parser.should respond_to(attr)
-      end
-    end
-
-    specify { plugin_parser.plugin_name.should_not be_nil }
-    specify { plugin_parser.plugin_uri.should_not be_nil }
-    specify { plugin_parser.description.should_not be_nil }
-    specify { plugin_parser.version.should_not be_nil }
-    specify { plugin_parser.license.should_not be_nil }
-    specify { plugin_parser.tags.should_not be_nil }
-    specify { plugin_parser.author.should_not be_nil }
+    specify { plugin_parser.attributes[:name].should_not be_nil }
+    specify { plugin_parser.attributes[:uri].should_not be_nil }
+    specify { plugin_parser.attributes[:description].should_not be_nil }
+    specify { plugin_parser.attributes[:version].should_not be_nil }
+    specify { plugin_parser.attributes[:license].should_not be_nil }
+    specify { plugin_parser.attributes[:tags].should_not be_nil }
+    specify { plugin_parser.attributes[:author].should_not be_nil }
 
     it 'should have an array of tags' do
       plugin_parser.attributes[:tags].is_a?(Array).should be_true
@@ -44,8 +38,8 @@ describe PluginParser do
       plugin_parser.should_not be_valid
     end
 
-    it 'should add error message to :theme_name when the theme name is missing' do
-      plugin_parser.errors.should have_key(:plugin_name)
+    it 'should add error message to :name when the name is missing' do
+      plugin_parser.errors.should have_key(:name)
     end
   end
 

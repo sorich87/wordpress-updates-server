@@ -43,5 +43,5 @@ describe Business do
   it { should have_and_belong_to_many(:customers) }
   it { should have_many(:users) }
   it { should have_many(:packages) }
-  it { should have_many(:themes) }
+  it { should have_many(:extensions) }
 end

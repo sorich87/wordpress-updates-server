@@ -1,24 +1,26 @@
-<h1 class="page-header">Themes</h1>
+<h1 class="page-header"><%= @extension._type.pluralize %></h1>
 
 <%= render_navigation :renderer => Breadcrumbs %>
 
-<h2 class="page-header"><%= @theme.name %> <%= @theme.current_version %></h2>
+<h2 class="page-header"><%= @extension.name %></h2>
 
-<% attributes = [:version, :uri, :author, :author_uri, :description,
+<% attributes = [:description, :uri, :author, :author_uri,
                  :license, :license_uri, :status, :template] %>
 
 <div class="row">
   <dl class="span6">
+    <dt>Latest Version</dt>
+    <dd><%= @extension.current_version %></dd>
     <% attributes.each do |attr| %>
-      <% unless @theme.versions.current.read_attribute(attr).nil? %>
-        <dt><%= Theme.human_attribute_name(attr) %></dt>
-        <dd><%= @theme.versions.current.read_attribute(attr) %></dd>
+      <% unless @extension.versions.current.read_attribute(attr).nil? %>
+        <dt><%= Extension.human_attribute_name(attr) %></dt>
+        <dd><%= @extension.versions.current.read_attribute(attr) %></dd>
       <% end %>
     <% end %>
   </dl>
 
   <div class="pull-right">
-    <%= image_tag @theme.screenshot %>
+    <%= image_tag @extension.screenshot %>
   </div>
 </div>
 
@@ -32,8 +34,9 @@
       <%= link_to version.download_url, title: "Download Version #{version.version}" do %>
          <i class="icon-download-alt"></i>
       <% end %>
-      <%- if @theme.current_version != version.version -%>
-        <%= link_to theme_version_path(@theme, version.id), method: :delete, confirm: "Are you sure?", title: "Delete Version #{version.version}" do %>
+      <%- if @extension.current_version != version.version -%>
+        <%= link_to extension_version_path(@extension, version.id),
+          method: :delete, confirm: "Are you sure?", title: "Delete Version #{version.version}" do %>
           <i class="icon-remove"></i>
         <% end %>
       <%- end -%>

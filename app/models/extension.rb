@@ -57,7 +57,7 @@ class Extension
   private
 
   def set_current_version
-    self[:current_version] = self.versions.last.version
+    self[:current_version] = self.versions.last.version unless current_version_changed?
   end
 
   def grab_screenshot_from_zip(value)

@@ -1,4 +1,4 @@
-<li class="span3 extension <%=extension.class.to_s.downcase%>" id="extension-<%=extension.id%>" data-extension-id="<%=extension.id%>" data-update-path="<%=escape_javascript(extension_path(extension))%>">
+<li class="span3 extension <%=extension._type.downcase%>" id="extension-<%=extension.id%>" data-extension-id="<%=extension.id%>" data-update-path="<%=escape_javascript(extension_path(extension))%>">
   <div class="thumbnail">
     <%= link_to extension do %>
       <%= image_tag extension.screenshot.url %>
@@ -11,7 +11,7 @@
         <div class="btn-group">
           <%= link_to 'view details', extension_path(extension), class: 'btn btn-mini' %>
           <%= link_to 'new version', '#', class: 'btn btn-mini update-extension-button', id: "update-#{extension.id}" %>
-          <%= link_to "delete #{extension.class.to_s.downcase}", extension_path(extension), method: :delete,
+          <%= link_to "delete #{extension._type.downcase}", extension_path(extension), method: :delete,
               confirm: 'Are you sure?', class: 'btn btn-mini btn-danger' %>
         </div>
       </div>

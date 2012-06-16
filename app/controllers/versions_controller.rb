@@ -1,12 +1,12 @@
 class VersionsController < ApplicationController
   def destroy
-    @theme = @business.themes.find(params[:theme_id])
-    if @theme.versions.count == 1
+    @extension = @business.extensions.find(params[:extension_id])
+    if @extension.versions.count == 1
       flash[:error] = "You can't delete the only one version of this theme."
     else
-      @version = @theme.versions.destroy_all(id: params[:id])
+      @extension.versions.find(params[:id]).destroy
       flash[:notice] = "Version deleted."
     end
-    redirect_to theme_path(@theme)
+    redirect_to send("#{@extension._type.downcase}_path", @extension)
   end
 end

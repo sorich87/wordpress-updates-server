@@ -71,15 +71,15 @@ SimpleNavigation::Configuration.run do |navigation|
     # You can turn off auto highlighting for a specific level
     # primary.auto_highlight = false
 
-    primary.item :themes, 'Themes', themes_path do |sub_nav|
-      unless @theme.nil? || ! @theme.persisted?
-        sub_nav.item :show_theme, "#{@theme.name} #{@theme.current_version}", theme_path(@theme)
+    primary.item :themes, 'Themes', themes_path, highlights_on: :subpath do |sub_nav|
+      unless @extension.nil? || ! @extension.persisted?
+        sub_nav.item :show_theme, @extension.name, theme_path(@extension)
       end
     end
 
-    primary.item :plugins, 'Plugins', plugins_path do |sub_nav|
-      unless @plugin.nil? || ! @plugin.persisted?
-        sub_nav.item :show_plugin, "#{@plugin.name} #{@plugin.current_version}", plugin_path(@plugin)
+    primary.item :plugins, 'Plugins', plugins_path, highlights_on: :subpath do |sub_nav|
+      unless @extension.nil? || ! @extension.persisted?
+        sub_nav.item :show_plugin, @extension.name, plugin_path(@extension)
       end
     end
 

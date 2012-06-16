@@ -16,8 +16,6 @@ ThemeMy::Application.routes.draw do
       post :update
       get '/download', to: :download
     end
-
-    resources :versions, only: :destroy
   end
 
   resources :plugins, except: :edit do
@@ -26,7 +24,9 @@ ThemeMy::Application.routes.draw do
       post :update
       get '/download', to: :download
     end
+  end
 
+  resources :extensions, only: [] do
     resources :versions, only: :destroy
   end
 

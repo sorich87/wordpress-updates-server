@@ -38,8 +38,8 @@ describe ThemeParser do
 
   it 'should get the attributes out of it' do
     @attributes = {
-      theme_name:   'Hatch',
-      theme_uri:    'http://devpress.com/shop/hatch/',
+      name:   'Hatch',
+      uri:    'http://devpress.com/shop/hatch/',
       description:  'A simple and minimal portfolio theme for photographers, illustrators, designers, '\
                     'or photobloggers. Responsive layout, optimized for mobile browsing (iPhone and iPad). '\
                     'Ideal for sites where images are the main type of content. The customization options '\

@@ -14,8 +14,15 @@
     <%= f.input :package_id, as: :radio_buttons,
       collection: @business.packages.all, value_method: :id, label_method: :name %>
 
-    <%= f.input :theme_ids, as: :check_boxes,
-      collection: @business.themes.all, value_method: :id, label_method: :name %>
+    <%- unless @business.themes.blank? -%>
+      <%= f.input :extension_ids, as: :check_boxes,
+        collection: @business.themes.all, value_method: :id, label_method: :name %>
+    <%- end -%>
+
+    <%- unless @business.plugins.blank? -%>
+      <%= f.input :extension_ids, as: :check_boxes,
+        collection: @business.plugins.all, value_method: :id, label_method: :name %>
+    <%- end -%>
 
     <%= f.input :purchase_date, input_html: { class: 'input-small' },
       as: :date, start_year: 2008, end_year: Date.today.year, order: [:day, :month, :year] %>

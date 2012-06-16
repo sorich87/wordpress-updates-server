@@ -10,6 +10,17 @@ module PurchaseHelper
     end
   end
 
+  def purchase_plugins_description(purchase)
+    plugins_count = purchase.plugins.count
+
+    if plugins_count == @business.plugins.count
+      I18n.t :all_plugins, scope: [:purchases, :descriptions]
+    else
+      I18n.t :plugins, scope: [:purchases, :descriptions],
+        themes: purchase.plugins.collect { |plugin| plugin.name }.join(", "), count: plugins_count
+    end
+  end
+
   def purchase_date_description(purchase)
     I18n.t :purchase_date, scope: [:purchases, :descriptions],
       date: purchase.purchase_date.to_formatted_s(:long)

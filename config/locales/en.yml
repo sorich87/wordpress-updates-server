@@ -31,6 +31,10 @@ en:
       themes:
         one: "Theme: %{themes}"
         other: "Themes: %{themes}"
+      all_plugins: "All plugins"
+      plugins:
+        one: "Plugin: %{plugins}"
+        other: "Plugins: %{plugins}"
       purchase_date: "Purchased on %{date}"
       expiration:
         no_expiration: "No expiration"

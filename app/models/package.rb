@@ -49,4 +49,8 @@ class Package
   def themes
     extensions.where(_type: "Theme")
   end
+
+  def plugins
+    extensions.where(_type: "Plugin")
+  end
 end

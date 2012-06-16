@@ -22,7 +22,7 @@ class PurchasesController < ApplicationController
       redirect_to customer_purchases_path(@customer)
     else
       flash[:error] = "Error saving purchase."
-      render :new
+      render :edit
     end
   end
 

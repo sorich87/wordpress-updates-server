@@ -11,7 +11,7 @@ class Purchase
 
   attr_accessible :package_id, :purchase_date, :theme_ids
 
-  validates_presence_of :customer, :package_id, :purchase_date
+  validates_presence_of :customer, :package_id, :purchase_date, :extension_ids
 
   def expiration_date
     purchase_date >> package.validity unless package.is_valid_for_life?

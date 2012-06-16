@@ -15,12 +15,12 @@
       collection: @business.packages.all, value_method: :id, label_method: :name %>
 
     <%- unless @business.themes.blank? -%>
-      <%= f.input :extension_ids, as: :check_boxes,
+      <%= f.input :extension_ids, as: :check_boxes, label: "Themes",
         collection: @business.themes.all, value_method: :id, label_method: :name %>
     <%- end -%>
 
     <%- unless @business.plugins.blank? -%>
-      <%= f.input :extension_ids, as: :check_boxes,
+      <%= f.input :extension_ids, as: :check_boxes, label: "Plugins",
         collection: @business.plugins.all, value_method: :id, label_method: :name %>
     <%- end -%>
 

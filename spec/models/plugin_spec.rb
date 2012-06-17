@@ -11,7 +11,7 @@ describe Plugin do
       file = File.new(filename)
       tempfile = ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file))
       pp = PluginParser.new(file)
-      plugin = @business.plugins.new( name: pp.attributes[:theme_name],
+      plugin = @business.plugins.new( name: pp.attributes[:name],
                                         new_version: pp.attributes.merge(attachment: tempfile) )
       plugin.screenshot.should be_present
     end

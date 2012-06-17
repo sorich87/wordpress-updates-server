@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe ThemesController do
+describe ExtensionsController do
   sign_in_user
 
   let!(:extension) { create(:theme, business: @business) }
 
   describe 'GET #index' do
     before do
-      get :index
+      get :index, model: "Theme"
     end
 
     it { should assign_to(:extensions).with([extension]) }
@@ -16,7 +16,7 @@ describe ThemesController do
 
   describe 'GET #show' do
     before do
-      get :show, id: extension.id
+      get :show, model: "Theme", id: extension.id
     end
 
     it { should assign_to(:extension).with(extension) }

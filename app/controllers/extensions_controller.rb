@@ -8,7 +8,7 @@ class ExtensionsController < ApplicationController
   end
 
   def index
-    @type = controller_name.classify
+    @type = params[:model]
     @extensions = @business.extensions.where(_type: @type)
   end
 
@@ -80,6 +80,16 @@ class ExtensionsController < ApplicationController
       redirect_to @extension.download_url
     else
       render status: 404, nothing: true
+    end
+  end
+
+  private
+
+  def extension_parser
+    if params[:model] == "Theme"
+      ThemeParser.new(params[:file].tempfile)
+    elsif params[:model] == "Plugin"
+      PluginParser.new(params[:file].tempfile)
     end
   end
 end

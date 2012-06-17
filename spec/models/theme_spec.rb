@@ -11,7 +11,7 @@ describe Theme do
       file = File.new(filename)
       tempfile = ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file))
       tp = ThemeParser.new(file)
-      theme = @business.themes.new( name: tp.attributes[:theme_name],
+      theme = @business.themes.new( name: tp.attributes[:name],
                                         new_version: tp.attributes.merge(attachment: tempfile) )
       theme.screenshot.should be_present
     end

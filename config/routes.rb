@@ -10,7 +10,7 @@ ThemeMy::Application.routes.draw do
     resources :purchases
   end
 
-  resources :themes, except: :edit do
+  resources :themes, controller: "extensions", model: "Theme", except: :edit do
     member do
       # Because plupload does not support PUT requests (POST is hardcoded into it)
       post :update
@@ -18,7 +18,7 @@ ThemeMy::Application.routes.draw do
     end
   end
 
-  resources :plugins, except: :edit do
+  resources :plugins, controller: "extensions", model: "Plugin", except: :edit do
     member do
       # Because plupload does not support PUT requests (POST is hardcoded into it)
       post :update

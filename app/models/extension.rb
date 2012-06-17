@@ -36,8 +36,6 @@ class Extension
     fog_public: true,
     path: 'extensions/:attachment/:id/:style/:filename'
 
-  alias_attribute :theme_name, :name
-
   def download_url(version = nil, expires = nil)
     version ||= versions.current
     version = versions.where(version: version).first unless version.is_a?(Version)

@@ -63,26 +63,6 @@ class ExtensionsController < ApplicationController
     end
   end
 
-  def download
-    if params[:auth_token]
-      authenticate_customer!
-    else
-      authenticate_user!
-    end
-
-    if current_user
-      @extension = current_user.business.extensions.find(params[:id])
-    elsif current_customer
-      @extension = current_customer.extensions.find { |e| e.id == params[:id] }
-    end
-
-    if @extension
-      redirect_to @extension.download_url
-    else
-      render status: 404, nothing: true
-    end
-  end
-
   private
 
   def extension_parser

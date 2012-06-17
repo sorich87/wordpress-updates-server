@@ -39,7 +39,7 @@ class Version
     path: 'extensions/:attachment/:id/:filename'
 
   def download_url(expires = nil)
-    expires ||= 10.minutes.from_now
+    expires ||= 12.hours.from_now
     url = attachment.send(:directory).files.get_https_url(attachment.path, expires)
   end
 

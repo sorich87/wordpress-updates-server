@@ -53,11 +53,11 @@ class Customer
   end
 
   def plugins
-    extensions.find { |e| e._type == 'Plugin' }
+    extensions.select { |e| e._type == 'Plugin' }
   end
 
   def themes
-    extensions.find { |e| e._type == 'Theme' }
+    extensions.select { |e| e._type == 'Theme' }
   end
 
   def plugin_names

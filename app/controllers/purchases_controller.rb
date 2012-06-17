@@ -52,6 +52,6 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params[:purchase].slice(:package_id, "purchase_date(1i)", "purchase_date(2i)", "purchase_date(3i)", :theme_ids)
+    params[:purchase].slice(:package_id, "purchase_date(1i)", "purchase_date(2i)", "purchase_date(3i)", :extension_ids)
   end
 end

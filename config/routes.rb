@@ -59,7 +59,7 @@ ThemeMy::Application.routes.draw do
     namespace :v1 do
       resources :tokens, only: [:create, :destroy]
       resources :sites, only: [:create] do
-        get 'themes', :on => :collection
+        get 'update-check', :to => :update_check, :on => :collection
       end
     end
   end

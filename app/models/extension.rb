@@ -53,6 +53,20 @@ class Extension
     ExtensionMailer.permission_notification(self, customer).deliver
   end
 
+  # create a method with each attribute of the current version
+  %w(uri author author_uri description license license_uri tags status template domain_path network text_domain).each do |m|
+    define_method(m) { versions.current[m] }
+  end
+
+  def for_update
+    {
+      package: download_url,
+      new_version: current_version,
+      url: uri,
+      slug: id
+    }
+  end
+
   private
 
   def set_current_version

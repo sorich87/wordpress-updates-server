@@ -58,7 +58,11 @@ ThemeMy::Application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :tokens, only: [:create, :destroy]
-      resources :sites, only: [:create] do
+      resources :sites, only: [:create]
+      resources :plugins, controller: "extensions", model: "Plugin", only: [:show] do
+        get 'update-check', :to => :update_check, :on => :collection
+      end
+      resources :themes, controller: "extensions", model: "Theme", only: [:show] do
         get 'update-check', :to => :update_check, :on => :collection
       end
     end

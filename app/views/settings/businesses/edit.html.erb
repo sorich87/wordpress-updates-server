@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="span9">
-    <%= simple_form_for @business, url: settings_business_path, html: {class: 'form-horizontal'}, defaults: {input_html: {class: 'input-xlarge'}} do |f| %>
+    <%= simple_form_for @business, url: settings_business_path, html: {class: 'form-horizontal settings-form'}, defaults: {input_html: {class: 'input-xlarge'}} do |f| %>
       <%= f.error_notification %>
 
       <legend>Company Profile</legend>

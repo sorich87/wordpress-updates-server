@@ -13,11 +13,12 @@ jQuery ($) ->
   )
 
   # Toggle next element
-  $("p.toggle-next").click (e) ->
+  $(".toggle-next").click (e) ->
     e.preventDefault()
     $(this).next().toggle()
 
-  $("a.hide-target").click (e) ->
+  # Hide target element specified in href
+  $(".hide-target").click (e) ->
     e.preventDefault()
     target = $(this).attr("href")
     $(target).hide()

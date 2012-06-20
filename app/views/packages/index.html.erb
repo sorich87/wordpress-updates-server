@@ -36,6 +36,6 @@
 </div>
 
 <p class="toggle-next"><a href="#new_package"><i class="icon-plus"></i> Add a package</a></p>
-<%= simple_form_for @new_package, url: packages_path, html: {class: 'form-horizontal hide-if-js'}, defaults: {required: false} do |f| %>
+<%= simple_form_for @new_package, url: packages_path, html: {class: 'form-horizontal hide-if-js new-package-form'}, defaults: {required: false} do |f| %>
   <%= render :partial => 'form', locals: {f: f} %>
 <% end %>

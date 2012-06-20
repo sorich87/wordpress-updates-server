@@ -46,7 +46,7 @@ ThemeMy::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( functions.js plupload.full.js extension_uploader.js )
+  config.assets.precompile += %w( bootstrap.tour.js tour_steps.js functions.js plupload.full.js extension_uploader.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

@@ -105,5 +105,9 @@ jQuery ($) ->
       element: "#nav-item-themes"
       placement: "bottom"
       content: "<p>When you've got an update, just upload it and we'll push it straight to your WordPress customers.</p>"
+      # Return to homepage when clicking close
+      onShow: ->
+        $(document).on "click", ".popover .end", ->
+          document.location.href = "/"
     })
     tour.start()

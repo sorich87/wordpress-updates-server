@@ -23,6 +23,8 @@
 #
 
 (($, window) ->
+  document = window.document
+
   class BootstrapTour
     constructor: ->
       @_steps = []
@@ -161,7 +163,7 @@
     # Set next step variable
     setNextStep: (i) ->
       i = @_current unless i?
-      step = @_steps[@_current]
+      step = @_steps[i]
       @_next = if step.next then step.next else i + 1
 
   window.BootstrapTour = BootstrapTour

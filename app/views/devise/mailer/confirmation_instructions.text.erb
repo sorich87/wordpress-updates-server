@@ -1,0 +1,7 @@
+Hi <%= @resource.full_name %>!
+
+Thanks signing up for Push.ly! We just need you to confirm your account and you're good to go:
+
+<%= confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %>
+
+Need any help getting started? Check out our getting started guide: .

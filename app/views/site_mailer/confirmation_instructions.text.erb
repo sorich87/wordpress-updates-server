@@ -1,5 +1,5 @@
-Hello <%= @site.customer.email %>!
+Thanks for signing up for automatic updates! In a few seconds you'll be able to update your purchased WordPress Plugins and Themes from the WordPress Admin Screens.
 
-You can confirm your website through the link below:
+Click this link to confirm your website:
 
-<%= link_to 'Confirm my website', confirm_url(@site.confirmation_token) %>
+<%= confirm_url(@site.confirmation_token) %>

@@ -1,5 +1,7 @@
-<p>Welcome <%= @resource.email %>!</p>
+<p>Hi <%= @resource.full_name %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Thanks signing up for Push.ly! We just need you to confirm your account and you're good to go:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>
+
+<p>Need any help getting started? Check out our <%= link_to 'getting started guide', '' %>.</p>

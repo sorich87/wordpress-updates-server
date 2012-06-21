@@ -49,7 +49,6 @@
     # Hide current step and show next step
     nextStep: ->
       @hideStep(@_current)
-      step = @getCurrentStep()
       @showNextStep()
 
     # End tour
@@ -100,12 +99,11 @@
 
       step.onShow(@) if step.onShow?
 
-      # Show step
-      @loadStep(step, i)
-      $(step.element).popover("show")
+      # Show popover
+      @showPopover(step, i)
 
-    # Load step popover (but don't display it yet)
-    loadStep: (step, i) ->
+    # Show step popover
+    showPopover: (step, i) ->
       content = "#{step.content}<br /><p>"
       if i == @_steps.length - 1
         content += "<a href='#' class='end'>Close</a>"
@@ -118,7 +116,20 @@
         trigger: "manual"
         title: step.title
         content: content
-      })
+      }).popover("show")
+
+      # Bootstrap doesn't prevent elements to cross over the edge of the window, so we do that here
+      tip = $(step.element).data('popover').tip()
+      tipOffset = tip.offset()
+
+      offsetBottom = $(document).outerHeight() - tipOffset.top - $(tip).outerHeight()
+      tipOffset.top = tipOffset.top + offsetBottom if offsetBottom < 0
+      offsetRight = $(document).outerWidth() - tipOffset.left - $(tip).outerWidth()
+      tipOffset.left = tipOffset.left + offsetRight if offsetRight < 0
+
+      tipOffset.top = 0 if tipOffset.top < 0
+      tipOffset.left = 0 if tipOffset.left < 0
+      tip.offset(tipOffset)
 
     # Return current step
     getCurrentStep: -> @_steps[@_current]

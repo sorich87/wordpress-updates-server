@@ -18,10 +18,13 @@
 
   <%= f.input :billing, as: :radio_buttons, collection: collection_for_package_billings %>
 
-  <%= f.input :validity do %>
+  <%= f.input :validity, wrapper_html: { id: 'validity', class: ( 'hide-if-js' if f.object.billing != 0 ) } do %>
     <%= f.input_field :validity, class: 'input-mini' %>
-    <p class="help-inline">Number of months the customer gets updates for. 0 unlimited.</p>
+    <p class="help-inline">Number of months the customer gets updates for. 0 for unlimited.</p>
   <% end %>
+
+  <%= f.input :frequency, label: 'Billing Frequency', wrapper_html: { id: 'frequency', class: ( 'hide-if-js' if f.object.billing != 1 ) },
+    collection: collection_for_package_subscription_frequencies %>
 
   <%- unless @business.themes.blank? -%>
     <%= f.association :extensions, label: 'Themes',

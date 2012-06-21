@@ -39,7 +39,8 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    params[:package].slice(:name, :description, :price, :validity, :billing, :number_of_extensions, :number_of_domains, :extension_ids)
+    validity = params[:package][:billing] === "0" ? :validity : :frequency
+    params[:package].slice(:name, :description, :price, validity, :billing, :number_of_extensions, :number_of_domains, :extension_ids)
   end
 
 end

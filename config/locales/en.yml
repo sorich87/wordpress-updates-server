@@ -77,7 +77,7 @@ en:
         billing: Billing
         validity: Validity
         themes: Themes
-        number_of_extensions: Number of Extensions
+        number_of_extensions: Number of Products
         number_of_domains: Number of Domains
       user:
         first_name: First Name

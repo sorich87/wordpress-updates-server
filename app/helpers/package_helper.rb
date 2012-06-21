@@ -6,6 +6,10 @@ module PackageHelper
     end
   end
 
+  def collection_for_package_subscription_frequencies
+    Hash['1 Month', 1, '3 Months', 3, '6 Months', 6, 'Annual', 12]
+  end
+
   def package_extension_price_description(package)
     price = number_to_currency(package.price, precision: 2)
     case package.number_of_extensions

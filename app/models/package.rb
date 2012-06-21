@@ -9,6 +9,8 @@ class Package
   field :billing,              :type => Integer
   field :validity,             :type => Integer
 
+  alias_attribute :frequency, :validity
+
   belongs_to :business
   has_many :purchases
   has_and_belongs_to_many :extensions
@@ -18,7 +20,7 @@ class Package
     :subscription => 1
   }
 
-  attr_accessible :name, :description, :price, :number_of_extensions, :number_of_domains, :billing, :validity, :extension_ids
+  attr_accessible :name, :description, :price, :number_of_extensions, :number_of_domains, :billing, :validity, :frequency, :extension_ids
 
   validates_presence_of [:name, :description, :price, :number_of_extensions, :number_of_domains, :billing, :validity, :business, :extension_ids]
 

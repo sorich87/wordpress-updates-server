@@ -2,10 +2,10 @@
   <p>Already have an account? <%= link_to "Log in", new_session_path(resource_name) %></p>
 <% end -%>
 
-<%- if controller_name != 'registrations' %>
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <p>Don't have an account? <%= link_to "Sign up", new_registration_path(resource_name) %></p>
 <% end -%>
 
-<%- if controller_name != 'confirmations' %>
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <p>Didn't receive confirmation instructions? <%= link_to "Resend", new_confirmation_path(resource_name) %></p>
 <% end -%>

@@ -16,6 +16,7 @@ gem 'jquery-rails'
 gem 'kaminari', '~> 0.13'
 gem 'fog', '~> 1.3.0'
 gem 'rubyzip', :require => 'zip/zip'
+gem 'rails_admin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

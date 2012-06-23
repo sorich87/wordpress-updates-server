@@ -1,5 +1,9 @@
 ThemeMy::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/master', :as => 'rails_admin'
+
+  devise_for :admins
+
   resources :confirm, controller: "sites", only: [] do
     get '/', :to => :confirm
   end

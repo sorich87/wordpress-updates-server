@@ -33,6 +33,9 @@ class Customer
   end
   has_and_belongs_to_many :businesses
 
+  accepts_nested_attributes_for :purchases
+  accepts_nested_attributes_for :sites
+
   validates :email,
     :presence => true,
     :email => true,

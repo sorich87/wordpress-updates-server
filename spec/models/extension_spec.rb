@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Extension do
   describe 'validations' do
-    let(:extension) { build(:extension_in_business) }
+    let(:extension) { Fabricate.build(:extension) }
 
     it 'is valid given valid attributes' do
       extension.should be_valid
@@ -14,13 +14,16 @@ describe Extension do
     it { should validate_presence_of(:versions) }
 
     it { should validate_uniqueness_of(:name).scoped_to(:business_id) }
+
+    it { should belong_to(:business) }
+    it { should embed_many(:versions) }
+
+    it { should validate_attachment_presence(:screenshot) }
+    it { should validate_attachment_content_type(:screenshot).allowing('image/gif', 'image/jpeg', 'image/png') }
   end
 
-  it { should belong_to(:business) }
-  it { should have_and_belong_to_many(:packages) }
-
-  describe 'VERSIONS' do
-    let(:extension) { create(:extension_in_business) }
+  describe 'versions' do
+    let(:extension) { Fabricate(:extension) }
 
     describe 'changing the extension name' do
       it 'should not be allowed' do

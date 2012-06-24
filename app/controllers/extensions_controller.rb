@@ -3,7 +3,6 @@ class ExtensionsController < ApplicationController
 
   def show
     @extension = @business.extensions.find(params[:id])
-    @packages = @extension.packages.includes(:purchases)
     @versions = @extension.versions
   end
 
@@ -19,7 +18,7 @@ class ExtensionsController < ApplicationController
       format.js do
         if @parser.valid?
           @extension = @business.extensions.new(name: @parser.attributes[:name],
-                                                new_version: @parser.attributes.merge(attachment: params[:file]),
+                                                new_version: @parser.attributes.merge(archive: params[:file]),
                                                 _type: params[:model])
           unless @extension.save
             @errors = @extension.errors
@@ -53,7 +52,7 @@ class ExtensionsController < ApplicationController
     respond_to do |format|
       format.js do
         if @parser.valid?
-          unless @extension.update_attributes(new_version: @parser.attributes.merge(attachment: params[:file]))
+          unless @extension.update_attributes(new_version: @parser.attributes.merge(archive: params[:file]))
             @errors = @extension.errors
           end
         else

@@ -1,5 +1,5 @@
 <div id="<%= purchase.id %>" class="span3 well">
-  <h3><%= purchase.package.name %></h3>
+  <h3><%= purchase.package_name %></h3>
   <ul class="unstyled">
     <%- unless purchase.themes.blank? -%>
       <li><%= purchase_themes_description(purchase) %></li>
@@ -14,7 +14,6 @@
     <%- if purchase.expired? -%>
       <%= link_to 'Renew' %>
     <%- else -%>
-      <%= link_to 'Edit', edit_customer_purchase_path(@customer, purchase) %> |
       <%= link_to 'Delete', customer_purchase_path(@customer, purchase), method: :delete, confirm: "Are you sure?", title: 'Delete Purchase' %>
     <%- end -%>
   </div>

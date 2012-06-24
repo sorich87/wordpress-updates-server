@@ -23,24 +23,30 @@ class Version
   field :text_domain, type: String
 
   # Fields used by Paperclip
-  field :attachment_file_name
-  field :attachment_content_type
-  field :attachment_file_size,    :type => Integer
-  field :attachment_updated_at,   :type => DateTime
+  field :archive_file_name
+  field :archive_content_type
+  field :archive_file_size,    :type => Integer
+  field :archive_updated_at,   :type => DateTime
 
   attr_accessor :screenshot_path_in_zip
 
-  validates_presence_of :version
-
-  embedded_in :extension
-
-  has_attached_file :attachment,
+  has_attached_file :archive,
     fog_public: false,
     path: 'extensions/:attachment/:id/:filename'
 
+  embedded_in :extension
+
+  validates_presence_of :version
+  validates_attachment_presence :archive
+  validates_attachment_content_type :archive, content_type: 'application/zip'
+
+  attr_accessible :uri, :version, :author, :author_uri, :description, :license, :license_uri,
+    :tags, :status, :template, :domain_path, :network, :text_domain,
+    :archive_file_name, :archive_content_type, :archive_file_size, :archive_updated_at, :extension
+
   def download_url(expires = nil)
     expires ||= 12.hours.from_now
-    url = attachment.send(:directory).files.get_https_url(attachment.path, expires)
+    url = archive.send(:directory).files.get_https_url(archive.path, expires)
   end
 
 end

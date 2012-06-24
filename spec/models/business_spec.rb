@@ -1,47 +1,26 @@
 require 'spec_helper'
 
 describe Business do
-  describe 'validation' do
-    it 'passes with valid attributes' do
-      FactoryGirl.build(:business).should be_valid
-    end
+  let(:business) { Fabricate.build(:business) }
 
-    describe 'of name' do
-      it 'requires presence' do
-        FactoryGirl.build(:business, :name => nil).should_not be_valid
-      end
-
-      it 'requires minimum length' do
-        FactoryGirl.build(:business, :name => 'a').should_not be_valid
-      end
-
-      it 'requires maximum length' do
-        FactoryGirl.build(:business, :name => 'a' * 70).should_not be_valid
-      end
-    end
-
-    describe 'of email' do
-      it 'requires presence' do
-        FactoryGirl.build(:business, :email => nil).should_not be_valid
-      end
-
-      it 'requires uniqueness' do
-        business = FactoryGirl.attributes_for(:business)
-        Business.create(business)
-        Business.create(business).should_not be_valid
-      end
-
-      it "requires valid email" do
-        invalid_emails = ["notatallcorrect", "without@tld", "without@.domain"]
-        invalid_emails.each do |e|
-          FactoryGirl.build(:business, :email => e).should_not be_valid
-        end
-      end
-    end
+  it 'is valid given valid attributes' do
+    business.should be_valid
   end
 
+  it { should validate_presence_of(:name) }
+  it { should ensure_length_of(:name).is_at_least(2).is_at_most(50) }
+
+  it { should validate_presence_of(:email) }
+  it {
+    Fabricate(:business)
+    should validate_uniqueness_of(:email)
+  }
+  it { should_not allow_value("notatallcorrect").for(:email) }
+  it { should_not allow_value("without@tld").for(:email) }
+  it { should_not allow_value("without@.domain").for(:email) }
+
+  it { should embed_many(:packages) }
   it { should have_and_belong_to_many(:customers) }
   it { should have_many(:users) }
-  it { should have_many(:packages) }
   it { should have_many(:extensions) }
 end

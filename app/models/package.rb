@@ -11,8 +11,16 @@ class Package
 
   alias_attribute :frequency, :validity
 
-  belongs_to :business
-  has_and_belongs_to_many :extensions
+  embedded_in :business
+  has_and_belongs_to_many :extensions, inverse_of: nil do
+    def themes
+      where(_type: 'Theme')
+    end
+
+    def plugins
+      where(_type: 'Plugin')
+    end
+  end
 
   BILLING = {
     :one_time_payment => 0,
@@ -47,11 +55,11 @@ class Package
     "%.2f" % read_attribute(:price) unless read_attribute(:price).nil?
   end
 
-  def themes
-    extensions.where(_type: "Theme")
+  def plugins
+    extensions.plugins
   end
 
-  def plugins
-    extensions.where(_type: "Plugin")
+  def themes
+    extensions.themes
   end
 end

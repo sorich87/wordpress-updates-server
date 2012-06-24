@@ -3,7 +3,7 @@ require 'spec_helper'
 describe CustomersController do
   sign_in_user
 
-  let(:customer) { create(:customer, businesses: [@business]) }
+  let(:customer) { Fabricate(:customer, businesses: [@business]) }
 
   describe "GET #index" do
     before do
@@ -19,18 +19,18 @@ describe CustomersController do
     context "with valid attributes" do
       it "creates a new customer" do
         expect{
-          post :create, customer: attributes_for(:customer)
+          post :create, customer: Fabricate.attributes_for(:customer)
         }.to change(Customer,:count).by(1)
       end
 
       it "adds an existing customer to the business" do
-        @customer = create(:customer)
+        @customer = Fabricate(:customer)
         post :create, customer: { email: @customer.email }
         Business.find(@business.id).customer_ids.should include @customer.id
       end
 
       it "redirects to the customer purchases list" do
-        @customer = create(:customer)
+        @customer = Fabricate(:customer)
         post :create, customer: { email: @customer.email }
         response.should redirect_to customer_purchases_path(@customer)
       end
@@ -39,12 +39,12 @@ describe CustomersController do
     context "with invalid attributes" do
       it "does not save the new customer" do
         expect{
-          post :create, customer: attributes_for(:customer, email: nil)
+          post :create, customer: Fabricate.attributes_for(:customer, email: nil)
         }.to_not change(Customer,:count)
       end
 
       it "re-renders the new method" do
-        post :create, customer: attributes_for(:customer, email: nil)
+        post :create, customer: Fabricate.attributes_for(:customer, email: nil)
         response.should render_template :new
       end
     end

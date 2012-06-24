@@ -48,7 +48,7 @@ class Customer
   end
 
   def package_names
-    purchases.current.collect { |p| p.package.name }.uniq
+    purchases.current.collect { |p| p.package_name }.uniq
   end
 
   def extensions

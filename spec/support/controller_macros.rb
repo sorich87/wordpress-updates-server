@@ -3,8 +3,8 @@ module ControllerMacros
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:user]
 
-      @user_attributes = FactoryGirl.attributes_for(:user)
-      @business_attributes = FactoryGirl.attributes_for(:business)
+      @user_attributes = Fabricate.attributes_for(:user)
+      @business_attributes = Fabricate.attributes_for(:business)
 
       @business = Business.create(@business_attributes)
       @user = User.create(@user_attributes.merge(business: @business))

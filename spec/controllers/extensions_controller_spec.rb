@@ -3,14 +3,14 @@ require 'spec_helper'
 describe ExtensionsController do
   sign_in_user
 
-  let!(:extension) { create(:theme, business: @business) }
+  let!(:extension) { Fabricate(:theme, business: @business) }
 
   describe 'GET #index' do
     before do
       get :index, model: "Theme"
     end
 
-    it { should assign_to(:extensions).with([extension]) }
+    it { should assign_to(:extensions).with(@business.extensions.where(_type: "Theme")) }
     it { should render_template(:index) }
   end
 

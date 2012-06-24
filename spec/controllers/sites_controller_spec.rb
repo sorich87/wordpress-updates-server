@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe SitesController do
-  let(:site) { FactoryGirl.create(:unconfirmed_site) }
+  let(:site) { Fabricate(:unconfirmed_site) }
 
   describe "GET confirm" do
     context "with valid attributes" do

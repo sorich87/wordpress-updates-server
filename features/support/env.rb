@@ -7,7 +7,6 @@
 require 'cucumber/rails'
 require 'email_spec'
 require 'email_spec/cucumber'
-require 'factory_girl/step_definitions'
 
 # Capybara defaults to XPath selectors rather than Webrat's default of CSS3. In
 # order to ease the transition to Capybara we set the default here. If you'd
@@ -62,5 +61,3 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Capybara.javascript_driver = :webkit
-
-World(FactoryGirl::Syntax::Methods)

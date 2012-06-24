@@ -15,34 +15,21 @@ class PurchasesController < ApplicationController
   end
 
   def create
-    @purchase = @customer.purchases.build(purchase_params)
+    build_params = purchase_params
+    build_params[:package] = @business.packages.find(purchase_params[:package_id])
+    build_params[:business_id] = @business._id
+    @purchase = @customer.purchases.build(build_params)
 
     if @purchase.save
-      flash[:notice] = "Purchase saved."
-      redirect_to customer_purchases_path(@customer)
+      redirect_to customer_purchases_path(@customer), notice: 'Purchase saved.'
     else
-      flash[:error] = "Error saving purchase."
-      render :edit
-    end
-  end
-
-  def update
-    @purchase = @customer.purchases.find(params[:id])
-
-    if @purchase.update_attributes(purchase_params)
-      flash[:notice] = "Purchase saved."
-      redirect_to customer_purchases_path(@customer)
-    else
-      flash[:error] = "Error saving purchase."
-      render :edit
+      render :edit, error: 'Error saving purchase.'
     end
   end
 
   def destroy
-    @purchase = @customer.purchases.find(params[:id])
-    @customer.purchases -= [@purchase]
-    flash[:notice] = "Purchase deleted."
-    redirect_to customer_purchases_path(@customer)
+    @customer.purchases.find(params[:id]).delete
+    redirect_to customer_purchases_path(@customer), notice: 'Purchase deleted.'
   end
 
   private
@@ -52,6 +39,7 @@ class PurchasesController < ApplicationController
   end
 
   def purchase_params
-    params[:purchase].slice(:package_id, "purchase_date(1i)", "purchase_date(2i)", "purchase_date(3i)", :extension_ids)
+    params[:purchase].slice(:package_id, :"purchase_date(1i)", :"purchase_date(2i)", :"purchase_date(3i)", :extension_ids,
+                           :package_name, :price, :billing, :validity, :number_of_domains)
   end
 end

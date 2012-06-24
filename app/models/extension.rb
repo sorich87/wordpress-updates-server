@@ -15,10 +15,17 @@ class Extension
   field :screenshot_file_size,    :type => Integer
   field :screenshot_updated_at,   :type => DateTime
 
+  has_attached_file :screenshot,
+    styles: { thumb: '320x240>' },
+    fog_public: true,
+    path: 'extensions/:attachment/:id/:style/:filename'
+
   validates_presence_of [:name, :current_version, :business, :versions]
   validates_uniqueness_of :name, :scope => :business_id
   validates :name, :on => :update, :immutable => true
   validates :current_version, :version => true
+  validates_attachment_presence :screenshot
+  validates_attachment_content_type :screenshot, content_type: ['image/gif', 'image/jpeg', 'image/png']
 
   belongs_to :business
   embeds_many :versions, :cascade_callbacks => true do
@@ -26,14 +33,8 @@ class Extension
       where(version: @base.current_version).first
     end
   end
-  has_and_belongs_to_many :packages
 
   accepts_nested_attributes_for :versions
-
-  has_attached_file :screenshot,
-    styles: { thumb: '320x240>' },
-    fog_public: true,
-    path: 'extensions/:attachment/:id/:style/:filename'
 
   def download_url(version = nil, expires = nil)
     version ||= versions.current
@@ -69,11 +70,11 @@ class Extension
   private
 
   def set_current_version
-    self[:current_version] = self.versions.last.version unless current_version_changed?
+    self[:current_version] = self.versions.last.version unless current_version_changed? || self.versions.empty?
   end
 
   def grab_screenshot_from_zip(value)
-    zip_file = value[:attachment].tempfile
+    zip_file = value[:archive].tempfile
     screenshot_path_in_zip = value[:screenshot_path_in_zip]
     return if screenshot_path_in_zip.nil?
 

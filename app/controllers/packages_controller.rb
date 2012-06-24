@@ -30,8 +30,7 @@ class PackagesController < ApplicationController
   end
 
   def destroy
-    @package = @business.packages.find(params[:id])
-    @package.destroy
+    @business.packages.find(params[:id]).delete
     redirect_to packages_path, notice: "Package removed."
   end
 

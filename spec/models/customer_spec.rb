@@ -1,42 +1,20 @@
 require 'spec_helper'
 
 describe Customer do
-  before do
-    @valid_attributes = {
-      first_name: "Test",
-      last_name: "User",
-      email: "test.user@example.com"
-    }
+  let(:customer) { Fabricate.build(:customer) }
+
+  it 'is valid given valid attributes' do
+    customer.should be_valid
   end
 
-  context "helper methods" do
-    before { @customer = Customer.create!(@valid_attributes) }
-
-    it 'should return the full name' do
-      @customer.full_name.should == "#{@valid_attributes[:first_name]} #{@valid_attributes[:last_name]}"
-    end
-  end
-
-  context '#CREATE' do
-    it "should be successful given valid attributes" do
-      Customer.new(@valid_attributes).should be_valid
-    end
-
-    it "should reject empty emails" do
-      Customer.new( @valid_attributes.merge(email: nil) ).should_not be_valid
-    end
-
-    it "should reject invalid emails" do
-      ["notatallcorrect", "without@tld", "without@.domain"].each do |e|
-        Customer.new( @valid_attributes.merge(email: e) ).should_not be_valid
-      end
-    end
-
-    it "should reject duplicate emails" do
-      Customer.create!(@valid_attributes)
-      Customer.new(@valid_attributes).should_not be_valid
-    end
-  end
+  it { should validate_presence_of(:email) }
+  it {
+    Fabricate(:business)
+    should validate_uniqueness_of(:email)
+  }
+  it { should_not allow_value("notatallcorrect").for(:email) }
+  it { should_not allow_value("without@tld").for(:email) }
+  it { should_not allow_value("without@.domain").for(:email) }
 
   it { should have_and_belong_to_many(:businesses) }
   it { should embed_many(:purchases) }

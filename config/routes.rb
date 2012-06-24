@@ -7,7 +7,7 @@ ThemeMy::Application.routes.draw do
   resources :customers do
     get 'page/:page', :action => :index, :on => :collection
 
-    resources :purchases
+    resources :purchases, except: :edit
 
     resources :confirm, controller: "sites", only: [] do
       get '/', :to => :confirm

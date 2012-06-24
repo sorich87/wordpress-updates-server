@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Site do
+  let(:site) { Fabricate.build(:site) }
+
   it { should be_embedded_in(:customer) }
 
   it { should validate_presence_of(:domain_name) }
@@ -18,19 +20,11 @@ describe Site do
   it { should_not allow_mass_assignment_of(:confirmation_sent_at) }
 
   it 'is valid given valid attributes' do
-    FactoryGirl.build(:site).should be_valid
-  end
-
-
-  it "validates uniqueness of domain name" do
-    FactoryGirl.create(:site)
-    should validate_uniqueness_of(:domain_name)
+    site.should be_valid
   end
 
   context 'helper method' do
-    let!(:site) do
-      FactoryGirl.create(:unconfirmed_site)
-    end
+    let!(:site) { Fabricate.build(:unconfirmed_site) }
 
     describe '.generate_confirmation_token' do
       it 'should set a confirmation token' do

@@ -1,9 +1,9 @@
 require 'rubygems'
 require 'spork'
-require 'factory_girl'
 require 'forgery'
 require 'capybara/rspec'
 require 'email_spec'
+require 'paperclip/matchers'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
 
@@ -29,8 +29,7 @@ Spork.prefork do
 
     config.include(EmailSpec::Helpers)
     config.include(EmailSpec::Matchers)
-
-    config.include FactoryGirl::Syntax::Methods
+    config.include(Paperclip::Shoulda::Matchers)
   end
 end
 
@@ -46,6 +45,7 @@ Spork.each_run do
 
     config.before(:each) do
       DatabaseCleaner.clean
+      Fabrication.clear_definitions
     end
 
     config.include Devise::TestHelpers, :type => :controller

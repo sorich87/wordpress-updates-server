@@ -30,18 +30,18 @@ group :production do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '~> 2.0'
+  gem 'rspec-rails'
   gem 'spork', '~> 1.0rc'
-  gem 'forgery', '0.5.0'
+  gem 'forgery'
 end
 
 group :test do
-  gem 'mongoid-rspec', '~>1.4.0'
-  gem 'database_cleaner', '~> 0.7.0'
-  gem 'factory_girl_rails', '~> 3.3.0'
-  gem 'cucumber-rails', '~> 1.3.0', :require => false
-  gem 'capybara', '~> 1.1.0'
-  gem "capybara-webkit", ">= 0.12.0"
+  gem 'mongoid-rspec'
+  gem 'database_cleaner'
+  gem 'fabrication'
+  gem 'cucumber-rails', :require => false
+  gem 'capybara'
+  gem 'capybara-webkit'
   gem 'email_spec'
   gem 'shoulda-matchers'
 end

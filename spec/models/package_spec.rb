@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Package do
-  let(:package) { build(:package) }
+  let(:package) { Fabricate.build(:package) }
 
   it 'should be valid given valid attributes' do
     package.should be_valid
@@ -25,7 +25,7 @@ describe Package do
     it { should_not allow_value(v).for(:billing) }
   end
 
-  it { should belong_to(:business) }
+  it { should be_embedded_in(:business) }
   it { should have_and_belong_to_many(:extensions) }
 
   context "helpers" do

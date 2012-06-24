@@ -7,8 +7,8 @@ Given /^I am on the registration page$/ do
 end
 
 When /^I fill in and submit the registration form$/ do
-  @business = FactoryGirl.attributes_for(:business)
-  @user = FactoryGirl.attributes_for(:user)
+  @business = Fabricate.attributes_for(:business)
+  @user = Fabricate.attributes_for(:user)
   within('#business-details') do
     fill_in 'Business Name', :with => @business[:name]
     fill_in 'Business Email', :with => @business[:email]
@@ -39,8 +39,8 @@ Then /^I should see a confirmation success message$/ do
 end
 
 When /^I incorrectly fill in the registration form$/ do
-  business = FactoryGirl.attributes_for(:business)
-  user = FactoryGirl.attributes_for(:user)
+  business = Fabricate.attributes_for(:business)
+  user = Fabricate.attributes_for(:user)
   within('#business-details') do
     fill_in 'Business Name', :with => business[:name]
     fill_in 'Business Email', :with => ''

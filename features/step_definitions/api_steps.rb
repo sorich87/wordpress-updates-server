@@ -1,5 +1,5 @@
 Given /^I have a confirmed site$/ do
-  @site = FactoryGirl.create(:confirmed_site)
+  @site = Fabricate(:confirmed_site)
 end
 
 When /^I send and accept JSON$/ do
@@ -33,7 +33,7 @@ Then /^my token should be reset$/ do
 end
 
 Given /^I have an unconfirmed site$/ do
-  @site = FactoryGirl.create(:unconfirmed_site)
+  @site = Fabricate(:unconfirmed_site)
 end
 
 Then /^a site confirmation message should be sent my email$/ do

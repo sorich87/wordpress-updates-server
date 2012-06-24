@@ -21,7 +21,7 @@ Then /^I should see a success message$/ do
 end
 
 When /^I there is a customer in my account$/ do
-  @customer = FactoryGirl.create(:customer, businesses: [@business])
+  @customer = Fabricate(:customer, businesses: [@business])
 end
 
 When /^I add that customer again$/ do

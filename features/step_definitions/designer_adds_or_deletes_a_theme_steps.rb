@@ -25,7 +25,7 @@ end
 
 When /^I have one theme$/ do
   @user.business.themes.destroy_all
-  @theme = FactoryGirl.create(:theme, name: "Annotum Base", business: @user.business)
+  @theme = Fabricate(:theme, name: "Annotum Base", business: @user.business)
   @theme.should be_persisted
 end
 

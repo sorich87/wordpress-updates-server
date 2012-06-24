@@ -3,7 +3,7 @@ When /^I go to the packages management page$/ do
 end
 
 When /^I add a package$/ do
-  @package = attributes_for(:package)
+  @package = Fabricate.attributes_for(:package)
   click_on "Add a package"
   fill_in "Package Name", with: @package[:name]
   fill_in "Package Description", with: @package[:description]

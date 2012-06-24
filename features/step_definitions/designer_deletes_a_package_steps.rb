@@ -1,6 +1,6 @@
 Given /^there is one package named "(.*?)"$/ do |arg1|
-  @package = Package.where(name: arg1).find(:first)
-  @package ||= FactoryGirl.create(:package, name: arg1, business: @business)
+  @package = @business.packages.where(name: arg1).first
+  @package ||= Fabricate(:package, name: arg1, business: @business)
   @package.should be_persisted
 end
 

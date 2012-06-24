@@ -24,7 +24,7 @@ end
 
 When /^I have one plugin$/ do
   @user.business.plugins.destroy_all
-  @plugin = FactoryGirl.create(:plugin, name: 'Acobot Live Chat Robot 1.1.2', 
+  @plugin = Fabricate(:plugin, name: 'Acobot Live Chat Robot 1.1.2', 
                                business: @user.business, current_version: '0.1')
   @plugin.should be_persisted
 end

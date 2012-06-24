@@ -4,7 +4,7 @@ end
 
 Given /^there is one customer with email "(.*?)"$/ do |email|
   @customer = @business.customers.where(email: email).first
-  @customer ||= FactoryGirl.create(:customer, email: email, businesses: [@business])
+  @customer ||= Fabricate(:customer, email: email, businesses: [@business])
 end
 
 Then /^I click on delete and "(.*?)" the confirmation$/ do |arg1|

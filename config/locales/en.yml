@@ -88,7 +88,7 @@ en:
         password_confirmation: Confirm New Password
       business:
         name: Business Name
-        email: Email Address
+        email: Business Email
       purchase:
         package_id: Package
         theme_ids: Themes

@@ -1,6 +1,6 @@
 Given /^there is one package$/ do
-  @theme = FactoryGirl.create(:theme, name: "A Theme", business: @user.business)
-  @package = FactoryGirl.create(:package, business: @business, extension_ids: [@theme.id])
+  @theme = Fabricate(:theme, name: "A Theme", business: @business)
+  @package = Fabricate(:package, business: @business, extension_ids: [@theme.id])
 end
 
 When /^I go to the edit package page$/ do

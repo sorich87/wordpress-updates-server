@@ -18,9 +18,9 @@ describe Api::V1::SitesController do
       end
 
       it "creates a new site" do
-        expect{
-          post :create, email: @site.customer.email, domain_name: "test.com", secret_key: "12345"
-        }.to change(Site,:count).by(1)
+        count = Customer.find(@site.customer.id).sites.count
+        post :create, email: @site.customer.email, domain_name: "test.com", secret_key: "12345"
+        Customer.find(@site.customer.id).sites.count.should == count + 1
       end
 
       it "sends confirmation instructions" do

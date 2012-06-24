@@ -21,6 +21,7 @@ class Customer
   index :email, :unique => true
   index :authentication_token
 
+  embeds_many :sites
   has_many :purchases, dependent: :delete do
     def current
       @target.select { |p| ! p.expired? }
@@ -30,7 +31,6 @@ class Customer
       @target.select { |p| p.expired? }
     end
   end
-  has_many :sites, dependent: :delete
   has_and_belongs_to_many :businesses
 
   validates :email,

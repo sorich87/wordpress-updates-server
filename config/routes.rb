@@ -4,14 +4,14 @@ ThemeMy::Application.routes.draw do
 
   devise_for :admins
 
-  resources :confirm, controller: "sites", only: [] do
-    get '/', :to => :confirm
-  end
-
   resources :customers do
     get 'page/:page', :action => :index, :on => :collection
 
     resources :purchases
+
+    resources :confirm, controller: "sites", only: [] do
+      get '/', :to => :confirm
+    end
   end
 
   resources :themes, controller: "extensions", model: "Theme", except: :edit do

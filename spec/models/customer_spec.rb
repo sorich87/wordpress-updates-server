@@ -40,5 +40,5 @@ describe Customer do
 
   it { should have_and_belong_to_many(:businesses) }
   it { should have_many(:purchases) }
-  it { should have_many(:sites) }
+  it { should embed_many(:sites) }
 end

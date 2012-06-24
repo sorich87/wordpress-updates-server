@@ -2,7 +2,7 @@ class Site
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  belongs_to :customer
+  embedded_in :customer
 
   field :domain_name,            :type => String
   field :secret_key,             :type => String
@@ -43,7 +43,7 @@ class Site
   def generate_confirmation_token
     begin
       self[:confirmation_token] = SecureRandom.urlsafe_base64
-    end while Site.where(confirmation_token: self[:confirmation_token]).exists?
+    end while Customer.where({"sites.confirmation_token" => self[:confirmation_token]}).exists?
   end
 
 end

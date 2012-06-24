@@ -19,12 +19,12 @@ describe PackagesController do
     context 'with valid attributes' do
       it 'saves the new package in the database' do
         expect{
-          post :create, package: attributes_for(:package, extension_ids: [extension.id])
+          post :create, package: attributes_for(:package, business: @user.business, extension_ids: [extension.id])
         }.to change(Package,:count).by(1)
       end
 
       it 'redirects to the packages page' do
-        post :create, package: attributes_for(:package, extension_ids: [extension.id])
+        post :create, package: attributes_for(:package, business: @user.business, extension_ids: [extension.id])
         response.should redirect_to packages_path
       end
     end

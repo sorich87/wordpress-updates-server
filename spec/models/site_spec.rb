@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Site do
-  it { should belong_to(:customer) }
+  it { should be_embedded_in(:customer) }
 
   it { should validate_presence_of(:domain_name) }
   it { should validate_uniqueness_of(:domain_name) }

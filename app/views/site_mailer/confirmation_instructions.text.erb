@@ -2,4 +2,4 @@ Thanks for signing up for automatic updates! In a few seconds you'll be able to 
 
 Click this link to confirm your website:
 
-<%= confirm_url(@site.confirmation_token) %>
+<%= customer_confirm_url(@site.customer, @site.confirmation_token) %>

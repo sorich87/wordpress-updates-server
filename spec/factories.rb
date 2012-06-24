@@ -30,7 +30,7 @@ FactoryGirl.define do
     price                { Forgery(:monetary).money }
     number_of_extensions { Forgery(:basic).number(at_least: 0) }
     number_of_domains    { Forgery(:basic).number(at_least: 0) }
-    billing              Package::BILLING[:subscription]
+    billing              Package::BILLING[:one_time_payment]
     validity             { Forgery(:basic).number(at_least: 0) }
     business
     extension_ids        { [] }

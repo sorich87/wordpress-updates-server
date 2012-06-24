@@ -44,16 +44,3 @@
   <% end %>
 </ul>
 <% end %>
-
-<% unless @packages.empty? %>
-<hr />
-<h3>Packages</h3>
-<ul>
-  <% @packages.each do |package| %>
-    <li><%= link_to package.name, edit_package_path(package) %> 
-      (<%=pluralize(package.purchases.count, 'purchase')%>)
-    </li>
-  <% end %>
-</ul>
-<% end %>
-

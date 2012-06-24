@@ -12,7 +12,6 @@ class Package
   alias_attribute :frequency, :validity
 
   belongs_to :business
-  has_many :purchases
   has_and_belongs_to_many :extensions
 
   BILLING = {

@@ -3,9 +3,9 @@ class Purchase
   include Mongoid::Timestamps
   include Mongoid::MultiParameterAttributes
 
-  belongs_to :customer
-  belongs_to :package
-  has_and_belongs_to_many :extensions
+  embedded_in :customer
+  has_many :extensions
+  has_one :package
 
   field :purchase_date, type: Date
 

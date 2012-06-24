@@ -26,7 +26,6 @@ class Extension
       where(version: @base.current_version).first
     end
   end
-  has_and_belongs_to_many :purchases
   has_and_belongs_to_many :packages
 
   accepts_nested_attributes_for :versions

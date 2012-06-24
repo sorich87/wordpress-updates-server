@@ -22,7 +22,7 @@ class Customer
   index :authentication_token
 
   embeds_many :sites
-  has_many :purchases, dependent: :delete do
+  embeds_many :purchases do
     def current
       @target.select { |p| ! p.expired? }
     end

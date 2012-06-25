@@ -7,7 +7,7 @@
     <%- unless purchase.plugins.blank? -%>
       <li><%= purchase_plugins_description(purchase) %></li>
     <%- end -%>
-    <li><%= subscription_description(purchase) %></li>
+    <li><%= subscription_description(purchase) %>: $<%= purchase.price %></li>
     <li><%= purchase_date_description(purchase) %></li>
     <li><%= purchase_expiration_description(purchase) %></li>
     <li><%= number_of_domains_description(purchase) %></li>

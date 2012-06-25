@@ -31,6 +31,10 @@ class Purchase
 
   validates_presence_of :customer, :purchase_date, :extension_ids
 
+  def price
+    "%.2f" % read_attribute(:price) unless read_attribute(:price).nil?
+  end
+
   def expired?
     return false if expiration_date.nil?
     return false if ( expiration_date <=> Date.today ) > 0

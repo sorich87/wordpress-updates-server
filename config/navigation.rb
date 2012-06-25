@@ -99,16 +99,7 @@ SimpleNavigation::Configuration.run do |navigation|
           highlights_on: update_action_matcher("customers")
 
         sub_nav.item :purchases, "Customer's Purchases", customer_purchases_path(@customer),
-          highlights_on: :subpath do |sub_sub_nav|
-
-          sub_sub_nav.item :new_purchase, "New Purchase", new_customer_purchase_path,
-            highlights_on: create_action_matcher("purchases")
-
-          unless @purchase.nil? || ! @purchase.persisted?
-            sub_sub_nav.item :edit_purchase, "Edit Purchase", edit_customer_purchase_path(@customer, @purchase),
-              highlights_on: update_action_matcher("purchases")
-          end
-        end
+          highlights_on: :subpath
       end
     end
 

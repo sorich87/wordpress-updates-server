@@ -23,6 +23,11 @@ class PurchasesController < ApplicationController
     end
   end
 
+  def renew
+    @purchase = @customer.purchases.find(params[:id]).renew
+    redirect_to customer_purchases_path(@customer), notice: 'Subscription renewed.'
+  end
+
   def destroy
     @customer.purchases.find(params[:id]).delete
     redirect_to customer_purchases_path(@customer), notice: 'Purchase deleted.'

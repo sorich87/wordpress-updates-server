@@ -13,8 +13,9 @@
     <li><%= number_of_domains_description(purchase) %></li>
   </ul>
   <div>
-    <%= link_to 'Renew' %>
-    |
-    <%= link_to 'Delete', customer_purchase_path(@customer, purchase), method: :delete, confirm: "Are you sure?", title: 'Delete Purchase' %>
+    <%- if purchase.is_subscription -%>
+      <%= link_to 'Renew', renew_customer_purchase_path(@customer, purchase), method: :put, confirm: "Are you sure you want to renew the subscription?", title: 'Renew Subscription' %> |
+    <%- end -%>
+    <%= link_to 'Delete', customer_purchase_path(@customer, purchase), method: :delete, confirm: "Are you sure you want to delete the purchase?", title: 'Delete Purchase' %>
   </div>
 </div>

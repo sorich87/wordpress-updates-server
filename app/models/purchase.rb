@@ -31,6 +31,11 @@ class Purchase
 
   validates_presence_of :customer, :purchase_date, :extension_ids, :package_id
 
+  def renew
+    self[:expiration_date] = expiration_date >> validity unless validity.nil?
+    save(validate: false)
+  end
+
   def price
     "%.2f" % read_attribute(:price) unless read_attribute(:price).nil?
   end

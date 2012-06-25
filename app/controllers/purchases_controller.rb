@@ -2,7 +2,7 @@ class PurchasesController < ApplicationController
   before_filter :load_customer
 
   def index
-    @purchases = @customer.purchases.current
+    @purchases = @customer.purchases
     new
   end
 

@@ -39,18 +39,6 @@ class Package
   validates_inclusion_of :billing,
     :in => BILLING.values
 
-  def is_valid_for_life?
-    read_attribute(:validity) == 0
-  end
-
-  def is_subscription?
-    read_attribute(:billing) == BILLING[:subscription]
-  end
-
-  def unlimited?
-    read_attribute(:number_of_domains) == 0
-  end
-
   def price
     "%.2f" % read_attribute(:price) unless read_attribute(:price).nil?
   end

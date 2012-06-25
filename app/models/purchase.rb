@@ -3,6 +3,8 @@ class Purchase
   include Mongoid::Timestamps
   include Mongoid::MultiParameterAttributes
 
+  before_validation :set_expiration_date
+
   embedded_in :customer
   has_and_belongs_to_many :extensions, inverse_of: nil do
     def themes
@@ -16,21 +18,18 @@ class Purchase
   has_one :business
 
   field :purchase_date,     type: Date
+  field :expiration_date,   type: Date
+  field :validity,          type: Integer
   field :package_name,      type: String
   field :price,             type: Float
   field :billing,           type: Integer
-  field :validity,          type: Integer
   field :number_of_domains, type: Integer
 
-  attr_accessible :business_id, :purchase_date, :extension_ids, :package, :package_name, :price, :billing, :validity, :number_of_domains
+  attr_accessible :business_id, :purchase_date, :expiration_date, :extension_ids, :package, :package_name, :price, :billing, :validity, :number_of_domains
 
   attr_accessor :package_id, :package
 
   validates_presence_of :customer, :purchase_date, :extension_ids
-
-  def expiration_date
-    purchase_date >> validity unless validity.nil?
-  end
 
   def expired?
     return false if expiration_date.nil?
@@ -52,5 +51,11 @@ class Purchase
 
   def themes
     extensions.themes
+  end
+
+  private
+
+  def set_expiration_date
+    self[:expiration_date] = purchase_date >> self[:validity] unless self[:validity].nil?
   end
 end

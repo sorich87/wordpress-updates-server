@@ -4,7 +4,15 @@ class Business
 
   embeds_many :packages
   has_many :users, dependent: :delete
-  has_many :extensions, dependent: :delete
+  has_many :extensions, dependent: :delete do
+    def themes
+      where(_type: 'Theme')
+    end
+
+    def plugins
+      where(_type: 'Plugin')
+    end
+  end
   has_and_belongs_to_many :customers
 
   field :name,      :type => String
@@ -34,11 +42,11 @@ class Business
 
   attr_accessible :name, :email, :users, :country, :time_zone, :street1, :street2, :city, :state, :zip, :phone
 
-  def themes
-    extensions.where(_type: "Theme")
+  def plugins
+    extensions.plugins
   end
 
-  def plugins
-    extensions.where(_type: "Plugin")
+  def themes
+    extensions.themes
   end
 end

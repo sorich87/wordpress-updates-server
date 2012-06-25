@@ -24,11 +24,11 @@ class Customer
   embeds_many :sites
   embeds_many :purchases do
     def current
-      @target.select { |p| ! p.expired? }
+      where(:expiration_date.gt => Date.today)
     end
 
     def expired
-      @target.select { |p| p.expired? }
+      where(:expiration_date.lte => Date.today)
     end
   end
   has_and_belongs_to_many :businesses
@@ -56,11 +56,11 @@ class Customer
   end
 
   def plugins
-    extensions.select { |e| e._type == 'Plugin' }
+    purchases.current.collect { |p| p.plugins }.flatten
   end
 
   def themes
-    extensions.select { |e| e._type == 'Theme' }
+    purchases.current.collect { |p| p.themes }.flatten
   end
 
   def plugin_names

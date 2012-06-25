@@ -27,14 +27,4 @@ describe Package do
 
   it { should be_embedded_in(:business) }
   it { should have_and_belong_to_many(:extensions) }
-
-  context "helpers" do
-    it 'should respond to validity methods' do
-      package.should respond_to(:is_valid_for_life?)
-    end
-
-    it 'should respond to payment methods' do
-      package.should respond_to(:is_subscription?)
-    end
-  end
 end

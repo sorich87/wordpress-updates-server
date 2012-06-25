@@ -1,9 +1,4 @@
-<h1 class="page-header">Customers</h1>
-
-<p>
-<%= link_to 'New Customer', new_customer_path, class: 'btn' %>
-<a class="btn" href="">Import CSV</a>
-</p>
+<h1 class="page-header">Customers <%= link_to 'Add New', new_customer_path, class: 'btn' %></h1>
 
 <%= paginate @customers %>
 

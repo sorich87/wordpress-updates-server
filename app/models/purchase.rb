@@ -25,11 +25,11 @@ class Purchase
   field :is_subscription,   type: Boolean
   field :number_of_domains, type: Integer
 
-  attr_accessible :business_id, :purchase_date, :expiration_date, :extension_ids, :package, :package_name, :price, :is_subscription, :validity, :number_of_domains
+  attr_accessible :business_id, :purchase_date, :expiration_date, :extension_ids, :package_id, :package, :package_name, :price, :is_subscription, :validity, :number_of_domains
 
   attr_accessor :package_id, :package
 
-  validates_presence_of :customer, :purchase_date, :extension_ids
+  validates_presence_of :customer, :purchase_date, :extension_ids, :package_id
 
   def price
     "%.2f" % read_attribute(:price) unless read_attribute(:price).nil?

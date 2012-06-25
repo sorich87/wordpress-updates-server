@@ -1,15 +1,8 @@
-<%- html_class = "form-horizontal" -%>
-<%- html_class << " hide-if-js" if @purchase.customer.nil? -%>
-
-<%= simple_form_for [@customer, @purchase], html: { class: html_class },
+<%= simple_form_for [@customer, @purchase], html: { class: 'form-horizontal hide-if-js' },
   defaults: { required: false, input_html: { class: 'input-xlarge' } } do |f| %>
 
   <fieldset>
-    <%- if @purchase.persisted? -%>
-      <legend>Edit Purchase</legend>
-    <%- else -%>
-      <legend>New Purchase</legend>
-    <%- end -%>
+    <legend>New Purchase</legend>
 
     <%= f.input :package_id, as: :radio_buttons,
       collection: @business.packages.all, value_method: :id, label_method: :name %>
@@ -29,12 +22,7 @@
 
     <div class="form-actions">
       <%= f.button :submit, class: 'btn-primary', value: 'Save Purchase' %>
-
-      <%- if @purchase.persisted? -%>
-        <%= link_to 'Cancel', customer_purchases_path(@customer) %>
-      <%- else -%>
-        <%= link_to 'Cancel', "#new_purchase", class: 'hide-target' %>
-      <%- end -%>
+      <%= link_to 'Cancel', "#new_purchase", class: 'hide-target' %>
     </div>
   </fieldset>
 

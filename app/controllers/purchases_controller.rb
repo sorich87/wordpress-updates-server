@@ -3,27 +3,23 @@ class PurchasesController < ApplicationController
 
   def index
     @purchases = @customer.purchases
-    new
-  end
-
-  def new
     @purchase = Purchase.new
   end
 
-  def edit
-    @purchase = @customer.purchases.find(params[:id])
-  end
-
   def create
+    @purchases = @customer.purchases
+
     build_params = purchase_params
-    build_params[:package] = @business.packages.find(purchase_params[:package_id])
+    build_params[:package] = @business.packages.find(purchase_params[:package_id]) unless purchase_params[:package_id].nil?
     build_params[:business_id] = @business._id
-    @purchase = @customer.purchases.build(build_params)
+    @purchase = Purchase.new(build_params)
+    @purchase.customer = @customer
 
     if @purchase.save
       redirect_to customer_purchases_path(@customer), notice: 'Purchase saved.'
     else
-      render :edit, error: 'Error saving purchase.'
+      flash[:error] = 'Error saving purchase.'
+      render :index
     end
   end
 

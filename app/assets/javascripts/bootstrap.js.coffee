@@ -6,12 +6,6 @@ jQuery ($) ->
   # Add js class to body for javascript interactions
   $("body").addClass("js")
 
-  # Toggle actions links when hovering parent element
-  $("span.row-actions").parents("tr").hover(
-    () -> $(".row-actions", this).show()
-    () -> $(".row-actions", this).hide()
-  )
-
   # Toggle next element
   $(".toggle-next").click (e) ->
     e.preventDefault()

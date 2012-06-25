@@ -12,15 +12,7 @@ class Package
   alias_attribute :frequency, :validity
 
   embedded_in :business
-  has_and_belongs_to_many :extensions, inverse_of: nil do
-    def themes
-      where(_type: 'Theme')
-    end
-
-    def plugins
-      where(_type: 'Plugin')
-    end
-  end
+  has_and_belongs_to_many :extensions, inverse_of: nil
 
   attr_accessible :name, :description, :price, :number_of_extensions, :number_of_domains, :is_subscription, :validity, :frequency, :extension_ids
 

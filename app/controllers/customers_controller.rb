@@ -10,28 +10,18 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = Customer.find_or_initialize_by(email: customer_params[:email])
+    @customer = @business.customers.build(customer_params)
 
-    if @customer.business_ids.include?(@business.id)
-      @customer = @business.customers.new(email: customer_params[:email])
-      @customer.errors.add(:email, "is already taken")
-      @customer._id = nil
-      render :new
+    if @customer.save
+      redirect_to customer_purchases_path(@customer), notice: 'Customer saved.'
     else
-      @customer.businesses << @business
-      if @customer.save
-        redirect_to customer_purchases_path(@customer), notice: "Customer saved."
-      else
-        render :new
-      end
+      render :new
     end
   end
 
   def destroy
-    @customer = Customer.find(params[:id])
-    @business.customers -= [@customer]
-    flash[:notice] = "Customer deleted."
-    redirect_to customers_path
+    @business.customers.find(params[:id]).delete
+    redirect_to customers_path, notice: 'Customer deleted.'
   end
 
   private

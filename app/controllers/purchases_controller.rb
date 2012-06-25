@@ -2,12 +2,12 @@ class PurchasesController < ApplicationController
   before_filter :load_customer
 
   def index
-    @purchases = @customer.purchases
+    @purchases = @customer.purchases.find_by_business(@business)
     @purchase = Purchase.new
   end
 
   def create
-    @purchases = @customer.purchases
+    @purchases = @customer.purchases.find_by_business(@business)
 
     build_params = purchase_params
     build_params[:package] = @business.packages.find(purchase_params[:package_id]) unless purchase_params[:package_id].nil?
@@ -24,19 +24,19 @@ class PurchasesController < ApplicationController
   end
 
   def renew
-    @purchase = @customer.purchases.find(params[:id]).renew
+    @purchase = @customer.purchases.find_by_business(@business).find(params[:id]).renew
     redirect_to customer_purchases_path(@customer), notice: 'Subscription renewed.'
   end
 
   def destroy
-    @customer.purchases.find(params[:id]).delete
+    @customer.purchases.find_by_business(@business).find(params[:id]).delete
     redirect_to customer_purchases_path(@customer), notice: 'Purchase deleted.'
   end
 
   private
 
   def load_customer
-    @customer = Customer.find(params[:customer_id])
+    @customer = @business.customers.find(params[:customer_id])
   end
 
   def purchase_params

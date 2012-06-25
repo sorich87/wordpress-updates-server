@@ -34,6 +34,9 @@ class Extension
     end
   end
 
+  scope :plugins, where(_type: 'Plugin')
+  scope :themes, where(_type: 'Theme')
+
   accepts_nested_attributes_for :versions
 
   def download_url(version = nil, expires = nil)

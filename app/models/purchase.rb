@@ -6,15 +6,7 @@ class Purchase
   before_create :set_expiration_date
 
   embedded_in :customer
-  has_and_belongs_to_many :extensions, inverse_of: nil do
-    def themes
-      where(_type: 'Theme')
-    end
-
-    def plugins
-      where(_type: 'Plugin')
-    end
-  end
+  has_and_belongs_to_many :extensions, inverse_of: nil
   has_one :business
 
   field :purchase_date,     type: Date
@@ -24,6 +16,9 @@ class Purchase
   field :price,             type: Float
   field :is_subscription,   type: Boolean
   field :number_of_domains, type: Integer
+
+  scope :current, where(:expiration_date.gt => Date.today)
+  scope :expired, where(:expiration_date.lte => Date.today)
 
   attr_accessible :business_id, :purchase_date, :expiration_date, :extension_ids, :package_id, :package, :package_name, :price, :is_subscription, :validity, :number_of_domains
 

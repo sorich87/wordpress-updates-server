@@ -4,15 +4,7 @@ class Business
 
   embeds_many :packages
   has_many :users, dependent: :delete
-  has_many :extensions, dependent: :delete do
-    def themes
-      where(_type: 'Theme')
-    end
-
-    def plugins
-      where(_type: 'Plugin')
-    end
-  end
+  has_many :extensions, dependent: :delete
   has_and_belongs_to_many :customers
 
   field :name,      :type => String

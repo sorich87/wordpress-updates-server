@@ -7,30 +7,26 @@
     <tr>
       <th class="span3">Email</th>
       <th>Packages</th>
-      <th>Themes</th>
+      <th>Products</th>
     </tr>
   </thead>
   <tbody>
     <% @customers.each do |customer| %>
       <tr id="<%=customer.id%>" class="customer">
         <td>
+          <%= link_to customer_path(customer), title: "Delete Customer", method: :delete, confirm: 'Are you sure?' do %>
+            <i class="icon-remove"></i>
+          <% end %>
           <%= customer.email %>
-          <span class="row-actions hide-if-js">
-            <%= link_to customer_path(customer), title: "Delete Customer", method: :delete, confirm: 'Are you sure?' do %>
-              <i class="icon-remove"></i> delete
-            <% end %>
-          </span>
         </td>
         <td>
-          <%= customer.package_names.join(", ") %>
-          <span class="row-actions hide-if-js">
-            <%= link_to customer_purchases_path(customer), title: "Edit Customer's Purchases" do %>
-              <i class="icon-pencil"></i> edit
-            <% end %>
-          </span>
+          <%= link_to customer_purchases_path(customer), title: "Edit Customer's Purchases" do %>
+            <i class="icon-pencil"></i>
+            <%= customer.package_names(@business).join(", ") %>
+          <% end %>
         </td>
         <td>
-          <%= customer.theme_names.join(", ") %>
+          <%= customer.extension_names(@business).join(", ") %>
         </td>
       </tr>
     <% end %>

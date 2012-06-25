@@ -23,9 +23,9 @@
     <%- end -%>
     <ul>
       <li><%= package_extension_price_description(package) %></li>
+      <li><%= subscription_description(package) %></li>
       <li><%= package_validity_description(package) %></li>
-      <li><%= package_domains_description(package) %></li>
-      <li><%= package_renewal_description(package) %></li>
+      <li><%= number_of_domains_description(package) %></li>
     </ul>
     <div>
       <%= link_to 'Edit', edit_package_path(package) %> | 

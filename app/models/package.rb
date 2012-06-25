@@ -6,7 +6,7 @@ class Package
   field :price,                :type => Float
   field :number_of_extensions, :type => Integer
   field :number_of_domains,    :type => Integer
-  field :billing,              :type => Integer
+  field :is_subscription,      :type => Boolean
   field :validity,             :type => Integer
 
   alias_attribute :frequency, :validity
@@ -22,22 +22,14 @@ class Package
     end
   end
 
-  BILLING = {
-    :one_time_payment => 0,
-    :subscription => 1
-  }
+  attr_accessible :name, :description, :price, :number_of_extensions, :number_of_domains, :is_subscription, :validity, :frequency, :extension_ids
 
-  attr_accessible :name, :description, :price, :number_of_extensions, :number_of_domains, :billing, :validity, :frequency, :extension_ids
-
-  validates_presence_of [:name, :description, :price, :number_of_extensions, :number_of_domains, :billing, :validity, :business, :extension_ids]
+  validates_presence_of [:name, :description, :price, :number_of_extensions, :number_of_domains, :validity, :business, :extension_ids]
 
   validates_numericality_of :number_of_domains, greater_than_or_equal_to: 0, only_integers: true
   validates_numericality_of :number_of_extensions, greater_than_or_equal_to: 0, only_integers: true
   validates_numericality_of :price, greater_than_or_equal_to: 0
   validates_numericality_of :validity, greater_than_or_equal_to: 0, only_integers: true
-
-  validates_inclusion_of :billing,
-    :in => BILLING.values
 
   def price
     "%.2f" % read_attribute(:price) unless read_attribute(:price).nil?

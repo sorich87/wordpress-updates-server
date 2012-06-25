@@ -4,7 +4,7 @@ Fabricator :package do
 	price                { Forgery(:monetary).money }
 	number_of_extensions { Forgery(:basic).number(at_least: 0) }
 	number_of_domains    { Forgery(:basic).number(at_least: 0) }
-	billing              Package::BILLING[:one_time_payment]
+	is_subscription      { Forgery(:basic).boolean }
 	validity             { Forgery(:basic).number(at_least: 0) }
 	extensions(count: 3) { |package, i| Fabricate(:extension) }
 	business

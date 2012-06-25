@@ -3,7 +3,7 @@ class Purchase
   include Mongoid::Timestamps
   include Mongoid::MultiParameterAttributes
 
-  before_validation :set_expiration_date
+  before_create :set_expiration_date
 
   embedded_in :customer
   has_and_belongs_to_many :extensions, inverse_of: nil do
@@ -22,10 +22,10 @@ class Purchase
   field :validity,          type: Integer
   field :package_name,      type: String
   field :price,             type: Float
-  field :billing,           type: Integer
+  field :is_subscription,   type: Boolean
   field :number_of_domains, type: Integer
 
-  attr_accessible :business_id, :purchase_date, :expiration_date, :extension_ids, :package, :package_name, :price, :billing, :validity, :number_of_domains
+  attr_accessible :business_id, :purchase_date, :expiration_date, :extension_ids, :package, :package_name, :price, :is_subscription, :validity, :number_of_domains
 
   attr_accessor :package_id, :package
 
@@ -40,7 +40,7 @@ class Purchase
   def package=(value)
     self[:package_name] = value[:name]
     self[:price] = value[:price]
-    self[:billing] = value[:billing]
+    self[:is_subscription] = value[:is_subscription]
     self[:validity] = value[:validity]
     self[:number_of_domains] = value[:number_of_domains]
   end

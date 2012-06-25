@@ -1,10 +1,14 @@
 en:
+  descriptions:
+    domains:
+      limited_domains:
+        one: "Limited to 1 domain"
+        other: "Limited to %{domains} domains"
+      unlimited_domains: "Unlimited domains"
+    is_subscription:
+      subscription: "Subscription"
+      one_time_payment: "One time payment"
   packages:
-    values:
-      billing:
-        one_time_payment: One time payment
-        subscription: Subscription with recurring billing
-
     descriptions:
       extensions:
         price_for_number:
@@ -16,14 +20,6 @@ en:
           one: "Valid for 1 month"
           other: "Valid for %{months} months"
         valid_for_life: "Valid for life"
-      domains:
-        limited_domains:
-          one: "Limited to 1 domain"
-          other: "Limited to %{domains} domains"
-        unlimited_domains: "Unlimited domains"
-      billing:
-        one_time_payment: "Renewal is manual"
-        subscription: "Renewal is automatic"
 
   purchases:
     descriptions:
@@ -74,7 +70,7 @@ en:
         name: Package Name
         description: Package Description
         price: Price
-        billing: Billing
+        is_subscription: Subscription
         validity: Validity
         themes: Themes
         number_of_extensions: Number of Products

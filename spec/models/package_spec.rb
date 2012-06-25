@@ -13,17 +13,12 @@ describe Package do
   it { should validate_presence_of(:price) }
   it { should validate_presence_of(:number_of_extensions) }
   it { should validate_presence_of(:number_of_domains) }
-  it { should validate_presence_of(:is_subscription) }
   it { should validate_presence_of(:validity) }
 
   it { should validate_numericality_of(:number_of_domains) }
   it { should validate_numericality_of(:number_of_extensions) }
   it { should validate_numericality_of(:price) }
   it { should validate_numericality_of(:validity) }
-
-  [-1, 999, :one_time_payment, "one time payment"].each do |v|
-    it { should_not allow_value(v).for(:is_subscription) }
-  end
 
   it { should be_embedded_in(:business) }
   it { should have_and_belong_to_many(:extensions) }

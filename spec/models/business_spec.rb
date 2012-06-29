@@ -23,4 +23,22 @@ describe Business do
   it { should have_and_belong_to_many(:customers) }
   it { should have_many(:users) }
   it { should have_many(:extensions) }
+
+  describe 'extension methods' do
+    let(:business) { Fabricate.build(:business) }
+    let(:plugin) { Fabricate(:plugin, business: business) }
+    let(:theme) { Fabricate(:theme, business: business) }
+
+    describe '.plugins' do
+      it 'returns the plugins' do
+        business.plugins.should == [plugin]
+      end
+    end
+
+    describe '.themes' do
+      it 'returns the themes' do
+        business.themes.should == [theme]
+      end
+    end
+  end
 end

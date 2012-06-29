@@ -38,11 +38,10 @@ class Version
 
   validates_presence_of :version
   validates_attachment_presence :archive
-  validates_attachment_content_type :archive, content_type: 'application/zip'
 
   attr_accessible :uri, :version, :author, :author_uri, :description, :license, :license_uri,
-    :tags, :status, :template, :domain_path, :network, :text_domain,
-    :archive_file_name, :archive_content_type, :archive_file_size, :archive_updated_at, :extension
+    :tags, :status, :template, :domain_path, :network, :text_domain, :extension,
+    :archive_file_name, :archive_content_type, :archive_file_size, :archive_updated_at, :archive
 
   def download_url(expires = nil)
     expires ||= 12.hours.from_now

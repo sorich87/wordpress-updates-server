@@ -4,7 +4,7 @@ class Extension
   include Paperclip
   include Paperclip::Glue
 
-  before_validation :set_current_version
+  before_validation :add_new_version
 
   field :name,            type: String
   field :current_version, type: String
@@ -25,7 +25,6 @@ class Extension
   validates :name, :on => :update, :immutable => true
   validates :current_version, :version => true
   validates_attachment_presence :screenshot
-  validates_attachment_content_type :screenshot, content_type: ['image/gif', 'image/jpeg', 'image/png']
 
   belongs_to :business
   embeds_many :versions, :cascade_callbacks => true do
@@ -39,17 +38,14 @@ class Extension
 
   accepts_nested_attributes_for :versions
 
+  attr_accessible :name, :current_version, :business, :versions, :_type, :new_version
+
+  attr_accessor :new_version
+
   def download_url(version = nil, expires = nil)
     version ||= versions.current
     version = versions.where(version: version).first unless version.is_a?(Version)
     version.download_url(expires)
-  end
-
-  # Interrupt the assignment of the attachment and grab the tempfile
-  # so we can extract the screenshot from it.
-  def new_version=(value)
-    grab_screenshot_from_zip(value)
-    self.versions.new(value)
   end
 
   def send_permission_notification(customer)
@@ -72,8 +68,11 @@ class Extension
 
   private
 
-  def set_current_version
-    self[:current_version] = self.versions.last.version unless current_version_changed? || self.versions.empty?
+  def add_new_version
+    return if new_version.nil?
+    grab_screenshot_from_zip(new_version)
+    self[:current_version] = new_version
+    self.versions.new(new_version)
   end
 
   def grab_screenshot_from_zip(value)

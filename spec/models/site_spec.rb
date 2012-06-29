@@ -12,13 +12,6 @@ describe Site do
   it { should_not allow_value('test').for(:domain_name) }
   it { should_not allow_value('.com').for(:domain_name) }
 
-  it { should allow_mass_assignment_of(:domain_name) }
-  it { should_not allow_mass_assignment_of(:secret_key) }
-  it { should_not allow_mass_assignment_of(:unconfirmed_secret_key) }
-  it { should_not allow_mass_assignment_of(:confirmation_token) }
-  it { should_not allow_mass_assignment_of(:confirmed_at) }
-  it { should_not allow_mass_assignment_of(:confirmation_sent_at) }
-
   it 'is valid given valid attributes' do
     site.should be_valid
   end

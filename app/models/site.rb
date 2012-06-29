@@ -11,11 +11,8 @@ class Site
   field :confirmed_at,           :type => Time
   field :confirmation_sent_at,   :type => Time
 
-  index :domain_name, :unique => true
-  index :confirmation_token
-
   validates_presence_of :domain_name
-  validates_uniqueness_of :domain_name, scope: :customer_id
+  validates_uniqueness_of :domain_name
   validates :domain_name, format: { with: /^[a-z0-9\-\.]+\.[a-z]{2,}$/i }
 
   attr_accessible :domain_name

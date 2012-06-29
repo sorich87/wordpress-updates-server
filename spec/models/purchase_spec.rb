@@ -85,13 +85,13 @@ describe Purchase do
 
     describe '.plugins' do
       it 'returns the plugins' do
-        purchase.plugins.all.should == [plugin]
+        purchase.plugins.all.entries.should == [plugin]
       end
     end
 
     describe '.themes' do
       it 'returns the themes' do
-        purchase.themes.all.should == [theme]
+        purchase.themes.all.entries.should == [theme]
       end
     end
   end

@@ -53,10 +53,12 @@
   theUploader.init()
 
   theUploader.bind('FileUploaded', (up, file, info) ->
+    $updateButton.button("reset")
     eval(info.response)
   )
 
   theUploader.bind('FilesAdded', (up, files) ->
+    $updateButton.button("loading")
     theUploader.start()
   )
 

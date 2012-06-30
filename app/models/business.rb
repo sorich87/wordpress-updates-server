@@ -17,6 +17,7 @@ class Business
   field :state,     :type => String
   field :zip,       :type => String
   field :phone,     :type => String
+  field :tour,      :type => String
 
   index :email, :unique => true
 

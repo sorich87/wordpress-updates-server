@@ -76,7 +76,9 @@ ThemeMy::Application.routes.draw do
 
   resource :home, only: [:index] do
     match 'sorry' => 'home#sorry'
+    match 'tour' => 'home#tour'
     get '/sorry', :to => :sorry
+    post '/tour', :to => :tour
   end
 
   root :to => 'home#index'

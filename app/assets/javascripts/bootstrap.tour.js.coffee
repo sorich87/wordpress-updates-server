@@ -1,6 +1,5 @@
 # TODO:
 # Add "index" option to identify each step instead of using integers
-# Use a better method than simple localStorage to store states
 #
 # Usage:
 # # initialize the tour
@@ -26,7 +25,12 @@
   document = window.document
 
   class BootstrapTour
-    constructor: ->
+    constructor: (options) ->
+      @_options = $.extend({
+        afterSaveState: (key, value) ->
+        afterGetState: (key, value) ->
+      }, options)
+
       @_steps = []
       @setCurrentStep()
 
@@ -39,6 +43,15 @@
       $(document).on "click", ".popover .end", (e) =>
         e.preventDefault()
         @end()
+
+    saveState: (key, value) ->
+      $.cookie("tour_" + key, value, { expires: 36500, path: '/' })
+      @_options.afterSaveState(key, value)
+
+    getState: (key) ->
+      value = $.cookie("tour_" + key)
+      @_options.afterGetState(key, value)
+      return value
 
     # Add a new step
     addStep: (step) ->
@@ -56,11 +69,11 @@
     # End tour
     end: ->
       @hideStep(@_current)
-      localStorage.setItem('testNoTour', 'yes')
+      @saveState("end", "yes")
 
     # Verify if tour is enabled
     yes: ->
-      !localStorage.getItem('testNoTour')
+      !@getState("end")
 
     # Hide the specified step
     hideStep: (i) ->
@@ -121,7 +134,7 @@
       }).popover("show")
 
       # Bootstrap doesn't prevent elements to cross over the edge of the window, so we do that here
-      tip = $(step.element).data('popover').tip()
+      tip = $(step.element).data("popover").tip()
       tipOffset = tip.offset()
 
       offsetBottom = $(document).outerHeight() - tipOffset.top - $(tip).outerHeight()
@@ -138,7 +151,7 @@
 
     # Setup current step variable
     setCurrentStep: ->
-      @_current = localStorage.getItem('testCurrent')
+      @_current = @getState("current_step")
       if (@_current == null || @_current == "null")
         @_current = 0
       else
@@ -147,7 +160,7 @@
     # Save step
     saveStep: (value) ->
       @_current = value
-      localStorage.setItem('testCurrent', value)
+      @saveState("current_step", value)
 
     # Hide current step and save next step
     endCurrentStep: ->

@@ -6,4 +6,10 @@ class HomeController < ApplicationController
 
   def sorry
   end
+
+  def tour
+    return unless params[:end] == 'yes'
+    @business.update_attribute('tour', 'no')
+    render nothing: true
+  end
 end

@@ -13,7 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require bootstrap.tour
-//= require tour_steps
 //= require bootstrap
 //= require functions

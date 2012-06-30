@@ -42,6 +42,11 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+    <%- unless @business.nil? || @business.tour == 'no' -%>
+      <%= javascript_include_tag 'jquery.cookie' %>
+      <%= javascript_include_tag 'bootstrap.tour' %>
+      <%= javascript_include_tag 'tour_steps' %>
+    <%- end -%>
     <%= content_for(:javascript) %>
   </body>
 </html>

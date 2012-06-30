@@ -1,5 +1,8 @@
 jQuery ($) ->
-  tour = new BootstrapTour
+  tour = new BootstrapTour({
+    afterSaveState: (key, value) ->
+      $.post "/home/tour", { end: "yes" } if key == "end" and value == "yes"
+  })
 
   if tour.yes()
     tour.addStep({

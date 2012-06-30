@@ -24,7 +24,7 @@ class PurchasesController < ApplicationController
   end
 
   def renew
-    @purchase = @customer.purchases.find_by_business(@business).find(params[:id]).renew_suscription!
+    @purchase = @customer.purchases.find_by_business(@business).find(params[:id]).renew_subscription!
     redirect_to customer_purchases_path(@customer), notice: 'Subscription renewed.'
   end
 

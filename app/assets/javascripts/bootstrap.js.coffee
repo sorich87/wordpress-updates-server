@@ -26,3 +26,11 @@ jQuery ($) ->
     else if value == "true"
       $("#validity").hide()
       $("#frequency").show()
+
+  # Display extension_ids fields in package edit form if has_no_extensions is not checked
+  $("input[name='package[has_all_extensions]']").change ->
+    value = $(this).filter(":checked").val()
+    if value == "true"
+      $("#products").hide()
+    else if value == "false"
+      $("#products").show()

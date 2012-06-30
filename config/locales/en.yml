@@ -75,6 +75,7 @@ en:
         themes: Themes
         number_of_extensions: Number of Products
         number_of_domains: Number of Domains
+        has_all_extensions: All Products Included
       user:
         first_name: First Name
         last_name: Last Name

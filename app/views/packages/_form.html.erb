@@ -26,15 +26,19 @@
   <%= f.input :frequency, label: 'Billing Frequency', wrapper_html: { id: 'frequency', class: ( 'hide-if-js' if f.object.is_subscription ) },
     collection: collection_for_package_subscription_frequencies %>
 
-  <%- unless @business.themes.blank? -%>
-    <%= f.association :extensions, label: 'Themes',
-      as: :check_boxes, collection: @business.themes.all %>
-  <%- end -%>
+  <%= f.input :has_all_extensions, as: :radio_buttons %>
 
-  <%- unless @business.plugins.blank? -%>
-    <%= f.association :extensions, label: 'Plugins',
-      as: :check_boxes, collection: @business.plugins.all %>
-  <%- end -%>
+  <div id="products"<%- if f.object.has_all_extensions -%> class="hide-if-js"<%- end -%>>
+    <%- unless @business.themes.blank? -%>
+      <%= f.association :extensions, label: 'Themes',
+        as: :check_boxes, collection: @business.themes.all %>
+    <%- end -%>
+
+    <%- unless @business.plugins.blank? -%>
+      <%= f.association :extensions, label: 'Plugins',
+        as: :check_boxes, collection: @business.plugins.all %>
+    <%- end -%>
+  </div>
 
   <%= f.input :number_of_extensions do %>
     <%= f.input_field :number_of_extensions, class: 'input-mini' %>

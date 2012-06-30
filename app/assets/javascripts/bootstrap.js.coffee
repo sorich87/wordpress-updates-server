@@ -18,11 +18,11 @@ jQuery ($) ->
     $(target).hide()
 
   # Display validity or billing frequency field depending on value of billing field on package page
-  $("input[name='package[billing]']").change ->
+  $("input[name='package[is_subscription]']").change ->
     value = $(this).filter(":checked").val()
-    if value == "0"
+    if value == "false"
       $("#validity").show()
       $("#frequency").hide()
-    else if value == "1"
+    else if value == "true"
       $("#validity").hide()
       $("#frequency").show()

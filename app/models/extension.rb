@@ -76,7 +76,7 @@ class Extension
   end
 
   def grab_screenshot_from_zip(value)
-    zip_file = value[:archive].tempfile
+    zip_file = value[:archive].path
     screenshot_path_in_zip = value[:screenshot_path_in_zip]
     return if screenshot_path_in_zip.nil?
 

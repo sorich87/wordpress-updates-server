@@ -12,19 +12,19 @@ class ExtensionsController < ApplicationController
   end
 
   def create
-    @parser = extension_parser
+    parser = extension_parser
 
     respond_to do |format|
       format.js do
-        if @parser.valid?
-          @extension = @business.extensions.new(name: @parser.attributes[:name],
-                                                new_version: @parser.attributes.merge(archive: params[:file]),
+        if parser.valid?
+          @extension = @business.extensions.new(name: parser.attributes[:name],
+                                                new_version: parser.attributes.merge(archive: params[:file]),
                                                 _type: params[:model])
           unless @extension.save
             @errors = @extension.errors
           end
         else
-          @errors = @parser.errors
+          @errors = parser.errors
         end
       end
     end
@@ -47,16 +47,16 @@ class ExtensionsController < ApplicationController
 
   def update
     @extension = @business.extensions.find(params[:id])
-    @parser = extension_parser
+    parser = extension_parser
 
     respond_to do |format|
       format.js do
-        if @parser.valid?
-          unless @extension.update_attributes(new_version: @parser.attributes.merge(archive: params[:file]))
+        if parser.valid?
+          unless @extension.update_attributes(new_version: parser.attributes.merge(archive: params[:file]))
             @errors = @extension.errors
           end
         else
-          @errors = @parser.errors
+          @errors = parser.errors
         end
       end
     end
@@ -66,9 +66,9 @@ class ExtensionsController < ApplicationController
 
   def extension_parser
     if params[:model] == "Theme"
-      ThemeParser.new(params[:file].tempfile)
+      ThemeParser.new(params[:file].path)
     elsif params[:model] == "Plugin"
-      PluginParser.new(params[:file].tempfile)
+      PluginParser.new(params[:file].path)
     end
   end
 end

@@ -18,17 +18,17 @@
 
   <%= f.input :is_subscription, as: :radio_buttons %>
 
-  <%= f.input :validity, wrapper_html: { id: 'validity', class: ( 'hide-if-js' unless f.object.is_subscription ) } do %>
+  <%= f.input :validity, wrapper_html: { id: 'validity', class: ( 'hide-if-js' unless f.object.is_subscription === false ) } do %>
     <%= f.input_field :validity, class: 'input-mini' %>
     <p class="help-inline">Number of months the customer gets updates for. 0 for unlimited.</p>
   <% end %>
 
-  <%= f.input :frequency, label: 'Billing Frequency', wrapper_html: { id: 'frequency', class: ( 'hide-if-js' if f.object.is_subscription ) },
+  <%= f.input :frequency, label: 'Billing Frequency', wrapper_html: { id: 'frequency', class: ( 'hide-if-js' unless f.object.is_subscription === true ) },
     collection: collection_for_package_subscription_frequencies %>
 
   <%= f.input :has_all_extensions, as: :radio_buttons %>
 
-  <div id="products"<%- if f.object.has_all_extensions -%> class="hide-if-js"<%- end -%>>
+  <div id="products"<%- unless f.object.has_all_extensions === false -%> class="hide-if-js"<%- end -%>>
     <%- unless @business.themes.blank? -%>
       <%= f.association :extensions, label: 'Themes',
         as: :check_boxes, collection: @business.themes.all %>

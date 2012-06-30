@@ -39,4 +39,8 @@ module PurchaseHelper
       I18n.t :no_expiration, scope: scope
     end
   end
+
+  def collection_for_purchase_packages_has_all_extensions
+    Hash[@business.packages.collect { |p| [p.id, p.has_all_extensions] }].to_json
+  end
 end

@@ -34,3 +34,12 @@ jQuery ($) ->
       $("#products").hide()
     else if value == "false"
       $("#products").show()
+
+  # Display extension_ids fields in purchase form if selected package has_no_extensions is false
+  $("input[name='purchase[package_id]']").change ->
+    value = $(this).filter(":checked").val()
+    if has_all_extensions[value] == true
+      $("#products").hide()
+    else
+      $("#products").show()
+

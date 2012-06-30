@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Purchase do
-  let(:purchase) { Fabricate.build(:purchase) }
+  let(:business) { Fabricate(:business) }
+  let(:purchase) { Fabricate.build(:purchase, business_id: business.id) }
 
   it { should be_embedded_in(:customer) }
   it { should have_and_belong_to_many(:extensions) }
@@ -53,6 +54,12 @@ describe Purchase do
   describe '.price' do
     it 'returns the formatted price' do
       purchase.price.should == "%.2f" % purchase[:price]
+    end
+  end
+
+  describe '.business' do
+    it 'returns the business' do
+      purchase.business.should == business
     end
   end
 

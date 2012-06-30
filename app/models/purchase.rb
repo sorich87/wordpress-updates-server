@@ -60,6 +60,10 @@ class Purchase
     self[:has_all_extensions] = value[:has_all_extensions]
   end
 
+  def business
+    Business.find(self[:business_id]) unless self[:business_id].nil?
+  end
+
   def plugins
     extensions.plugins
   end

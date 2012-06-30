@@ -48,15 +48,33 @@ class Customer
   end
 
   def extensions(business = nil)
-    purchases.find_by_business(business).current.collect { |p| p.extensions }.flatten
+    purchases.find_by_business(business).current.collect do |p|
+      if p.has_all_extensions
+        unless business.nil? then business.extensions else p.business.extensions end
+      else
+        p.extensions
+      end
+    end.flatten
   end
 
   def plugins(business = nil)
-    purchases.find_by_business(business).current.collect { |p| p.plugins }.flatten
+    purchases.find_by_business(business).current.collect do |p|
+      if p.has_all_extensions
+        unless business.nil? then business.plugins else p.business.plugins end
+      else
+        p.plugins
+      end
+    end.flatten
   end
 
   def themes(business = nil)
-    purchases.find_by_business(business).current.collect { |p| p.themes }.flatten
+    purchases.find_by_business(business).current.collect do |p|
+      if p.has_all_extensions
+        unless business.nil? then business.themes else p.business.themes end
+      else
+        p.themes
+      end
+    end.flatten
   end
 
   def extension_names(business = nil)

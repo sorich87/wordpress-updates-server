@@ -24,15 +24,15 @@ describe CustomersController do
       end
 
       it "adds an existing customer to the business" do
-        @customer = Fabricate(:customer)
-        post :create, customer: { email: @customer.email }
-        Business.find(@business.id).customer_ids.should include @customer.id
+        customer = Fabricate(:customer)
+        post :create, customer: { email: customer.email }
+        Business.find(@business.id).customer_ids.should include customer.id
       end
 
       it "redirects to the customer purchases list" do
-        @customer = Fabricate(:customer)
-        post :create, customer: { email: @customer.email }
-        response.should redirect_to customer_purchases_path(@customer)
+        customer = Fabricate(:customer)
+        post :create, customer: { email: customer.email }
+        response.should redirect_to customer_purchases_path(customer)
       end
     end
 

@@ -71,7 +71,7 @@ class Extension
   def add_new_version
     return if new_version.nil?
     grab_screenshot_from_zip(new_version)
-    self[:current_version] = new_version
+    self[:current_version] = new_version[:version]
     self.versions.new(new_version)
   end
 

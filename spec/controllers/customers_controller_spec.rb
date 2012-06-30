@@ -15,6 +15,15 @@ describe CustomersController do
     it { should render_template(:index) }
   end
 
+  describe 'GET #new' do
+    before do
+      get :new
+    end
+
+    it { should assign_to(:customer).with_kind_of(Customer) }
+    it { should render_template(:new) }
+  end
+
   describe "POST create" do
     context "with valid attributes" do
       it "creates a new customer" do
@@ -23,14 +32,30 @@ describe CustomersController do
         }.to change(Customer,:count).by(1)
       end
 
-      it "adds an existing customer to the business" do
-        customer = Fabricate(:customer)
-        post :create, customer: { email: customer.email }
-        Business.find(@business.id).customer_ids.should include customer.id
+      it "adds a customer to the business" do
+        customer = Fabricate(:customer, businesses: [])
+        expect{
+          post :create, customer: { email: customer.email }
+          @business.reload
+        }.to change(@business.customers,:count).by(1)
       end
 
       it "redirects to the customer purchases list" do
-        customer = Fabricate(:customer)
+        customer = Fabricate(:customer, businesses: [])
+        post :create, customer: { email: customer.email }
+        response.should redirect_to customer_purchases_path(customer)
+      end
+    end
+
+    context "with existing customer" do
+      it "doesn't add the customer to the business" do
+        customer
+        expect{
+          post :create, customer: { email: customer.email }
+        }.to_not change(@business.customers,:count)
+      end
+
+      it "redirects to the customer purchases list" do
         post :create, customer: { email: customer.email }
         response.should redirect_to customer_purchases_path(customer)
       end

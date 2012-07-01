@@ -38,7 +38,7 @@ class PackagesController < ApplicationController
   private
 
   def package_params
-    validity = params[:package][:is_subscription] === "1" ? :frequency : :validity
+    validity = params[:package][:is_subscription] === 'true' ? :frequency : :validity
     params[:package].slice(:name, :description, :price, validity, :is_subscription,
                            :number_of_extensions, :number_of_domains, :has_all_extensions, :extension_ids)
   end

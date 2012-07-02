@@ -61,7 +61,7 @@ class Api::V1::ExtensionsController < Api::V1::BaseController
     extension = current_customer.extensions.select { |e| e.id.to_s == params[:id] }.first
 
     if extension.nil?
-      render status: 404, nothing: true and return
+      render status: 200, nothing: true and return
     end
 
     render status: 200, json: extension.info

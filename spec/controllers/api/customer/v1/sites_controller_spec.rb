@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::SitesController do
+describe Api::Customer::V1::SitesController do
   let(:site) { Fabricate(:unconfirmed_site) }
 
   describe "POST create" do

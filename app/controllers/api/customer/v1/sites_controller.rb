@@ -1,4 +1,4 @@
-class Api::V1::SitesController < Api::V1::BaseController
+class Api::Customer::V1::SitesController < Api::Customer::V1::BaseController
   skip_before_filter :authenticate_customer!
 
   def create

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::TokensController do
+describe Api::Customer::V1::TokensController do
   let(:site) { Fabricate(:confirmed_site) }
 
   describe "POST create" do

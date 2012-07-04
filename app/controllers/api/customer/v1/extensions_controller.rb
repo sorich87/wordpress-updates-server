@@ -1,4 +1,4 @@
-class Api::V1::ExtensionsController < Api::V1::BaseController
+class Api::Customer::V1::ExtensionsController < Api::Customer::V1::BaseController
 
   def update_check
     if params[:domain_name].nil?

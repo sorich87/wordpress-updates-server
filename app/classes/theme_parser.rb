@@ -5,6 +5,8 @@ class ThemeParser < Parser
     :template, :status, :screenshot_path_in_zip
   ]
 
+  REQUIRED_ATTRIBUTES = [:name, :version, :screenshot_path_in_zip]
+
   ALIASES = { theme_name: :name, theme_uri: :uri }
 
   def parsed?

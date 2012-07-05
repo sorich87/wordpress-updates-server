@@ -2,7 +2,6 @@ class Parser
 
   FIELDS = []
   ALIASES = {}
-  REQUIRED_ATTRIBUTES = [:name, :version, :screenshot_path_in_zip]
 
   def initialize(file)
     if file.is_a? File

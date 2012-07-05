@@ -8,6 +8,8 @@ class PluginParser < Parser
     :tested_up_to, :requires_at_least, :stable_tag
   ]
 
+  REQUIRED_ATTRIBUTES = [:name, :version]
+
   ALIASES = { plugin_name: :name, plugin_uri: :uri }
 
   def parsed?

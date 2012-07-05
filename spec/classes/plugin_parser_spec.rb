@@ -45,7 +45,7 @@ describe PluginParser do
 
 
   # Test all of the downloaded plugins
-  describe 'downloaded plugin' do
+  describe 'downloaded plugin', :time_consuming => true do
     plugin_files = File.join(Rails.root, 'spec/fixtures/plugins/zips/*.zip')
 
     Dir.glob(plugin_files).each do |plugin|

@@ -30,6 +30,8 @@ Spork.prefork do
     config.include(EmailSpec::Helpers)
     config.include(EmailSpec::Matchers)
     config.include(Paperclip::Shoulda::Matchers)
+
+    config.filter_run_excluding :time_consuming => true
   end
 end
 

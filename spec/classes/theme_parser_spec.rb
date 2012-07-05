@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe ThemeParser do  
-  describe 'valid zips' do
+  describe 'valid zips', :time_consuming => true do
     zip_files = File.join(Rails.root, 'spec/fixtures/themes/zips/*.zip')
 
     Dir.glob(zip_files).each do |zip_file|
